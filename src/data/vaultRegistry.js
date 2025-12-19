@@ -6,10 +6,9 @@ export const VAULTS = [
     id: "untitled-study-1",
     title: "Untitled Study I",
     artist: "Artist Name",
-    year: "2024",
-    medium: "Mixed Media",
-    network: 137, // Polygon
+    network: 137,
     vaultType: "NFT Fractional Vault",
+    contract: "0x0000000000000000000000000000000000000000", // ← replace later
     externalUrl: "https://xdalegallery.com/artwork/untitled-study-1",
     status: "active",
   },
@@ -21,7 +20,9 @@ export const VAULTS = [
     medium: "Mixed Media",
     network: 137,
     vaultType: "NFT Vault",
+    contract: null, // no on-chain vault yet
     externalUrl: "https://xdalegallery.com/artwork/untitled-study-2",
     status: "draft",
   },
 ];
+
