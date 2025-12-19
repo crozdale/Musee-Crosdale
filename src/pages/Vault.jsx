@@ -1,43 +1,29 @@
-import { useWeb3 } from "../providers/Web3Provider";
-import { VAULTS } from "../data/vaultRegistry";
-import VaultCard from "../components/VaultCard";
+import { VAULTS } from "../registry/vaultRegistry";
 
 export default function Vault() {
-  const { account, chainId } = useWeb3();
-
-  if (!account) {
-    return (
-      <div>
-        <h1 className="text-3xl font-semibold mb-4">Vault</h1>
-        <p className="text-neutral-600">
-          Connect your wallet to view vaults.
-        </p>
-      </div>
-    );
-  }
-
-  const visibleVaults = VAULTS.filter(
-    (v) => !v.network || v.network === chainId
-  );
-
   return (
-    <div>
-      <h1 className="text-3xl font-semibold mb-2">Vault Dashboard</h1>
-      <p className="text-neutral-600 mb-8">
-        NFT-based vaults linked to xDALE Gallery
-      </p>
+    <div className="px-10 py-16 space-y-10">
+      {VAULTS.map((vault) => (
+        <div
+          key={vault.id}
+          className="border p-6 flex justify-between items-center"
+        >
+          <div>
+            <h2 className="text-2xl font-serif">{vault.title}</h2>
+            <p className="text-sm text-black/70">{vault.artist}</p>
+            <p className="text-sm text-black/50">{vault.vaultType}</p>
+          </div>
 
-      {visibleVaults.length === 0 ? (
-        <p className="text-sm text-neutral-500">
-          No vaults available on this network.
-        </p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {visibleVaults.map((vault) => (
-            <VaultCard key={vault.id} vault={vault} />
-          ))}
+          <a
+            href={vault.externalUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline"
+          >
+            View on XDALE
+          </a>
         </div>
-      )}
+      ))}
     </div>
   );
 }
