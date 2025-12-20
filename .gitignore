@@ -1,5 +1,21 @@
-node_modules
-dist
+# Node
+node_modules/
+dist/
+
+# Vite
+.vite/
+
+# Environment
 .env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
 .DS_Store
+Thumbs.db
 

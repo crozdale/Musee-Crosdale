@@ -1,15 +1,18 @@
-import "./index.css";
-
 
 import React from "react";
-import ReactDOM from "react-dom/client";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { Web3Provider } from "./providers/Web3Provider";
+import AppProviders from "./providers/AppProviders";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+import "./index.css";
+
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Web3Provider>
-      <App />
-    </Web3Provider>
+    <BrowserRouter>
+      <AppProviders>
+        <App />
+      </AppProviders>
+    </BrowserRouter>
   </React.StrictMode>
 );
