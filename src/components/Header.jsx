@@ -1,21 +1,23 @@
-import { Link } from "react-router-dom";
-import "./Header.css";
-
 export default function Header() {
   return (
-    <header className="header">
-      <div className="logo">
-        <img src="/sigil.png" alt="Sigil" />
-        <span>Facinations</span>
-      </div>
-
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/gallery">Gallery</Link>
-        <Link to="/vaults">Vaults</Link>
-      </nav>
-
-      <button className="theme-btn">🌙 Dark</button>
+    <header
+      style={{
+        display: "flex",
+        alignItems: "center",
+        padding: "16px 32px",
+        borderBottom: "1px solid #222",
+        background: "#000",
+      }}
+    >
+      <img
+        src="/logo-gold.png"
+        alt="Facinations"
+        height="42"
+        style={{ marginRight: 16 }}
+      />
+      <h1 style={{ color: "#d4af37", fontWeight: 500 }}>
+        Facinations
+      </h1>
     </header>
   );
 }

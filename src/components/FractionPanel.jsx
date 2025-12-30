@@ -1,33 +1,34 @@
-﻿import { Link } from "react-router-dom";
-import { useContext } from "react";
-import { Web3Context } from "../providers/Web3Provider";
-import { useFraction } from "../hooks/useFraction";
-import { useFractionBalance } from "../hooks/useFractionBalance";
+﻿import { useState } from "react";
 
-export default function FractionPanel({ vaultId }) {
-  const web3 = useContext(Web3Context);
-  const account = web3?.account;
-
-  const { supply, price, loading } = useFraction(vaultId);
-  const balance = useFractionBalance(vaultId, account);
-
-  if (loading) {
-    return <div className="border p-6">Loading on-chain data…</div>;
-  }
+export default function FractionPanel({ vault }) {
+  const [amount, setAmount] = useState(1);
 
   return (
-    <div className="border p-6 space-y-4">
-      <h3 className="text-xl font-serif">Fractions</h3>
+    <div className="fraction-panel">
+      <h3>Fractional Ownership</h3>
 
-      <div className="text-sm space-y-1">
-        <div>Total Supply: {supply}</div>
-        <div>Price (XER): {price}</div>
-        {account && <div>Your Balance: {balance}</div>}
-      </div>
+      <p>
+        Total Fractions: <strong>{vault.totalFractions}</strong>
+      </p>
+      <p>
+        Available: <strong>{vault.availableFractions}</strong>
+      </p>
 
-      <Link to={`/swap/${vaultId}`} className="inline-block underline">
-        Trade Fractions
-      </Link>
+      <input
+        type="number"
+        min="1"
+        max={vault.availableFractions}
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+      />
+
+      <button className="primary">
+        Purchase Fraction
+      </button>
+
+      <p className="note">
+        Ownership recorded on-chain. Subject to legal documentation.
+      </p>
     </div>
   );
 }

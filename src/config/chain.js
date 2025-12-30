@@ -1,5 +1,6 @@
-export const CHAIN = {
-  id: 137,
-  name: "Polygon",
-  explorer: "https://polygonscan.com",
+export const CHAIN_CONFIG = {
+  chainId: 137, 
+  rpcUrl: "https://polygon-rpc.com",
+  vaultRegistryAddress: "0xYOUR_DEPLOYED_REGISTRY_ADDRESS"
 };
+

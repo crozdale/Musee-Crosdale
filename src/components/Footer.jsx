@@ -1,8 +1,10 @@
+import "../styles/layout.css";
+
 export default function Footer() {
   return (
     <footer className="footer">
-      <img src="/sigil-gold.png" className="footer-sigil" />
-      <span>© Facinations</span>
+      <p>© {new Date().getFullYear()} Facinations</p>
+      <p>All works registered in the Canonical Vault Registry</p>
     </footer>
   );
 }

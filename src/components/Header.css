@@ -1,45 +1,18 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 32px;
-  background: #0d0f14;
-  border-bottom: 1px solid #222;
+.page {
+  max-width: 960px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: gold;
-  font-size: 1.4rem;
-  font-weight: 600;
+.vault-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
-.logo img {
-  height: 34px;
-}
-
-nav {
-  display: flex;
-  gap: 24px;
-}
-
-nav a {
-  color: #ccc;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-nav a:hover {
-  color: white;
-}
-
-.theme-btn {
-  background: #6b5cff;
-  color: white;
-  border: none;
-  border-radius: 999px;
-  padding: 8px 16px;
-  cursor: pointer;
+.vault-card {
+  background: #111;
+  border: 1px solid #333;
+  padding: 1.5rem;
+  border-radius: 8px;
 }

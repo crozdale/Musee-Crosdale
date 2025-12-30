@@ -1,20 +1,34 @@
-import { ethers } from "hardhat";
+const hre = require("hardhat");
 
 async function main() {
-  const [deployer] = await ethers.getSigners();
+  const [deployer] = await hre.ethers.getSigners();
 
-  console.log("Deploying with:", deployer.address);
-  console.log("Balance:", (await deployer.getBalance()).toString());
+  const VaultNFT = await hre.ethers.getContractFactory("VaultNFT");
+  const nft = await VaultNFT.deploy("Facinations Vault", "FAC");
+  await nft.deployed();
 
-  const Contract = await ethers.getContractFactory("YourContractName");
-  const contract = await Contract.deploy();
+  const Fraction = await hre.ethers.getContractFactory("FractionToken");
+  const fraction = await Fraction.deploy(
+    "Facinations Fraction",
+    "FACX",
+    hre.ethers.parseEther("1000000")
+  );
+  await fraction.deployed();
 
-  await contract.waitForDeployment();
+  const Registry = await hre.ethers.getContractFactory("VaultRegistry");
+  const registry = await Registry.deploy();
+  await registry.deployed();
 
-  console.log("Deployed to:", await contract.getAddress());
+  await registry.registerVault(
+    "VAULT-ALBATRIX-001",
+    nft.address,
+    fraction.address,
+    "ipfs://legal-pack"
+  );
+
+  console.log("VaultNFT:", nft.address);
+  console.log("Fraction:", fraction.address);
+  console.log("Registry:", registry.address);
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+main().catch(console.error);

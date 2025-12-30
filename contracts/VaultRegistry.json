@@ -1,0 +1,17 @@
+[
+  {
+    "inputs": [
+      { "internalType": "string", "name": "vaultId", "type": "string" }
+    ],
+    "name": "getVault",
+    "outputs": [
+      { "internalType": "string", "name": "vaultId", "type": "string" },
+      { "internalType": "uint256", "name": "tokenId", "type": "uint256" },
+      { "internalType": "address", "name": "contractAddress", "type": "address" },
+      { "internalType": "string", "name": "legalURI", "type": "string" },
+      { "internalType": "bool", "name": "active", "type": "bool" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
