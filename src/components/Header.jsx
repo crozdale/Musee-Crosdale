@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Header.css";
+import logo from "../assets/logo.png";
 
 export default function Header() {
   return (
@@ -7,13 +8,9 @@ export default function Header() {
       <div className="header-inner">
         <Link to="/" className="logo-wrap">
           <img
-            src="/xdale-logo.png"
+            src={logo}
             alt="XDALE"
-            style={{
-              height: "48px",
-              width: "auto",
-              cursor: "pointer",
-            }}
+            className="logo"
           />
         </Link>
 
