@@ -101,3 +101,20 @@ main h2 {
 .swap-button:hover {
   opacity: 0.9;
 }
+.vault-grid {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.vault-card {
+  border: 1px solid #d4af37;
+  padding: 20px;
+  color: #d4af37;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.vault-card:hover {
+  background: rgba(212, 175, 55, 0.1);
+}

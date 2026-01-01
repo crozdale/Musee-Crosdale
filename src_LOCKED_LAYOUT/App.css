@@ -1,0 +1,103 @@
+/* =========================
+   GLOBAL RESET
+========================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* =========================
+   BASE STYLES
+========================= */
+body {
+  padding-top: 72px;
+  background: #0e0e0e;
+  font-family: system-ui, sans-serif;
+  color: white;
+}
+
+/* =========================
+   HEADER
+========================= */
+.site-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 0;
+  background: #000;
+}
+
+/* LOGO */
+.site-logo {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* =========================
+   MAIN CONTENT
+========================= */
+main {
+  line-height: 1.6;
+}
+
+main h2 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+/* =========================
+   SWAP COMPONENT
+========================= */
+.swap-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swap-box {
+  width: 340px;
+  background: #141414;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+.field {
+  margin-bottom: 1.2rem;
+}
+
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #aaa;
+}
+
+.field input,
+.token-select {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #1a1a1a;
+  color: #fff;
+}
+
+.swap-button {
+  width: 100%;
+  padding: 0.8rem;
+  background: linear-gradient(135deg, #5b6cff, #4aa3ff);
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+}
+
+.swap-button:hover {
+  opacity: 0.9;
+}

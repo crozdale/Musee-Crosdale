@@ -37,3 +37,17 @@
 .site-nav a:hover {
   color: #fff;
 }
+.wallet-btn {
+  margin-left: 24px;
+  padding: 8px 16px;
+  border: 1px solid #d4af37;
+  background: transparent;
+  color: #d4af37;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.wallet-btn:hover {
+  background: #d4af37;
+  color: black;
+}

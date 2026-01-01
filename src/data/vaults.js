@@ -1,11 +1,18 @@
-
-export const VAULTS = [
+export const vaults = [
   {
-    id: "vault-1",
-    address: "0x123...abc",
+    id: "atlas-001",
+    title: "Atlas Vault I",
+    description: "Fractionalized ownership of a generative masterwork.",
+    artist: "Anonymous",
+    supply: 1000,
+    status: "Active",
   },
   {
-    id: "vault-2",
-    address: "0x456...def",
-  },
+    id: "helios-002",
+    title: "Helios Vault",
+    description: "Tokenized solar-era conceptual asset.",
+    artist: "Unknown",
+    supply: 500,
+    status: "Locked",
+  }
 ];

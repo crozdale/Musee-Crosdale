@@ -13,6 +13,7 @@ export default function Header() {
             className="logo"
           />
         </Link>
+<button className="wallet-btn">Connect Wallet</button>
 
         <nav className="site-nav">
           <Link to="/">Home</Link>
