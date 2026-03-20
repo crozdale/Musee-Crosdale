@@ -1,7 +1,7 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
+import { DealerIntelligencePanel } from "./components/dealer/DealerIntelligencePanel";
 import Landing from "./pages/Landing.jsx";
 import Home from "./pages/Home.jsx";
 import Gallery from "./pages/Gallery.jsx";
