@@ -15,6 +15,7 @@ export default function Landing() {
         </p>
       </header>
 
+      {/* Role cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl w-full">
         <div className="border border-zinc-800 rounded-lg p-5">
           <h2 className="text-lg font-medium mb-1">Venture Capitalists</h2>
@@ -54,21 +55,17 @@ export default function Landing() {
         <div className="border border-zinc-800 rounded-lg p-5">
           <h2 className="text-lg font-medium mb-1">Sales Partners</h2>
           <p className="text-xs text-zinc-400 mb-4">
-            Learn the story and strategy behind Facinations at the 
-{/* Existing landing content above */}
-
-<DealerIntelligencePanel />
-
-{/* Rest of landing content below */}
-
-
-
-Blogazine.
+            Learn the story and strategy behind Facinations at the Blogazine.
           </p>
           <Link to="/blogazine" className="px-3 py-1.5 border border-zinc-700 rounded text-sm">
             Visit Blogazine
           </Link>
         </div>
+      </div>
+
+      {/* Dealer Intelligence panel below the grid */}
+      <div className="mt-10 max-w-4xl w-full">
+        <DealerIntelligencePanel />
       </div>
     </div>
   );
