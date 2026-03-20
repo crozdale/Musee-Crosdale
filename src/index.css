@@ -1,3 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
 .vault-layout {
   display: grid;
   grid-template-columns: 2fr 1.5fr;

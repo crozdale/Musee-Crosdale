@@ -3,7 +3,9 @@ import ReactDOM from "react-dom/client";
 import { ApolloProvider } from "@apollo/client/react";
 import { graphClient } from "./graphql/client";
 import "./i18n";
-import App from "./App";
+import App from "./App.jsx";
+import "./index.css"; // must still exist and include tailwind directives
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
