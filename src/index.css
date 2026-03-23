@@ -1,3 +1,12 @@
+/* src/index.css (or main css) */
+
+/* 1. Tailwind directives must be at the root, before your custom classes */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 2. Your custom styles below */
+
 .vault-layout {
   display: grid;
   grid-template-columns: 2fr 1.5fr;
@@ -8,6 +17,7 @@
   border-left: 1px solid #e2e2e2;
   padding-left: 1.5rem;
 }
+
 .teleport-shell {
   position: relative;
   z-index: 1;

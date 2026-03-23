@@ -1,4 +1,3 @@
-// src/hooks/useVaults.ts
 import { VAULTS } from "../registry/vaultRegistry";
 
 export function useVaults() {
@@ -8,3 +7,5 @@ export function useVaults() {
     error: null,
   };
 }
+
+
