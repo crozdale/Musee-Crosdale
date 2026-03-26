@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({k:v for k,v in {**d.get\\(''''scripts'''',{}\\), **d.get\\(''''devDependencies'''',{}\\), **d.get\\(''''dependencies'''',{}\\)}.items\\(\\) if any\\(x in k.lower\\(\\) for x in [''''test'''',''''vitest'''',''''jest'''',''''@testing'''']\\)}, indent=2\\)\\)\")",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm list:*)",
+      "Bash(pnpm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(find /c/Users/crozd/xervault/src -type f \\\\\\(-name *Layout* -o -name *Header* -o -name *Home* -o -name *Landing* -o -name App.* \\\\\\))",
+      "Bash(grep -E \"\\\\.\\(jsx|tsx\\)$\")",
+      "Bash(find /c/Users/crozd/musee-crosdale/src -type f \\\\\\(-name *Layout* -o -name *Header* -o -name *Home* -o -name *Landing* -o -name App.* \\\\\\))",
+      "Bash(find /c/Users/crozd/xervault -type f -name *i18n* -o -name *i18next* -o -name *locale*)",
+      "Bash(find /c/Users/crozd/xervault -type f \\\\\\(-name *.json -o -name *.ts -o -name *.js \\\\\\))",
+      "Bash(grep:*)",
+      "Bash(for lang:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/crozd/musee-crosdale/public/locales/$lang/**)",
+      "Bash(done)",
+      "Bash(node:*)",
+      "Bash(mv:*)",
+      "Bash(python3:*)",
+      "Bash(npx vite:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(python3 -c \"import json; abi=json.load\\(open\\(''''subgraph/abis/FacinationsDAO.json''''\\)\\); print\\(len\\(abi\\), ''''entries''''\\)\" 2)",
+      "Bash(/dev/null cat:*)",
+      "Bash(xargs -I{} python3 -c \"import json,sys; abi=json.load\\(open\\(''''{}''''\\)\\);  [print\\(e[''''name''''], [\\(i[''''name''''],i[''''type'''']\\) for i in e.get\\(''''inputs'''',[]\\)]\\) for e in abi if e.get\\(''''type''''\\)==''''event'''']\")",
+      "Bash(xargs -I{} basename {} .json)",
+      "Bash(find C:Userscrozdmusee-crosdale -type f \\\\\\(-name *.sql -o -name *schema* -o -name *migration* -o -name *.db \\\\\\))",
+      "Bash(find /c/Users/crozd/musee-crosdale -type f -path *migrations* -o -path *sql*)",
+      "Bash(where ffmpeg:*)",
+      "Bash(ffmpeg -i \"C:/Users/crozd/musee-crosdale/public/facinations.mov\" -c:v libx264 -preset slow -crf 28 -vf \"scale=1920:-2\" -c:a aac -b:a 128k -movflags +faststart -y \"C:/Users/crozd/musee-crosdale/public/hero.mp4\")"
+    ]
+  }
+}
