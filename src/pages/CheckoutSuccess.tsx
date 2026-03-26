@@ -41,6 +41,19 @@ export default function CheckoutSuccess() {
         }
 
         subscribe(data.tier as PlanTier);
+
+        // Subscribe to Mailchimp tagged by plan tier (best-effort)
+        if (data.customerEmail) {
+          fetch("/api/mailchimp", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: data.customerEmail,
+              tags: [`studio-${data.tier}`],
+            }),
+          }).catch(() => {});
+        }
+
         setStatus("success");
         setTimeout(() => navigate("/studio"), 2500);
       } catch {

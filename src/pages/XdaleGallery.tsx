@@ -202,18 +202,19 @@ function ArtworkModal({ artwork, onClose }: { artwork: Artwork; onClose: () => v
     if (!form.name || !form.email) return;
     setSending(true);
     const [firstName, ...rest] = form.name.trim().split(" ");
-    await fetch("/api/hubspot", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        formType: "artwork_enquiry",
-        email: form.email,
-        firstName,
-        lastName: rest.join(" ") || undefined,
-        message: form.message,
-        artworkTitle: artwork.title,
+    const lastName = rest.join(" ") || undefined;
+    await Promise.all([
+      fetch("/api/hubspot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "artwork_enquiry", email: form.email, firstName, lastName, message: form.message, artworkTitle: artwork.title }),
       }),
-    }).catch(() => {}); // best-effort — don't block UX on CRM failure
+      fetch("/api/mailchimp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email, firstName, lastName, tags: ["artwork-enquiry"] }),
+      }),
+    ]).catch(() => {});
     setSending(false);
     setSent(true);
   }
@@ -407,20 +408,19 @@ function DealerOnboarding() {
     if (!form.galleryName || !form.email) return;
     setSubmitting(true);
     const [firstName, ...rest] = (form.contactName || form.galleryName).trim().split(" ");
-    await fetch("/api/hubspot", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        formType: "dealer_onboarding",
-        email: form.email,
-        firstName,
-        lastName: rest.join(" ") || undefined,
-        company: form.galleryName,
-        website: form.website,
-        location: form.location,
-        description: form.description,
+    const lastName = rest.join(" ") || undefined;
+    await Promise.all([
+      fetch("/api/hubspot", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ formType: "dealer_onboarding", email: form.email, firstName, lastName, company: form.galleryName, website: form.website, location: form.location, description: form.description }),
       }),
-    }).catch(() => {});
+      fetch("/api/mailchimp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: form.email, firstName, lastName, tags: ["dealer-lead"] }),
+      }),
+    ]).catch(() => {});
     setSubmitting(false);
     setSubmitted(true);
   }

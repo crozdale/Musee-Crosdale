@@ -36,7 +36,11 @@ export default async function handler(req, res) {
       session.status === "complete" &&
       (session.payment_status === "paid" || session.mode === "subscription");
 
-    return res.status(200).json({ verified, tier: verified ? tier : null });
+    return res.status(200).json({
+      verified,
+      tier: verified ? tier : null,
+      customerEmail: session.customer_details?.email ?? null,
+    });
   } catch (err) {
     console.error("[checkout/verify] Stripe error:", err.message);
     return res.status(500).json({ error: "Failed to verify session" });
