@@ -111,6 +111,33 @@ export async function runMigrations() {
   `);
 
   await query(`
+    CREATE TABLE IF NOT EXISTS galleries (
+      slug          TEXT PRIMARY KEY,
+      name          TEXT NOT NULL,
+      blurb         TEXT,
+      location      TEXT,
+      external_url  TEXT,
+      enquiry_email TEXT,
+      logo_url      TEXT,
+      active        BOOLEAN NOT NULL DEFAULT true,
+      created_at    TIMESTAMPTZ DEFAULT NOW(),
+      updated_at    TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
+
+  // Seed xdale if not present
+  await query(`
+    INSERT INTO galleries (slug, name, blurb, location, external_url, enquiry_email)
+    VALUES (
+      'xdale', 'Xdale',
+      'Xdale represents a curated roster of contemporary and emerging artists whose work engages with the intersection of materiality, concept, and the archive.',
+      'London · New York · On-Chain',
+      'https://xdale.io',
+      'enquiries@xdale.io'
+    ) ON CONFLICT (slug) DO NOTHING;
+  `);
+
+  await query(`
     CREATE TABLE IF NOT EXISTS vaults_meta (
       vault_id             TEXT PRIMARY KEY,
       name                 TEXT NOT NULL,

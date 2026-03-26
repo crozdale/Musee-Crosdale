@@ -28,6 +28,8 @@ const CheckoutSuccess = React.lazy(() => import("./pages/CheckoutSuccess"));
 const CryptoSuccess   = React.lazy(() => import("./pages/CryptoSuccess"));
 const PayPalSuccess   = React.lazy(() => import("./pages/PayPalSuccess"));
 const Admin        = React.lazy(() => import("./pages/Admin"));
+const Galleries    = React.lazy(() => import("./pages/Galleries"));
+const GalleryPage  = React.lazy(() => import("./pages/GalleryPage"));
 const NotFound     = React.lazy(() => import("./pages/NotFound"));
 
 // ── Loading fallback ──────────────────────────────────────────────────────────
@@ -89,6 +91,8 @@ export default function App() {
                 <Route path="/checkout/crypto-success"  element={<CryptoSuccess />} />
                 <Route path="/checkout/paypal-success"  element={<PayPalSuccess />} />
                 <Route path="/admin"          element={<Admin />} />
+                <Route path="/galleries"     element={<Galleries />} />
+                <Route path="/gallery/:slug" element={<GalleryPage />} />
                 <Route path="*"              element={<NotFound />} />
               </Routes>
             </Suspense>

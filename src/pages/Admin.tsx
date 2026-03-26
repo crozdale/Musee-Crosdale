@@ -66,6 +66,16 @@ const css = `
   .adm-btn-gold:hover { background:#c49d2a; }
   .adm-btn-red { border-color:rgba(220,0,80,0.3); color:#e05; }
   .adm-btn-red:hover { border-color:#e05; }
+  .adm-btn-ghost { padding:0.35rem 0.85rem; background:transparent; border:1px solid rgba(255,255,255,0.08);
+                   color:#4a4238; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em;
+                   text-transform:uppercase; cursor:pointer; }
+  .adm-btn-ghost:hover { border-color:rgba(212,175,55,0.2); color:#9a9288; }
+  .adm-btn-sm { padding:0.3rem 0.65rem; background:transparent; border:1px solid rgba(212,175,55,0.2);
+                color:#9a9288; font-family:'Cinzel',serif; font-size:0.48rem; letter-spacing:0.12em;
+                text-transform:uppercase; cursor:pointer; }
+  .adm-btn-sm:hover { border-color:#d4af37; color:#d4af37; }
+  .adm-btn-danger { border-color:rgba(220,0,80,0.25) !important; color:#cc0044 !important; }
+  .adm-btn-danger:hover { border-color:#e05 !important; color:#e05 !important; }
   .adm-form { display:flex; flex-direction:column; gap:0.85rem; max-width:600px;
               border:1px solid rgba(212,175,55,0.12); padding:1.5rem; background:#0a0a0a; margin-bottom:2rem; }
   .adm-label { font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.2em; text-transform:uppercase;
@@ -397,8 +407,164 @@ function SubscribersTab({ secret }: { secret: string }) {
   );
 }
 
+// ── Galleries tab ─────────────────────────────────────────────────────────────
+interface GalleryRow {
+  slug: string;
+  name: string;
+  blurb: string | null;
+  location: string | null;
+  external_url: string | null;
+  enquiry_email: string | null;
+  logo_url: string | null;
+  active: boolean;
+}
+
+const BLANK_GALLERY: GalleryRow = {
+  slug: "", name: "", blurb: "", location: "", external_url: "", enquiry_email: "", logo_url: "", active: true,
+};
+
+function GalleriesTab({ secret }: { secret: string }) {
+  const [galleries, setGalleries] = useState<GalleryRow[]>([]);
+  const [loading, setLoading]     = useState(true);
+  const [showForm, setShowForm]   = useState(false);
+  const [editing, setEditing]     = useState<GalleryRow | null>(null);
+  const [form, setForm]           = useState<GalleryRow>(BLANK_GALLERY);
+  const [saving, setSaving]       = useState(false);
+  const [error, setError]         = useState<string | null>(null);
+
+  const headers = { "Content-Type": "application/json", "X-Admin-Secret": secret };
+
+  const load = useCallback(() => {
+    setLoading(true);
+    fetch("/api/admin/galleries", { headers: { "X-Admin-Secret": secret } })
+      .then((r) => r.json())
+      .then((d) => setGalleries(d.galleries ?? []))
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [secret]);
+
+  useEffect(() => { load(); }, [load]);
+
+  function startEdit(g: GalleryRow) { setEditing(g); setForm(g); setShowForm(true); }
+  function startNew()                { setEditing(null); setForm(BLANK_GALLERY); setShowForm(true); }
+
+  async function handleSave() {
+    if (!form.slug || !form.name) { setError("Slug and name are required"); return; }
+    setSaving(true); setError(null);
+    try {
+      const method = editing ? "PUT" : "POST";
+      const res = await fetch("/api/admin/galleries", { method, headers, body: JSON.stringify(form) });
+      if (!res.ok) { const d = await res.json(); throw new Error(d.error); }
+      setShowForm(false); load();
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Save failed");
+    } finally { setSaving(false); }
+  }
+
+  async function handleDelete(slug: string) {
+    if (!confirm(`Delete gallery "${slug}"? This does not delete its artworks.`)) return;
+    await fetch(`/api/admin/galleries?slug=${encodeURIComponent(slug)}`, { method: "DELETE", headers: { "X-Admin-Secret": secret } });
+    load();
+  }
+
+  const F: React.CSSProperties = { display:"flex", flexDirection:"column", gap:"0.4rem" };
+  const inp: React.CSSProperties = { padding:"0.45rem 0.65rem", background:"#060606", border:"1px solid rgba(212,175,55,0.12)", color:"#e8e0d0", fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", width:"100%", boxSizing:"border-box" };
+
+  return (
+    <div>
+      <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"1.25rem" }}>
+        <p className="adm-section-title" style={{ margin:0 }}>Galleries ({galleries.length})</p>
+        <button className="adm-btn" onClick={startNew}>+ New Gallery</button>
+      </div>
+
+      {showForm && (
+        <div style={{ border:"1px solid rgba(212,175,55,0.12)", background:"#0a0a0a", padding:"1.5rem", marginBottom:"1.5rem" }}>
+          <p className="adm-section-title">{editing ? `Edit: ${editing.name}` : "New Gallery"}</p>
+          {error && <p style={{ color:"#e05", fontFamily:"'Cormorant Garamond',serif", fontSize:"0.85rem", margin:"0 0 0.75rem" }}>{error}</p>}
+          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.75rem" }}>
+            <div style={F}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Slug *</label>
+              <input style={inp} value={form.slug} disabled={!!editing}
+                onChange={(e) => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/[^a-z0-9_-]/g,"") }))}
+                placeholder="xdale" />
+            </div>
+            <div style={F}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Name *</label>
+              <input style={inp} value={form.name} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Gallery Name" />
+            </div>
+            <div style={F}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Location</label>
+              <input style={inp} value={form.location ?? ""} onChange={(e) => setForm(f => ({ ...f, location: e.target.value }))} placeholder="London · New York" />
+            </div>
+            <div style={F}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Website</label>
+              <input style={inp} value={form.external_url ?? ""} onChange={(e) => setForm(f => ({ ...f, external_url: e.target.value }))} placeholder="https://example.com" />
+            </div>
+            <div style={F}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Enquiry Email</label>
+              <input style={inp} value={form.enquiry_email ?? ""} onChange={(e) => setForm(f => ({ ...f, enquiry_email: e.target.value }))} placeholder="enquiries@gallery.com" />
+            </div>
+            <div style={F}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Logo URL</label>
+              <input style={inp} value={form.logo_url ?? ""} onChange={(e) => setForm(f => ({ ...f, logo_url: e.target.value }))} placeholder="https://…/logo.png" />
+            </div>
+            <div style={{ ...F, gridColumn:"1 / -1" }}>
+              <label className="adm-section-title" style={{ fontSize:"0.48rem" }}>Blurb</label>
+              <textarea style={{ ...inp, resize:"vertical" }} rows={3} value={form.blurb ?? ""}
+                onChange={(e) => setForm(f => ({ ...f, blurb: e.target.value }))} placeholder="One-paragraph gallery description…" />
+            </div>
+            {editing && (
+              <div style={{ ...F, flexDirection:"row", alignItems:"center", gap:"0.5rem" }}>
+                <input type="checkbox" id="gal-active" checked={form.active}
+                  onChange={(e) => setForm(f => ({ ...f, active: e.target.checked }))} />
+                <label htmlFor="gal-active" style={{ fontFamily:"'Cinzel',serif", fontSize:"0.52rem", letterSpacing:"0.1em", color:"rgba(212,175,55,0.5)" }}>Active</label>
+              </div>
+            )}
+          </div>
+          <div style={{ display:"flex", gap:"0.75rem", marginTop:"1rem" }}>
+            <button className="adm-btn" onClick={handleSave} disabled={saving}>{saving ? "Saving…" : "Save"}</button>
+            <button className="adm-btn-ghost" onClick={() => { setShowForm(false); setError(null); }}>Cancel</button>
+          </div>
+        </div>
+      )}
+
+      {loading ? (
+        <p style={{ color:"#4a4238", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em" }}>Loading…</p>
+      ) : (
+        <table className="adm-table">
+          <thead>
+            <tr>
+              {["Slug","Name","Location","Active","Actions"].map((h) => (
+                <th key={h} className="adm-th">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {galleries.map((g) => (
+              <tr key={g.slug}>
+                <td className="adm-td adm-td-mono">{g.slug}</td>
+                <td className="adm-td adm-td-gold">{g.name}</td>
+                <td className="adm-td">{g.location ?? "—"}</td>
+                <td className="adm-td">{g.active ? <span className="adm-td-green">✓</span> : <span className="adm-td-red">✗</span>}</td>
+                <td className="adm-td">
+                  <div style={{ display:"flex", gap:"0.5rem" }}>
+                    <button className="adm-btn-sm" onClick={() => startEdit(g)}>Edit</button>
+                    <a href={`/gallery/${g.slug}`} target="_blank" rel="noopener noreferrer"
+                      style={{ fontFamily:"'Cinzel',serif", fontSize:"0.5rem", letterSpacing:"0.1em", color:"rgba(212,175,55,0.5)", textDecoration:"none", padding:"0.3rem 0.6rem", border:"1px solid rgba(212,175,55,0.1)" }}>View ↗</a>
+                    <button className="adm-btn-sm adm-btn-danger" onClick={() => handleDelete(g.slug)}>Delete</button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
-type Tab = "artworks" | "subscribers";
+type Tab = "artworks" | "galleries" | "subscribers";
 
 export default function Admin() {
   const { secret, save } = useAdminSecret();
@@ -449,7 +615,7 @@ export default function Admin() {
         </div>
 
         <div className="adm-tabs">
-          {(["artworks","subscribers"] as Tab[]).map((t) => (
+          {(["artworks","galleries","subscribers"] as Tab[]).map((t) => (
             <button key={t} onClick={() => setTab(t)}
               className={`adm-tab${tab===t?" active":""}`}>
               {t.charAt(0).toUpperCase() + t.slice(1)}
@@ -458,6 +624,7 @@ export default function Admin() {
         </div>
 
         {tab === "artworks"    && <ArtworksTab    secret={secret} />}
+        {tab === "galleries"   && <GalleriesTab   secret={secret} />}
         {tab === "subscribers" && <SubscribersTab secret={secret} />}
       </div>
     </div>
