@@ -31,7 +31,7 @@ export default function NotFound() {
         </p>
 
         {pathname !== "/" && (
-          <p style={{ fontFamily: "monospace", fontSize: "0.72rem", color: "#2a2a2a", margin: "0 0 2.5rem" }}>
+          <p style={{ fontFamily: "monospace", fontSize: "0.72rem", color: "#4a4238", margin: "0 0 2.5rem" }}>
             {pathname}
           </p>
         )}

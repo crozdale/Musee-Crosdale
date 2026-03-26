@@ -152,17 +152,17 @@ const css = `
   .dash-addr { font-family:monospace; font-size:0.8rem; color:#6a6258; }
   .dash-cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; margin:2rem 0; }
   .dash-card { border:1px solid rgba(212,175,55,0.15); background:#0a0a0a; padding:1.25rem 1.5rem; }
-  .dash-card-label { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:#4a4238; margin:0 0 0.4rem; }
+  .dash-card-label { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:#6a6258; margin:0 0 0.4rem; }
   .dash-card-value { font-family:'Cormorant Garamond',serif; font-size:1.6rem; color:#d4af37; margin:0; line-height:1.1; }
-  .dash-card-sub { font-size:0.72rem; color:#4a4238; margin:0.2rem 0 0; font-style:italic; }
+  .dash-card-sub { font-size:0.72rem; color:#6a6258; margin:0.2rem 0 0; font-style:italic; }
   .dash-section { margin-top:2.5rem; }
   .dash-section-title { font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.3em; text-transform:uppercase; color:#d4af37; margin:0 0 1rem; }
   .dash-table { width:100%; border-collapse:collapse; }
-  .dash-th { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:#4a4238; padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid rgba(212,175,55,0.1); }
+  .dash-th { font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:#6a6258; padding:0.5rem 0.75rem; text-align:left; border-bottom:1px solid rgba(212,175,55,0.1); }
   .dash-td { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#ccc; padding:0.55rem 0.75rem; border-bottom:1px solid rgba(255,255,255,0.03); }
   .dash-td-gold { color:#d4af37; }
   .dash-td-mono { font-family:monospace; font-size:0.75rem; color:#6a6258; }
-  .dash-empty { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#2a2a2a; font-style:italic; padding:1.5rem 0; text-align:center; border:1px solid rgba(212,175,55,0.06); }
+  .dash-empty { font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#6a6258; font-style:italic; padding:1.5rem 0; text-align:center; border:1px solid rgba(212,175,55,0.06); }
   .dash-status-row { display:flex; gap:1rem; flex-wrap:wrap; margin-top:1rem; }
   .dash-status-card { flex:1; min-width:220px; border:1px solid rgba(212,175,55,0.12); background:#0a0a0a; padding:1.25rem; }
   .dash-badge { display:inline-block; font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.2rem 0.6rem; border:1px solid; }
@@ -196,7 +196,7 @@ function ConnectGate({ onConnect, connecting }: { onConnect: () => void; connect
           {connecting ? t("wallet.connecting") : t("wallet.connect")}
         </button>
         {!window.ethereum && (
-          <p style={{ marginTop: "1rem", fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.1em", color: "#2a2a2a" }}>
+          <p style={{ marginTop: "1rem", fontFamily: "'Cinzel',serif", fontSize: "0.55rem", letterSpacing: "0.1em", color: "#6a6258" }}>
             {t("wallet.metamask_required")}
           </p>
         )}
@@ -246,6 +246,16 @@ export default function Dashboard() {
   return (
     <div className="dash-root">
       <style>{css}</style>
+      <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
+        <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
+        <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
+          Facinations Protocol
+        </p>
+        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, color: "#e8e0d0", letterSpacing: "0.1em", margin: 0, position: "relative" }}>
+          {t("dashboard.title")}
+        </h1>
+        <div style={{ width: 60, height: 1, background: "linear-gradient(to right, transparent, #d4af37, transparent)", margin: "1.5rem auto 0" }} />
+      </header>
 
       {!address ? (
         <ConnectGate onConnect={connect} connecting={connecting} />

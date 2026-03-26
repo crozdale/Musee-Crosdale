@@ -42,12 +42,12 @@ const css = `
   .artwork-thumb.selected { border-color:#d4af37; filter:brightness(1); box-shadow:0 0 20px rgba(212,175,55,0.2); }
   .mint-form { display:flex; flex-direction:column; gap:1rem; }
   .mint-preview { width:100%; aspect-ratio:1; object-fit:cover; border:1px solid rgba(212,175,55,0.2); margin-bottom:0.5rem; }
-  .mint-preview-empty { width:100%; aspect-ratio:1; background:#0c0c0c; border:1px solid rgba(212,175,55,0.1); display:flex; align-items:center; justify-content:center; color:#2a2a2a; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; margin-bottom:0.5rem; }
+  .mint-preview-empty { width:100%; aspect-ratio:1; background:#0c0c0c; border:1px solid rgba(212,175,55,0.1); display:flex; align-items:center; justify-content:center; color:#4a4238; font-family:'Cinzel',serif; font-size:0.6rem; letter-spacing:0.2em; margin-bottom:0.5rem; }
   .mint-input { background:#0c0c0c; border:1px solid rgba(212,175,55,0.15); color:#e8e0d0; padding:0.65rem 0.85rem; font-family:'Cormorant Garamond',serif; font-size:0.95rem; width:100%; box-sizing:border-box; transition:border-color 0.2s; }
   .mint-input:focus { outline:none; border-color:rgba(212,175,55,0.4); }
-  .mint-input::placeholder { color:#333; }
+  .mint-input::placeholder { color:#4a4238; }
   .mint-label { font-family:'Cinzel',serif; font-size:0.52rem; letter-spacing:0.2em; color:rgba(212,175,55,0.5); text-transform:uppercase; margin-bottom:0.25rem; display:block; }
-  .studio-disclaimer { text-align:center; font-size:0.72rem; color:#2a2a2a; font-family:'Cinzel',serif; letter-spacing:0.1em; max-width:640px; margin:2rem auto 0; padding:0 2rem 3rem; }
+  .studio-disclaimer { text-align:center; font-size:0.72rem; color:#6a6258; font-family:'Cinzel',serif; letter-spacing:0.1em; max-width:640px; margin:2rem auto 0; padding:0 2rem 3rem; }
   @media (max-width:640px) { .mint-flow { grid-template-columns:1fr; } }
 `;
 
