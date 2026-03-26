@@ -4,6 +4,35 @@ import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
+// ── VideoHero: tries mp4, falls back to a still image ─────────────────────────
+function VideoHero() {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <img
+        src="/images/MILLENNIALS-483507251_655514630770136_6062852906407374833_n.jpg"
+        alt="Gallery hero"
+        style={{ width: "100%", maxHeight: "480px", objectFit: "cover", display: "block", opacity: 0.85 }}
+      />
+    );
+  }
+
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      onError={() => setFailed(true)}
+      style={{ width: "100%", maxHeight: "480px", objectFit: "cover", display: "block", opacity: 0.85 }}
+    >
+      <source src="/hero.mp4" type="video/mp4" />
+      <source src="/hero.webm" type="video/webm" />
+    </video>
+  );
+}
+
 // ───────────────────────── Image list ─────────────────────────
 const images = [
   "Abiaat.jpg","Angie-eye-_2023-01-11_17-29-08.jpg",
@@ -1064,22 +1093,7 @@ export default function Gallery() {
           background: "#000",
         }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          style={{
-            width: "100%",
-            maxHeight: "480px",
-            objectFit: "cover",
-            display: "block",
-            opacity: 0.85,
-          }}
-        >
-          <source src="/facinations.mov" type="video/quicktime" />
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
+        <VideoHero />
       </div>
 
       <div
