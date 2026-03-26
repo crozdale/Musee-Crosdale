@@ -1,6 +1,7 @@
 ﻿// src/components/Header.jsx
 import "./Header.css";
 import { Link, useLocation } from "react-router-dom";
+import { BRAND } from "../brand/brandAssets";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import WalletConnect from "./WalletConnect";
@@ -33,7 +34,7 @@ export default function Header() {
         <div className="logo">
           <Link to="/" onClick={() => setMenuOpen(false)}>
             <img
-              src="/facinations-gold.png"
+              src={BRAND.FACINATIONS.WORDMARK}
               alt="Musee Crosdale"
               style={{ height: "38px", objectFit: "contain" }}
             />

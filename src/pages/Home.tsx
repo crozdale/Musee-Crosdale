@@ -3,6 +3,7 @@ import React, { useRef, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import xCoinLogo from "../assets/x-coin-logo.png";
+import { BRAND } from "../brand/brandAssets";
 
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400&display=swap');
@@ -77,7 +78,7 @@ export default function Home() {
         </a>
 
         <img
-          src="/facinations-gold.png"
+          src={BRAND.FACINATIONS.WORDMARK}
           alt="Facinations"
           className="home-banner"
         />
