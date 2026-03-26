@@ -2,7 +2,7 @@
 import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 const httpLink = new HttpLink({
-  uri: "https://api.studio.thegraph.com/query/1722298/facinations/v0.1.5",
+  uri: "https://api.studio.thegraph.com/query/1722298/facinations/v0.0.2",
 });
 
 export const graphClient = new ApolloClient({
