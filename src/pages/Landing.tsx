@@ -14,7 +14,7 @@ export default function Landing() {
       body: t("landing.role_vc_desc"),
       links: [
         { to: "/about", label: t("landing.btn_about") },
-        { to: "/whitepaper", label: t("landing.btn_whitepaper") },
+        { to: "/architecture", label: t("landing.btn_whitepaper") },
       ],
     },
     {
@@ -30,7 +30,7 @@ export default function Landing() {
     {
       title: t("landing.role_partners"),
       body: t("landing.role_partners_desc"),
-      links: [{ to: "/blogazine", label: t("landing.btn_blogazine") }],
+      links: [{ to: "/xdale", label: t("landing.btn_blogazine") }],
     },
   ];
 

@@ -11,28 +11,42 @@ export default function DealerIntelligencePanel() {
   ]);
   const [loading, setLoading] = useState(false);
 
+  const SYSTEM = `You are the Dealer Intelligence SIA (Synthetic Intelligence Analyst) for Musée-Crosdale / Facinations — a fine art platform that vaults and fractionalises artworks on-chain. You advise gallery owners, dealer principals, and collectors on: inventory mix strategy, acquisition and disposal desking, fractional ownership structures, XER token economics, on-chain provenance, and fine art market performance. Be concise (4 sentences max unless asked to expand), data-oriented, and professional. Where figures are unavailable, give directional guidance. Never fabricate specific auction results.`;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const trimmed = input.trim();
     if (!trimmed) return;
 
-    const userMessage = { role: "user", text: trimmed };
-    setMessages((prev) => [...prev, userMessage]);
+    const history = messages
+      .slice(1) // skip the initial greeting
+      .map((m) => ({ role: m.role === "user" ? "user" : "assistant", content: m.text }));
+
+    setMessages((prev) => [...prev, { role: "user", text: trimmed }]);
     setInput("");
     setLoading(true);
 
-    // Placeholder response – replace with real API call later
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          text:
-            "This is a placeholder response. In production, this panel will call your Dealer Intelligence agent and return structured recommendations."
-        }
-      ]);
+    try {
+      const res = await fetch("/api/claude/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-5",
+          max_tokens: 500,
+          system: SYSTEM,
+          messages: [...history, { role: "user", content: trimmed }],
+        }),
+      });
+      const raw = await res.text();
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const d = JSON.parse(raw);
+      const reply = d.content?.find((b: any) => b.type === "text")?.text ?? "No response.";
+      setMessages((prev) => [...prev, { role: "assistant", text: reply }]);
+    } catch (err: any) {
+      setMessages((prev) => [...prev, { role: "assistant", text: `Error: ${err.message}` }]);
+    } finally {
       setLoading(false);
-    }, 600);
+    }
   };
 
   return (
