@@ -1053,6 +1053,35 @@ export default function Gallery() {
         <div className="g-div" />
       </div>
 
+      {/* Video hero */}
+      <div
+        style={{
+          margin: "1.5rem -2rem 0",
+          position: "relative",
+          width: "calc(100% + 4rem)",
+          maxHeight: "480px",
+          overflow: "hidden",
+          background: "#000",
+        }}
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{
+            width: "100%",
+            maxHeight: "480px",
+            objectFit: "cover",
+            display: "block",
+            opacity: 0.85,
+          }}
+        >
+          <source src="/facinations.mov" type="video/quicktime" />
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+      </div>
+
       <div
         style={{
           display: "flex",

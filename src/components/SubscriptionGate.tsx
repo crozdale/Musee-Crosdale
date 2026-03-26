@@ -92,7 +92,7 @@ const S: Record<string, React.CSSProperties> = {
 
 export default function SubscriptionGate({ required, featureName = "this feature", children }: Props) {
   const { t } = useTranslation();
-  const { tier, subscribe } = useSubscription();
+  const { tier, startCheckout } = useSubscription();
 
   if (tierMeets(tier, required)) return <>{children}</>;
 
@@ -127,7 +127,7 @@ export default function SubscriptionGate({ required, featureName = "this feature
             </p>
             <button
               style={S.planBtn}
-              onClick={() => subscribe(plan.tier)}
+              onClick={() => startCheckout(plan.tier)}
             >
               {tier === "none" ? t("subscriptionGate.btn_subscribe") : t("subscriptionGate.btn_upgrade")}
             </button>
