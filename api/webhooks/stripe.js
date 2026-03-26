@@ -16,6 +16,7 @@
 import Stripe from "stripe";
 import { query } from "../lib/db.js";
 import { runMigrations } from "../lib/migrate.js";
+import { sendEmail, tplWelcome, tplPaymentFailed, tplCancelled } from "../lib/email.js";
 
 // Disable Vercel's automatic body parsing so we can verify the raw signature
 export const config = { api: { bodyParser: false } };
@@ -97,14 +98,23 @@ export default async function handler(req, res) {
         const tier  = tierFromPriceId(price);
         if (!tier) break;
 
+        const email = session.customer_details?.email ?? session.customer_email;
         await upsertSubscription({
           customerId:     session.customer,
           subscriptionId: session.subscription,
-          email:          session.customer_details?.email ?? session.customer_email,
+          email,
           tier,
           status:         "active",
           periodEnd:      new Date(sub.current_period_end * 1000),
         });
+
+        if (email) {
+          sendEmail({
+            to:      email,
+            subject: `Welcome to ${tier.charAt(0).toUpperCase() + tier.slice(1)} Studio — Musée-Crosdale`,
+            html:    tplWelcome({ tier, periodEnd: new Date(sub.current_period_end * 1000) }),
+          }).catch(() => {});
+        }
         break;
       }
 
@@ -131,12 +141,21 @@ export default async function handler(req, res) {
       // ── Subscription cancelled ──────────────────────────────────────────────
       case "customer.subscription.deleted": {
         const sub = event.data.object;
-        await query(
+        const { rows } = await query(
           `UPDATE subscriptions
            SET status = 'cancelled', tier = 'none', updated_at = NOW()
-           WHERE stripe_customer_id = $1`,
+           WHERE stripe_customer_id = $1
+           RETURNING email, tier`,
           [sub.customer]
         );
+        const row = rows[0];
+        if (row?.email) {
+          sendEmail({
+            to:      row.email,
+            subject: "Your Studio subscription has been cancelled",
+            html:    tplCancelled({ tier: row.tier || "studio" }),
+          }).catch(() => {});
+        }
         break;
       }
 
@@ -166,6 +185,13 @@ export default async function handler(req, res) {
            WHERE stripe_customer_id = $1`,
           [invoice.customer]
         );
+        if (invoice.customer_email) {
+          sendEmail({
+            to:      invoice.customer_email,
+            subject: "Action required — Studio payment unsuccessful",
+            html:    tplPaymentFailed(),
+          }).catch(() => {});
+        }
         break;
       }
 

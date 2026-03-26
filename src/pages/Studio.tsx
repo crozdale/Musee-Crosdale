@@ -138,7 +138,15 @@ export default function Studio() {
                 />
               </div>
               <button
-                onClick={() => waitlistForm.email && setWaitlistDone(true)}
+                onClick={async () => {
+                  if (!waitlistForm.email) return;
+                  await fetch("/api/waitlist", {
+                    method:  "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body:    JSON.stringify(waitlistForm),
+                  }).catch(() => {});
+                  setWaitlistDone(true);
+                }}
                 disabled={!waitlistForm.email}
                 style={{
                   padding: "0.75rem 2rem",

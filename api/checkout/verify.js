@@ -6,6 +6,7 @@
 
 import Stripe from "stripe";
 import { query } from "../lib/db.js";
+import { sendEmail, tplWelcome, tplReceipt } from "../lib/email.js";
 
 const VALID_TIERS = new Set(["starter", "gallery"]);
 
@@ -64,6 +65,17 @@ export default async function handler(req, res) {
           periodEnd,
         ]
       ).catch((e) => console.warn("[checkout/verify] DB upsert failed:", e.message));
+
+      // Send welcome + receipt emails (best-effort)
+      const customerEmail = session.customer_details?.email;
+      if (customerEmail) {
+        const periodEnd = sub?.current_period_end ? new Date(sub.current_period_end * 1000) : null;
+        const amount    = { starter: "29.00", gallery: "99.00" }[tier] ?? "—";
+        Promise.all([
+          sendEmail({ to: customerEmail, subject: `Welcome to ${tier.charAt(0).toUpperCase() + tier.slice(1)} Studio — Musée-Crosdale`, html: tplWelcome({ tier, periodEnd }) }),
+          sendEmail({ to: customerEmail, subject: "Your Musée-Crosdale Studio receipt", html: tplReceipt({ tier, amount, periodEnd }) }),
+        ]).catch(() => {});
+      }
     }
 
     return res.status(200).json({

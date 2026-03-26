@@ -29,6 +29,16 @@ export async function runMigrations() {
     CREATE INDEX IF NOT EXISTS idx_sub_stripe_customer
       ON subscriptions (stripe_customer_id);
   `);
+
+  await query(`
+    CREATE TABLE IF NOT EXISTS waitlist (
+      id         SERIAL PRIMARY KEY,
+      email      TEXT NOT NULL UNIQUE,
+      practice   TEXT,
+      goal       TEXT,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
 }
 
 /** Serverless handler — lets you trigger migrations via HTTP in dev/staging. */
