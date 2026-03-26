@@ -1,3 +1,4 @@
+# ── Swap (raw swap record — kept for backwards compat) ────────────────────────
 type Swap @entity(immutable: true) {
   id: ID!
   user: Bytes!
@@ -9,10 +10,42 @@ type Swap @entity(immutable: true) {
   blockNumber: BigInt!
 }
 
+# ── SwapUser (per-user swap aggregates) ───────────────────────────────────────
 type SwapUser @entity(immutable: false) {
   id: ID!
   totalSwaps: BigInt!
   totalXerIn: BigInt!
   totalFeesPaid: BigInt!
   lastSwapAt: BigInt!
+}
+
+# ── Trade — matches Dashboard + ETL query fields ──────────────────────────────
+type Trade @entity(immutable: true) {
+  id: ID!
+  user: Bytes!
+  fractionId: Bytes!          # vault/fraction token contract (tokenOut)
+  xerAmount: BigDecimal!      # XER spent (amountIn, 18-decimal normalised)
+  fractionAmount: BigDecimal! # fractions received (amountOut, 18-decimal normalised)
+  timestamp: BigInt!
+}
+
+# ── UserPosition — per-user per-vault holding ─────────────────────────────────
+type UserPosition @entity(immutable: false) {
+  id: ID!                     # "{userHex}-{vaultHex}"
+  user: Bytes!
+  vaultId: String!            # vault contract address (lowercase hex)
+  fractionBalance: BigDecimal!
+  entryXerAmount: BigDecimal! # cumulative XER spent via swaps (cost basis)
+  updatedAt: BigInt!
+}
+
+# ── VaultMint — artwork vault minting record ──────────────────────────────────
+type VaultMint @entity(immutable: true) {
+  id: ID!
+  user: Bytes!
+  tokenId: BigInt!
+  vaultId: String!
+  tokenURI: String!
+  legalURI: String!
+  timestamp: BigInt!
 }

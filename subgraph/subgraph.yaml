@@ -3,6 +3,7 @@ specVersion: 0.0.5
 schema:
   file: ./schema.graphql
 dataSources:
+  # ── FacinationsVaultDeFi — swap engine ──────────────────────────────────────
   - kind: ethereum
     name: FacinationsVaultDeFi
     network: sepolia
@@ -17,10 +18,63 @@ dataSources:
       entities:
         - Swap
         - SwapUser
+        - Trade
+        - UserPosition
+        - VaultMint
       abis:
         - name: FacinationsVaultDeFi
           file: ../artifacts/FacinationsVaultDeFi.sol/FacinationsVaultDeFi.json
       eventHandlers:
         - event: SwapExecuted(indexed address,indexed address,uint256,uint256,uint256,uint256)
           handler: handleSwapExecuted
+        - event: VaultMinted(indexed address,indexed uint256,string,string,string,uint256)
+          handler: handleVaultMinted
+      file: ./src/mappings.ts
+
+  # ── FractionalVault — fraction token transfers (UserPosition balance tracking)
+  - kind: ethereum
+    name: FractionalVault
+    network: sepolia
+    source:
+      address: "0x0A6C0cd989fd3643AE60C5C910C03fbAB25242dF"
+      abi: FractionalVault
+      startBlock: 10434909
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - UserPosition
+      abis:
+        - name: FractionalVault
+          file: ./abis/FractionalVault.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
+      file: ./src/mappings.ts
+
+  # ── ArtworkVault — second vault contract ─────────────────────────────────────
+  - kind: ethereum
+    name: ArtworkVault
+    network: sepolia
+    source:
+      address: "0x89E4041e2B51De805C824A4391e4f8216a7529cd"
+      abi: FractionalVault
+      startBlock: 10434909
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - UserPosition
+      abis:
+        - name: FractionalVault
+          file: ./abis/FractionalVault.json
+      eventHandlers:
+        - event: TransferSingle(indexed address,indexed address,indexed address,uint256,uint256)
+          handler: handleTransferSingle
+        - event: TransferBatch(indexed address,indexed address,indexed address,uint256[],uint256[])
+          handler: handleTransferBatch
       file: ./src/mappings.ts
