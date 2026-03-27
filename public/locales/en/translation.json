@@ -49,7 +49,12 @@
     "blogazine": "Click for Blogazine"
   },
   "footer": {
-    "copyright": "© {{year}} Façinations. All rights reserved."
+    "copyright": "© {{year}} Façinations. All rights reserved.",
+    "newsletter_eyebrow": "Private View · Musée-Crosdale",
+    "newsletter_confirmed": "You're on the list.",
+    "newsletter_placeholder": "Your email address",
+    "newsletter_btn": "Subscribe",
+    "newsletter_error": "Something went wrong — please try again."
   },
   "landing": {
     "eyebrow": "Facinations Protocol",
