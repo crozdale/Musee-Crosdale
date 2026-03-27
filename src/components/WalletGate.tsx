@@ -5,6 +5,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useWeb3 } from "../providers/Web3Provider";
+import { useXerVaultRef } from "../hooks/useXerVaultRef";
 
 interface Props {
   children: React.ReactNode;
@@ -70,11 +71,19 @@ const S: Record<string, React.CSSProperties> = {
     border: "1px solid rgba(212,175,55,0.08)",
     padding: "0.2rem 0.6rem",
   },
+  xvNote: {
+    fontFamily: "'Cormorant Garamond', serif",
+    fontSize: "0.82rem",
+    color: "rgba(212,175,55,0.55)",
+    fontStyle: "italic",
+    margin: 0,
+  },
 };
 
 export default function WalletGate({ children }: Props) {
   const { t } = useTranslation();
   const { account, connect } = useWeb3();
+  const isXerVault = useXerVaultRef();
 
   if (account) return <>{children}</>;
 
@@ -85,6 +94,19 @@ export default function WalletGate({ children }: Props) {
       <p style={S.body}>
         {t("wallet.wallet_required_body", "Connect your wallet to access this section. No account or email address is required.")}
       </p>
+      {isXerVault && (
+        <p style={S.xvNote}>
+          XerVault user? Connect the same wallet for instant access —{" "}
+          <a
+            href="https://xervault.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#d4af37", textDecoration: "none" }}
+          >
+            xervault.com
+          </a>
+        </p>
+      )}
       <button style={S.btn} onClick={connect}>
         {t("wallet.connect", "Connect Wallet")}
       </button>

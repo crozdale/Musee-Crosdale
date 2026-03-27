@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useFacinationsSwap } from "../hooks/useFacinationsSwap";
 import { swapsAllowed, regionRestrictionMessage } from "../config/regionFlags";
 import WalletGate from "../components/WalletGate";
+import XerVaultBanner from "../components/XerVaultBanner";
 import { useMeta } from "../hooks/useMeta";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import type { RegistryVault } from "../features/vaults/registry/vaultRegistry";
@@ -120,6 +121,7 @@ const Swap: React.FC = () => {
 
   return (
     <main style={{ background: "#1c1c1c", minHeight: "100vh" }}>
+      <XerVaultBanner />
       {/* Page Hero */}
       <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />

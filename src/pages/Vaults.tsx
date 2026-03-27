@@ -6,6 +6,7 @@ import { useVaults } from "../features/vaults/hooks/useVaults";
 import { regionRestrictionMessage, swapsAllowed } from "../config/regionFlags";
 import { useMeta } from "../hooks/useMeta";
 import WalletGate from "../components/WalletGate";
+import XerVaultBanner from "../components/XerVaultBanner";
 
 const RISK_COLORS: Record<string, string> = {
   Low: "#5cb85c",
@@ -71,6 +72,8 @@ const Vaults = () => {
   }
 
   return (
+    <>
+    <XerVaultBanner />
     <WalletGate>
     <main style={{ background: "#1c1c1c", minHeight: "100vh", fontFamily: "'Cormorant Garamond', Georgia, serif", color: "#f2ece0" }}>
 
@@ -257,6 +260,7 @@ const Vaults = () => {
       </div>
     </main>
     </WalletGate>
+    </>
   );
 };
 

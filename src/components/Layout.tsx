@@ -193,6 +193,32 @@ function SiteFooter() {
               {label}
             </Link>
           ))}
+          <a
+            href="https://xervault.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.5rem",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "rgba(212,175,55,0.45)",
+              textDecoration: "none",
+              padding: "0.3rem 0.55rem",
+              border: "1px solid rgba(212,175,55,0.15)",
+              transition: "all 0.2s",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "#d4af37";
+              e.currentTarget.style.borderColor = "rgba(212,175,55,0.4)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "rgba(212,175,55,0.45)";
+              e.currentTarget.style.borderColor = "rgba(212,175,55,0.15)";
+            }}
+          >
+            XerVault
+          </a>
         </nav>
 
         {/* Right — chain info */}
