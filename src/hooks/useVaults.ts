@@ -1,11 +1,6 @@
-import { VAULTS } from "../registry/vaultRegistry";
-
-export function useVaults() {
-  return {
-    vaults: VAULTS,
-    loading: false,
-    error: null,
-  };
-}
-
-
+/**
+ * Compatibility shim — kept so legacy import paths (`../hooks/useVaults`)
+ * continue to resolve. The real implementation (subgraph + registry merge) is:
+ *   src/features/vaults/hooks/useVaults.ts
+ */
+export { useVaults } from "../features/vaults/hooks/useVaults";

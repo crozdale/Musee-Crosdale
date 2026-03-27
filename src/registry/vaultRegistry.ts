@@ -1,24 +1,14 @@
 /**
- * Facinations — Canonical Vault Registry
- * -------------------------------------
- * If a vault is not declared here, it does not exist.
+ * Compatibility shim — kept so legacy import paths (`../registry/vaultRegistry`)
+ * continue to resolve. All source-of-truth data lives in:
+ *   src/features/vaults/registry/vaultRegistry.ts
  */
 
-export const VAULTS = [
-  {
-    vaultId: "VAULT-ALBATRIX-001",
-    name: "Albatrix I",
-    description: "Genesis fractionalized artwork vault.",
-    contractAddress: "0x0000000000000000000000000000000000000000",
-    chainId: 1,
-    premiumRequired: true
-  },
-  {
-    vaultId: "VAULT-OPEN-ARCHIVE",
-    name: "Open Archive",
-    description: "Read-only provenance archive.",
-    contractAddress: "0x0000000000000000000000000000000000000000",
-    chainId: 1,
-    premiumRequired: false
-  }
-];
+export { VAULTS, type RegistryVault } from "../features/vaults/registry/vaultRegistry";
+import { VAULTS } from "../features/vaults/registry/vaultRegistry";
+
+/** Look up a vault by its vaultId string. Returns undefined when not found. */
+export function getVaultById(id?: string) {
+  if (!id) return undefined;
+  return VAULTS.find((v) => v.vaultId === id);
+}
