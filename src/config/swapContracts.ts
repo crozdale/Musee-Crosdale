@@ -3,7 +3,7 @@
 export const CHAIN_ID = Number(import.meta.env.VITE_CHAIN_ID || 11155111); // Sepolia
 
 export const XER_TOKEN_ADDRESS: string =
-  import.meta.env.VITE_XER_TOKEN_ADDRESS || "";
+  import.meta.env.VITE_XER_TOKEN_ADDRESS || "0x2926f34Ad98ccC6d90556c9f570E2DA89eEE";
 
 /** Vault Sale contract — executes all vault fraction swaps. */
 export const VAULT_SALE_ADDRESS: string =
