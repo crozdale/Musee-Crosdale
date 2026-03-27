@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function VaultAcceptance({ accepted, onChange }) {
+  const { t } = useTranslation();
+
   return (
     <div className="mt-12 pt-8 border-t border-black/10 max-w-3xl">
       <label className="flex items-start gap-4 cursor-pointer">
@@ -16,15 +20,12 @@ export default function VaultAcceptance({ accepted, onChange }) {
         />
 
         <span className="text-[15px] leading-relaxed text-black/80">
-          I acknowledge that Vault Tokens do not represent ownership,
-          possession, or legal title to the physical artwork, and that
-          my rights are limited to those expressly described in the
-          Vault Participation Agreement and related legal documents.
+          {t("vault.acceptance_text", "I acknowledge that Vault Tokens do not represent ownership, possession, or legal title to the physical artwork, and that my rights are limited to those expressly described in the Vault Participation Agreement and related legal documents.")}
         </span>
       </label>
 
       <p className="mt-3 text-[11px] tracking-wide uppercase text-black/40">
-        Acceptance is recorded with your wallet address and timestamp
+        {t("vault.acceptance_note", "Acceptance is recorded with your wallet address and timestamp")}
       </p>
     </div>
   );

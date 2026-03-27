@@ -17,7 +17,12 @@
     "connecting": "Conectando…",
     "connected": "Carteira Conectada",
     "disconnect": "Desconectar",
-    "metamask_required": "MetaMask ou carteira compatível necessária"
+    "metamask_required": "MetaMask ou carteira compatível necessária",
+    "wallet_required": "Carteira necessária",
+    "wallet_required_body": "Conecte sua carteira para acessar esta seção. Nenhuma conta ou endereço de e-mail é necessário.",
+    "identity_note": "Seu endereço de carteira é sua identidade — nada mais é armazenado",
+    "unsupported_network": "Rede não suportada",
+    "switch_network": "Mude para uma rede suportada."
   },
   "common": {
     "loading": "Carregando…",
@@ -39,7 +44,11 @@
     "close_menu": "Fechar menu",
     "skip_to_content": "Ir para o conteúdo principal",
     "risk_disclosures": "Ver Divulgações de Risco →",
-    "page_not_found": "Página Não Encontrada"
+    "page_not_found": "Página Não Encontrada",
+    "loading_page": "Carregando página",
+    "return_to_studio": "Voltar ao Estúdio",
+    "invalid_link": "Link de checkout inválido.",
+    "service_unreachable": "Não foi possível alcançar o serviço de verificação. Entre em contato com o suporte."
   },
   "hero": {
     "title": "Facinations: Cofres de Arte Fina Fracionada",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "Você está na lista.",
     "newsletter_placeholder": "Seu endereço de e-mail",
     "newsletter_btn": "Assinar",
-    "newsletter_error": "Algo deu errado — tente novamente."
+    "newsletter_error": "Algo deu errado — tente novamente.",
+    "protocol_tagline": "Protocolo de Arte Descentralizado"
   },
   "landing": {
     "eyebrow": "Protocolo Facinations",
@@ -544,6 +554,45 @@
     "mint_label_desc": "Descrição",
     "mint_placeholder_desc": "Descreva esta obra...",
     "disclaimer": "Preços e disponibilidade estão sujeitos a due diligence e revisão jurisdicional. O Facinations Studio não constitui aconselhamento ou solicitação de investimento."
+  },
+  "checkout": {
+    "verifying_subscription": "Verificando sua assinatura…",
+    "just_a_moment": "Isso leva apenas um momento.",
+    "subscription_activated": "Assinatura ativada",
+    "welcome_returning": "Bem-vindo ao Facinations Studio. Redirecionando agora…",
+    "verification_failed": "Verificação falhou",
+    "payment_failed": "Pagamento falhou",
+    "payment_not_verified": "O pagamento não pôde ser verificado.",
+    "verifying_payment": "Verificando seu pagamento…",
+    "payment_confirmed": "Pagamento confirmado",
+    "awaiting_confirmation": "Aguardando confirmação",
+    "crypto_pending_body": "Seu pagamento em criptomoeda foi recebido e está aguardando confirmação na blockchain. Isso pode levar alguns minutos. Você terá acesso assim que for confirmado.",
+    "confirming_paypal": "Confirmando seu pagamento PayPal…",
+    "payment_not_captured": "O pagamento não pôde ser capturado."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "Conectando carteira...",
+    "sending": "Enviando transação...",
+    "confirming": "Confirmando na chain...",
+    "success": "✓ Minted Successfully",
+    "retry": "Tentar Mint novamente",
+    "no_wallet": "Nenhuma carteira encontrada. Instale Uniswap ou MetaMask."
+  },
+  "redeem": {
+    "title": "Trocar por XER",
+    "instrument_line": "Trocar instrumento #{{tokenId}} por {{amount}} XER.",
+    "warning": "Esta ação queima o instrumento e não pode ser desfeita.",
+    "processing": "Processando...",
+    "confirm": "Confirmar troca"
+  },
+  "vault": {
+    "acceptance_text": "Reconheço que os tokens de vault não representam propriedade, posse ou título legal da obra física, e que meus direitos estão limitados àqueles expressamente descritos no Contrato de Participação no Vault e documentos legais relacionados.",
+    "acceptance_note": "A aceitação é registrada com seu endereço de carteira e carimbo de data/hora",
+    "legal_title": "Legal & Divulgações",
+    "view_legal_pack": "Ver pacote legal ({{label}})",
+    "legal_confirm": "Confirmo que li e compreendi a documentação legal.",
+    "jurisdiction_version": "Jurisdição: {{jurisdiction}} · Versão {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

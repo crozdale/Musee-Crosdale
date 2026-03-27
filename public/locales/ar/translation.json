@@ -17,7 +17,12 @@
     "connecting": "جارٍ الاتصال…",
     "connected": "المحفظة متصلة",
     "disconnect": "قطع الاتصال",
-    "metamask_required": "يلزم توفر MetaMask أو محفظة متوافقة"
+    "metamask_required": "يلزم توفر MetaMask أو محفظة متوافقة",
+    "wallet_required": "المحفظة مطلوبة",
+    "wallet_required_body": "قم بتوصيل محفظتك للوصول إلى هذا القسم. لا يلزم وجود حساب أو بريد إلكتروني.",
+    "identity_note": "عنوان محفظتك هو هويتك — لا يُحفظ شيء آخر",
+    "unsupported_network": "شبكة غير مدعومة",
+    "switch_network": "يرجى التبديل إلى شبكة مدعومة."
   },
   "common": {
     "loading": "جارٍ التحميل…",
@@ -39,7 +44,11 @@
     "close_menu": "إغلاق القائمة",
     "skip_to_content": "الانتقال إلى المحتوى الرئيسي",
     "risk_disclosures": "عرض إفصاحات المخاطر →",
-    "page_not_found": "الصفحة غير موجودة"
+    "page_not_found": "الصفحة غير موجودة",
+    "loading_page": "جارٍ تحميل الصفحة",
+    "return_to_studio": "العودة إلى الاستوديو",
+    "invalid_link": "رابط الدفع غير صالح.",
+    "service_unreachable": "تعذّر الوصول إلى خدمة التحقق. يرجى التواصل مع الدعم."
   },
   "hero": {
     "title": "Facinations: خزائن الفنون الجميلة الجزئية",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "أنت في القائمة.",
     "newsletter_placeholder": "عنوان بريدك الإلكتروني",
     "newsletter_btn": "اشتراك",
-    "newsletter_error": "حدث خطأ ما — يرجى المحاولة مرة أخرى."
+    "newsletter_error": "حدث خطأ ما — يرجى المحاولة مرة أخرى.",
+    "protocol_tagline": "بروتوكول فني لا مركزي"
   },
   "landing": {
     "eyebrow": "بروتوكول Facinations",
@@ -544,6 +554,45 @@
     "mint_label_desc": "الوصف",
     "mint_placeholder_desc": "صِف هذا العمل...",
     "disclaimer": "الأسعار والتوافر خاضعان لمراجعة العناية الواجبة والمراجعة القضائية. لا يُمثّل Facinations Studio نصيحة استثمارية أو عرضًا."
+  },
+  "checkout": {
+    "verifying_subscription": "جارٍ التحقق من اشتراكك…",
+    "just_a_moment": "هذا يستغرق لحظة فقط.",
+    "subscription_activated": "تم تفعيل الاشتراك",
+    "welcome_returning": "مرحباً بك في Facinations Studio. جارٍ إعادة التوجيه الآن…",
+    "verification_failed": "فشل التحقق",
+    "payment_failed": "فشل الدفع",
+    "payment_not_verified": "تعذّر التحقق من الدفع.",
+    "verifying_payment": "جارٍ التحقق من دفعتك…",
+    "payment_confirmed": "تم تأكيد الدفع",
+    "awaiting_confirmation": "في انتظار التأكيد",
+    "crypto_pending_body": "تم استلام دفعتك المشفرة وهي في انتظار تأكيد البلوكشين. قد يستغرق هذا بضع دقائق. ستحصل على الوصول فور التأكيد.",
+    "confirming_paypal": "جارٍ تأكيد دفعة PayPal…",
+    "payment_not_captured": "تعذّر التقاط الدفعة."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "جارٍ توصيل المحفظة...",
+    "sending": "جارٍ إرسال المعاملة...",
+    "confirming": "جارٍ التأكيد على السلسلة...",
+    "success": "✓ Minted Successfully",
+    "retry": "إعادة محاولة Mint",
+    "no_wallet": "لم يتم العثور على محفظة. قم بتثبيت Uniswap أو MetaMask."
+  },
+  "redeem": {
+    "title": "استبدال مقابل XER",
+    "instrument_line": "استبدال الأداة #{{tokenId}} مقابل {{amount}} XER.",
+    "warning": "يؤدي هذا الإجراء إلى حرق الأداة ولا يمكن التراجع عنه.",
+    "processing": "جارٍ المعالجة...",
+    "confirm": "تأكيد الاستبدال"
+  },
+  "vault": {
+    "acceptance_text": "أقرّ بأن رموز Vault لا تمثل ملكية أو حيازة أو حق قانوني للعمل الفني المادي، وأن حقوقي محدودة بتلك الموضحة صراحةً في اتفاقية المشاركة في Vault والوثائق القانونية ذات الصلة.",
+    "acceptance_note": "يتم تسجيل القبول مع عنوان محفظتك والطابع الزمني",
+    "legal_title": "القانونية والإفصاحات",
+    "view_legal_pack": "عرض الحزمة القانونية ({{label}})",
+    "legal_confirm": "أؤكد أنني قرأت وفهمت الوثائق القانونية.",
+    "jurisdiction_version": "الاختصاص القضائي: {{jurisdiction}} · الإصدار {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

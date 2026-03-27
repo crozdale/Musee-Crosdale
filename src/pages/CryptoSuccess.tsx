@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useSubscription } from "../context/SubscriptionContext";
 import type { PlanTier } from "../context/SubscriptionContext";
 
@@ -14,6 +15,7 @@ const VALID_TIERS = new Set<string>(["starter", "gallery"]);
 const LS_KEY = "facinations_cb_charge";
 
 export default function CryptoSuccess() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { subscribe } = useSubscription();
@@ -26,7 +28,7 @@ export default function CryptoSuccess() {
     const chargeId = localStorage.getItem(LS_KEY);
 
     if (!tier || !VALID_TIERS.has(tier)) {
-      setErrorMsg("Invalid checkout link.");
+      setErrorMsg(t("common.invalid_link", "Invalid checkout link."));
       setStatus("error");
       return;
     }
@@ -43,7 +45,7 @@ export default function CryptoSuccess() {
         const data = await res.json();
 
         if (!res.ok) {
-          setErrorMsg(data.error ?? "Verification failed.");
+          setErrorMsg(data.error ?? t("checkout.verification_failed", "Verification Failed"));
           setStatus("error");
           return;
         }
@@ -58,7 +60,7 @@ export default function CryptoSuccess() {
           setStatus("pending");
         }
       } catch {
-        setErrorMsg("Could not reach the verification service. Please contact support.");
+        setErrorMsg(t("common.service_unreachable", "Could not reach the verification service. Please contact support."));
         setStatus("error");
       }
     })();
@@ -77,10 +79,10 @@ export default function CryptoSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "rgba(212,175,55,0.4)", marginBottom: "1.5rem", animation: "pulse 1.6s ease-in-out infinite" }}>◈</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
-              Verifying your payment…
+              {t("checkout.verifying_payment", "Verifying your payment…")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#4a4238", fontSize: "0.85rem", margin: 0 }}>
-              This takes just a moment.
+              {t("checkout.just_a_moment", "This takes just a moment.")}
             </p>
           </>
         )}
@@ -89,10 +91,10 @@ export default function CryptoSuccess() {
           <>
             <div style={{ fontSize: "2.5rem", color: "#5cb85c", marginBottom: "1rem" }}>✓</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
-              Payment Confirmed
+              {t("checkout.payment_confirmed", "Payment Confirmed")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.9rem", margin: 0 }}>
-              Welcome to Facinations Studio. Returning you now…
+              {t("checkout.welcome_returning", "Welcome to Facinations Studio. Returning you now…")}
             </p>
           </>
         )}
@@ -101,11 +103,10 @@ export default function CryptoSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "#d4af37", marginBottom: "1.5rem", animation: "pulse 2s ease-in-out infinite" }}>⧗</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
-              Awaiting Confirmation
+              {t("checkout.awaiting_confirmation", "Awaiting Confirmation")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
-              Your crypto payment has been received and is awaiting blockchain confirmation.
-              This can take a few minutes. You'll gain access as soon as it's confirmed.
+              {t("checkout.crypto_pending_body", "Your crypto payment has been received and is awaiting blockchain confirmation. This can take a few minutes. You'll gain access as soon as it's confirmed.")}
             </p>
             <button
               onClick={() => navigate("/studio")}
@@ -121,7 +122,7 @@ export default function CryptoSuccess() {
                 cursor: "pointer",
               }}
             >
-              Return to Studio
+              {t("common.return_to_studio", "Return to Studio")}
             </button>
           </>
         )}
@@ -130,7 +131,7 @@ export default function CryptoSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "#e05", marginBottom: "1rem" }}>✗</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
-              Verification Failed
+              {t("checkout.verification_failed", "Verification Failed")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
               {errorMsg}
@@ -149,7 +150,7 @@ export default function CryptoSuccess() {
                 cursor: "pointer",
               }}
             >
-              Return to Studio
+              {t("common.return_to_studio", "Return to Studio")}
             </button>
           </>
         )}

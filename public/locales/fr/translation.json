@@ -17,7 +17,12 @@
     "connecting": "Connexion en cours…",
     "connected": "Portefeuille connecté",
     "disconnect": "Déconnecter",
-    "metamask_required": "MetaMask ou un portefeuille compatible est requis"
+    "metamask_required": "MetaMask ou un portefeuille compatible est requis",
+    "wallet_required": "Portefeuille requis",
+    "wallet_required_body": "Connectez votre portefeuille pour accéder à cette section. Aucun compte ni adresse e-mail n'est requis.",
+    "identity_note": "Votre adresse de portefeuille est votre identité — rien d'autre n'est stocké",
+    "unsupported_network": "Réseau non pris en charge",
+    "switch_network": "Veuillez passer à un réseau pris en charge."
   },
   "common": {
     "loading": "Chargement…",
@@ -39,7 +44,11 @@
     "close_menu": "Fermer le menu",
     "skip_to_content": "Aller au contenu principal",
     "risk_disclosures": "Voir les mentions de risque →",
-    "page_not_found": "Page introuvable"
+    "page_not_found": "Page introuvable",
+    "loading_page": "Chargement de la page",
+    "return_to_studio": "Retourner au Studio",
+    "invalid_link": "Lien de paiement invalide.",
+    "service_unreachable": "Impossible de joindre le service de vérification. Veuillez contacter le support."
   },
   "hero": {
     "title": "Facinations : Coffres d'art fractionné",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "Vous êtes sur la liste.",
     "newsletter_placeholder": "Votre adresse e-mail",
     "newsletter_btn": "S'abonner",
-    "newsletter_error": "Une erreur s'est produite — veuillez réessayer."
+    "newsletter_error": "Une erreur s'est produite — veuillez réessayer.",
+    "protocol_tagline": "Protocole d'Art Décentralisé"
   },
   "landing": {
     "eyebrow": "Protocole Facinations",
@@ -544,6 +554,45 @@
     "mint_label_desc": "Description",
     "mint_placeholder_desc": "Décrivez cette œuvre...",
     "disclaimer": "Les tarifs et la disponibilité sont soumis à la diligence raisonnable et à la révision juridictionnelle. Facinations Studio ne constitue pas un conseil en investissement ni une sollicitation."
+  },
+  "checkout": {
+    "verifying_subscription": "Vérification de votre abonnement…",
+    "just_a_moment": "Cela ne prend qu'un moment.",
+    "subscription_activated": "Abonnement activé",
+    "welcome_returning": "Bienvenue dans Facinations Studio. Redirection en cours…",
+    "verification_failed": "Vérification échouée",
+    "payment_failed": "Paiement échoué",
+    "payment_not_verified": "Le paiement n'a pas pu être vérifié.",
+    "verifying_payment": "Vérification de votre paiement…",
+    "payment_confirmed": "Paiement confirmé",
+    "awaiting_confirmation": "En attente de confirmation",
+    "crypto_pending_body": "Votre paiement crypto a été reçu et attend la confirmation de la blockchain. Cela peut prendre quelques minutes. Vous aurez accès dès confirmation.",
+    "confirming_paypal": "Confirmation de votre paiement PayPal…",
+    "payment_not_captured": "Le paiement n'a pas pu être capturé."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "Connexion du portefeuille...",
+    "sending": "Envoi de la transaction...",
+    "confirming": "Confirmation sur la chaîne...",
+    "success": "✓ Minted Successfully",
+    "retry": "Réessayer le Mint",
+    "no_wallet": "Aucun portefeuille trouvé. Installez Uniswap ou MetaMask."
+  },
+  "redeem": {
+    "title": "Échanger contre XER",
+    "instrument_line": "Échanger l'instrument #{{tokenId}} contre {{amount}} XER.",
+    "warning": "Cette action brûle l'instrument et ne peut pas être annulée.",
+    "processing": "Traitement en cours...",
+    "confirm": "Confirmer l'échange"
+  },
+  "vault": {
+    "acceptance_text": "Je reconnais que les jetons de coffre ne représentent pas la propriété, la possession ou le titre légal de l'œuvre physique, et que mes droits sont limités à ceux expressément décrits dans l'accord de participation au coffre et les documents juridiques connexes.",
+    "acceptance_note": "L'acceptation est enregistrée avec votre adresse de portefeuille et l'horodatage",
+    "legal_title": "Juridique & Divulgations",
+    "view_legal_pack": "Voir le dossier juridique ({{label}})",
+    "legal_confirm": "Je confirme avoir lu et compris la documentation juridique.",
+    "jurisdiction_version": "Juridiction : {{jurisdiction}} · Version {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

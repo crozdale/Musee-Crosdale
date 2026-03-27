@@ -3,6 +3,7 @@
 // Every page is loaded on-demand; only Layout, providers, and the loader are in the main bundle.
 
 import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import { KycProvider } from "./context/KycContext";
@@ -34,11 +35,12 @@ const NotFound     = React.lazy(() => import("./pages/NotFound"));
 
 // ── Loading fallback ──────────────────────────────────────────────────────────
 function PageLoader() {
+  const { t } = useTranslation();
   return (
     <div
       role="status"
       aria-live="polite"
-      aria-label="Loading page"
+      aria-label={t("common.loading_page", "Loading page")}
       style={{
         display: "flex",
         alignItems: "center",
@@ -55,7 +57,7 @@ function PageLoader() {
         textTransform: "uppercase",
         animation: "pulse 1.6s ease-in-out infinite",
       }}>
-        Loading…
+        {t("common.loading", "Loading…")}
       </span>
       <style>{`@keyframes pulse { 0%,100%{opacity:0.3} 50%{opacity:1} }`}</style>
     </div>

@@ -3,6 +3,7 @@
 // Shows a minimal connect prompt otherwise — no email, no subscription required.
 
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useWeb3 } from "../providers/Web3Provider";
 
 interface Props {
@@ -72,6 +73,7 @@ const S: Record<string, React.CSSProperties> = {
 };
 
 export default function WalletGate({ children }: Props) {
+  const { t } = useTranslation();
   const { account, connect } = useWeb3();
 
   if (account) return <>{children}</>;
@@ -79,14 +81,14 @@ export default function WalletGate({ children }: Props) {
   return (
     <div style={S.gate}>
       <div style={S.icon}>◈</div>
-      <h3 style={S.heading}>Wallet Required</h3>
+      <h3 style={S.heading}>{t("wallet.wallet_required", "Wallet Required")}</h3>
       <p style={S.body}>
-        Connect your wallet to access this section. No account or email address is required.
+        {t("wallet.wallet_required_body", "Connect your wallet to access this section. No account or email address is required.")}
       </p>
       <button style={S.btn} onClick={connect}>
-        Connect Wallet
+        {t("wallet.connect", "Connect Wallet")}
       </button>
-      <span style={S.note}>Your wallet address is your identity — nothing else is stored</span>
+      <span style={S.note}>{t("wallet.identity_note", "Your wallet address is your identity — nothing else is stored")}</span>
     </div>
   );
 }

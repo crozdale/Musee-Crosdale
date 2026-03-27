@@ -1,7 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { CHAINS } from "../chains/chains";
 import { useChain } from "../hooks/useChain";
 
 export default function ChainGuard({ children }) {
+  const { t } = useTranslation();
   const chainId = useChain();
 
   if (!chainId) return null;
@@ -9,8 +11,8 @@ export default function ChainGuard({ children }) {
   if (!CHAINS[chainId]) {
     return (
       <main className="app-main">
-        <h2>Unsupported Network</h2>
-        <p>Please switch to a supported chain.</p>
+        <h2>{t("wallet.unsupported_network", "Unsupported Network")}</h2>
+        <p>{t("wallet.switch_network", "Please switch to a supported chain.")}</p>
       </main>
     );
   }

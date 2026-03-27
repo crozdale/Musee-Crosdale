@@ -1,4 +1,5 @@
 ﻿import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ethers } from "ethers";
 import ABI from "../abi/FacinationsNFT.json";
 
@@ -6,6 +7,7 @@ const CONTRACT = "0x851dA473dA73Ab445641D8b0D981Aa66C917090F";
 const SEPOLIA = "0xaa36a7";
 
 export default function MintButton({ metadata }) {
+  const { t } = useTranslation();
   const [status, setStatus] = useState("idle");
   const [txHash, setTxHash] = useState(null);
   const [error, setError] = useState(null);
@@ -24,7 +26,7 @@ export default function MintButton({ metadata }) {
     setError(null);
     try {
       setStatus("connecting");
-      if (!window.ethereum) throw new Error("No wallet found. Install Uniswap or MetaMask.");
+      if (!window.ethereum) throw new Error(t("mint.no_wallet", "No wallet found. Install Uniswap or MetaMask."));
       try {
         await window.ethereum.request({ method: "wallet_switchEthereumChain", params: [{ chainId: SEPOLIA }] });
       } catch (sw) {
@@ -70,12 +72,12 @@ export default function MintButton({ metadata }) {
   };
 
   const labels = {
-    idle: "✦ Mint to Blockchain",
-    connecting: "Connecting Wallet...",
-    minting: "Sending Transaction...",
-    confirming: "Confirming on Chain...",
-    success: "✓ Minted Successfully",
-    error: "Retry Mint",
+    idle: t("mint.mint_btn", "✦ Mint to Blockchain"),
+    connecting: t("mint.connecting", "Connecting Wallet..."),
+    minting: t("mint.sending", "Sending Transaction..."),
+    confirming: t("mint.confirming", "Confirming on Chain..."),
+    success: t("mint.success", "✓ Minted Successfully"),
+    error: t("mint.retry", "Retry Mint"),
   };
 
   return (

@@ -17,7 +17,12 @@
     "connecting": "Connecting…",
     "connected": "Wallet Connected",
     "disconnect": "Disconnect",
-    "metamask_required": "MetaMask or compatible wallet required"
+    "metamask_required": "MetaMask or compatible wallet required",
+    "wallet_required": "Wallet Required",
+    "wallet_required_body": "Connect your wallet to access this section. No account or email address is required.",
+    "identity_note": "Your wallet address is your identity — nothing else is stored",
+    "unsupported_network": "Unsupported Network",
+    "switch_network": "Please switch to a supported chain."
   },
   "common": {
     "loading": "Loading…",
@@ -39,7 +44,11 @@
     "close_menu": "Close menu",
     "skip_to_content": "Skip to main content",
     "risk_disclosures": "See Risk Disclosures →",
-    "page_not_found": "Page Not Found"
+    "page_not_found": "Page Not Found",
+    "loading_page": "Loading page",
+    "return_to_studio": "Return to Studio",
+    "invalid_link": "Invalid checkout link.",
+    "service_unreachable": "Could not reach the verification service. Please contact support."
   },
   "hero": {
     "title": "Facinations: Fractional Fine Art Vaults",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "You're on the list.",
     "newsletter_placeholder": "Your email address",
     "newsletter_btn": "Subscribe",
-    "newsletter_error": "Something went wrong — please try again."
+    "newsletter_error": "Something went wrong — please try again.",
+    "protocol_tagline": "Decentralised Fine-Art Protocol"
   },
   "landing": {
     "eyebrow": "Facinations Protocol",
@@ -544,6 +554,45 @@
     "mint_label_desc": "Description",
     "mint_placeholder_desc": "Describe this work...",
     "disclaimer": "Pricing and availability are subject to due diligence and jurisdictional review. Facinations Studio does not constitute investment advice or a solicitation."
+  },
+  "checkout": {
+    "verifying_subscription": "Verifying your subscription…",
+    "just_a_moment": "This takes just a moment.",
+    "subscription_activated": "Subscription Activated",
+    "welcome_returning": "Welcome to Facinations Studio. Returning you now…",
+    "verification_failed": "Verification Failed",
+    "payment_failed": "Payment Failed",
+    "payment_not_verified": "Payment could not be verified.",
+    "verifying_payment": "Verifying your payment…",
+    "payment_confirmed": "Payment Confirmed",
+    "awaiting_confirmation": "Awaiting Confirmation",
+    "crypto_pending_body": "Your crypto payment has been received and is awaiting blockchain confirmation. This can take a few minutes. You'll gain access as soon as it's confirmed.",
+    "confirming_paypal": "Confirming your PayPal payment…",
+    "payment_not_captured": "Payment could not be captured."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "Connecting Wallet...",
+    "sending": "Sending Transaction...",
+    "confirming": "Confirming on Chain...",
+    "success": "✓ Minted Successfully",
+    "retry": "Retry Mint",
+    "no_wallet": "No wallet found. Install Uniswap or MetaMask."
+  },
+  "redeem": {
+    "title": "Exchange for XER",
+    "instrument_line": "Exchange Instrument #{{tokenId}} for {{amount}} XER.",
+    "warning": "This action burns the instrument and cannot be undone.",
+    "processing": "Processing...",
+    "confirm": "Confirm Exchange"
+  },
+  "vault": {
+    "acceptance_text": "I acknowledge that Vault Tokens do not represent ownership, possession, or legal title to the physical artwork, and that my rights are limited to those expressly described in the Vault Participation Agreement and related legal documents.",
+    "acceptance_note": "Acceptance is recorded with your wallet address and timestamp",
+    "legal_title": "Legal & Disclosures",
+    "view_legal_pack": "View Legal Pack ({{label}})",
+    "legal_confirm": "I confirm that I have read and understood the legal documentation.",
+    "jurisdiction_version": "Jurisdiction: {{jurisdiction}} · Version {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

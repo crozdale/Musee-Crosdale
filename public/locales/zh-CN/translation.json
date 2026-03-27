@@ -17,7 +17,12 @@
     "connecting": "连接中…",
     "connected": "钱包已连接",
     "disconnect": "断开连接",
-    "metamask_required": "需要 MetaMask 或兼容钱包"
+    "metamask_required": "需要 MetaMask 或兼容钱包",
+    "wallet_required": "需要钱包",
+    "wallet_required_body": "请连接您的钱包以访问此部分。无需账户或电子邮件地址。",
+    "identity_note": "您的钱包地址即您的身份——不存储其他任何信息",
+    "unsupported_network": "不支持的网络",
+    "switch_network": "请切换到支持的链。"
   },
   "common": {
     "loading": "加载中…",
@@ -39,7 +44,11 @@
     "close_menu": "关闭菜单",
     "skip_to_content": "跳转至主要内容",
     "risk_disclosures": "查看风险披露 →",
-    "page_not_found": "页面未找到"
+    "page_not_found": "页面未找到",
+    "loading_page": "页面加载中",
+    "return_to_studio": "返回工作室",
+    "invalid_link": "无效的结账链接。",
+    "service_unreachable": "无法连接验证服务，请联系支持团队。"
   },
   "hero": {
     "title": "Facinations：分级精细艺术金库",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "您已加入订阅列表。",
     "newsletter_placeholder": "您的电子邮件地址",
     "newsletter_btn": "订阅",
-    "newsletter_error": "出现错误，请重试。"
+    "newsletter_error": "出现错误，请重试。",
+    "protocol_tagline": "去中心化艺术协议"
   },
   "landing": {
     "eyebrow": "Facinations 协议",
@@ -544,6 +554,45 @@
     "mint_label_desc": "描述",
     "mint_placeholder_desc": "描述这件作品...",
     "disclaimer": "定价和可用性须经尽职调查和司法管辖区审查。Facinations 工作室不构成投资建议或招揽。"
+  },
+  "checkout": {
+    "verifying_subscription": "正在验证您的订阅…",
+    "just_a_moment": "只需片刻。",
+    "subscription_activated": "订阅已激活",
+    "welcome_returning": "欢迎来到 Facinations Studio，正在为您跳转…",
+    "verification_failed": "验证失败",
+    "payment_failed": "支付失败",
+    "payment_not_verified": "无法验证付款。",
+    "verifying_payment": "正在验证您的付款…",
+    "payment_confirmed": "付款已确认",
+    "awaiting_confirmation": "等待确认",
+    "crypto_pending_body": "您的加密货币付款已收到，正在等待区块链确认。这可能需要几分钟。确认后您将立即获得访问权限。",
+    "confirming_paypal": "正在确认您的 PayPal 付款…",
+    "payment_not_captured": "无法完成付款。"
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "正在连接钱包...",
+    "sending": "正在发送交易...",
+    "confirming": "正在链上确认...",
+    "success": "✓ Minted Successfully",
+    "retry": "重试 Mint",
+    "no_wallet": "未找到钱包，请安装 Uniswap 或 MetaMask。"
+  },
+  "redeem": {
+    "title": "兑换为 XER",
+    "instrument_line": "将乐器 #{{tokenId}} 兑换为 {{amount}} XER。",
+    "warning": "此操作将销毁乐器且无法撤销。",
+    "processing": "处理中...",
+    "confirm": "确认兑换"
+  },
+  "vault": {
+    "acceptance_text": "我确认，金库代币不代表对实物艺术品的所有权、占有权或法律所有权，我的权利仅限于金库参与协议及相关法律文件中明确描述的内容。",
+    "acceptance_note": "您的接受将与钱包地址和时间戳一起记录",
+    "legal_title": "法律与披露",
+    "view_legal_pack": "查看法律文件包 ({{label}})",
+    "legal_confirm": "我确认已阅读并理解法律文件。",
+    "jurisdiction_version": "司法管辖区：{{jurisdiction}} · 版本 {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

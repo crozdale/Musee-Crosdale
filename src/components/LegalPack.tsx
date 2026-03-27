@@ -1,6 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function LegalPack({ vault, onAcknowledge }) {
+  const { t } = useTranslation();
+
   if (!vault?.legal?.packs) return null;
 
   const { packs, default: defaultJurisdiction } = vault.legal;
@@ -38,7 +41,7 @@ export default function LegalPack({ vault, onAcknowledge }) {
   return (
     <section className="mt-10 rounded-xl border border-slate-700 bg-slate-900 p-6 space-y-4">
       <h3 className="text-lg font-semibold text-white">
-        Legal & Disclosures
+        {t("vault.legal_title", "Legal & Disclosures")}
       </h3>
 
       <a
@@ -47,7 +50,7 @@ export default function LegalPack({ vault, onAcknowledge }) {
         rel="noopener noreferrer"
         className="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-500 transition"
       >
-        View Legal Pack ({active.label})
+        {t("vault.view_legal_pack", "View Legal Pack ({{label}})", { label: active.label })}
       </a>
 
       <label className="flex items-start gap-3 text-sm text-slate-300">
@@ -58,12 +61,12 @@ export default function LegalPack({ vault, onAcknowledge }) {
           className="mt-1"
         />
         <span>
-          I confirm that I have read and understood the legal documentation.
+          {t("vault.legal_confirm", "I confirm that I have read and understood the legal documentation.")}
         </span>
       </label>
 
       <p className="text-xs text-slate-500">
-        Jurisdiction: {jurisdiction} · Version {active.version}
+        {t("vault.jurisdiction_version", "Jurisdiction: {{jurisdiction}} · Version {{version}}", { jurisdiction, version: active.version })}
       </p>
     </section>
   );

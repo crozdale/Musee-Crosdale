@@ -17,7 +17,12 @@
     "connecting": "연결 중…",
     "connected": "지갑 연결됨",
     "disconnect": "연결 해제",
-    "metamask_required": "MetaMask 또는 호환 가능한 지갑이 필요합니다"
+    "metamask_required": "MetaMask 또는 호환 가능한 지갑이 필요합니다",
+    "wallet_required": "지갑 필요",
+    "wallet_required_body": "이 섹션에 액세스하려면 지갑을 연결하세요. 계정이나 이메일 주소가 필요하지 않습니다.",
+    "identity_note": "지갑 주소가 귀하의 신원입니다 — 다른 정보는 저장되지 않습니다",
+    "unsupported_network": "지원되지 않는 네트워크",
+    "switch_network": "지원되는 체인으로 전환하세요."
   },
   "common": {
     "loading": "로딩 중…",
@@ -39,7 +44,11 @@
     "close_menu": "메뉴 닫기",
     "skip_to_content": "본문으로 건너뛰기",
     "risk_disclosures": "위험 고지 보기 →",
-    "page_not_found": "페이지를 찾을 수 없음"
+    "page_not_found": "페이지를 찾을 수 없음",
+    "loading_page": "페이지 로딩 중",
+    "return_to_studio": "스튜디오로 돌아가기",
+    "invalid_link": "잘못된 결제 링크입니다.",
+    "service_unreachable": "인증 서비스에 연결할 수 없습니다. 지원팀에 문의하세요."
   },
   "hero": {
     "title": "Facinations: 분할 순수 예술 볼트",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "목록에 추가되었습니다.",
     "newsletter_placeholder": "이메일 주소",
     "newsletter_btn": "구독",
-    "newsletter_error": "문제가 발생했습니다. 다시 시도해 주세요."
+    "newsletter_error": "문제가 발생했습니다. 다시 시도해 주세요.",
+    "protocol_tagline": "탈중앙화 미술 프로토콜"
   },
   "landing": {
     "eyebrow": "Facinations 프로토콜",
@@ -544,6 +554,45 @@
     "mint_label_desc": "설명",
     "mint_placeholder_desc": "이 작품을 설명하세요...",
     "disclaimer": "가격 및 가용성은 실사 및 관할권 검토의 대상입니다. Facinations 스튜디오는 투자 조언이나 권유를 구성하지 않습니다."
+  },
+  "checkout": {
+    "verifying_subscription": "구독 확인 중…",
+    "just_a_moment": "잠시만 기다려 주세요.",
+    "subscription_activated": "구독 활성화됨",
+    "welcome_returning": "Facinations Studio에 오신 것을 환영합니다. 지금 이동합니다…",
+    "verification_failed": "인증 실패",
+    "payment_failed": "결제 실패",
+    "payment_not_verified": "결제를 확인할 수 없습니다.",
+    "verifying_payment": "결제 확인 중…",
+    "payment_confirmed": "결제 확인됨",
+    "awaiting_confirmation": "확인 대기 중",
+    "crypto_pending_body": "암호화폐 결제가 수신되었으며 블록체인 확인을 기다리고 있습니다. 몇 분이 걸릴 수 있습니다. 확인되는 즉시 액세스 권한이 부여됩니다.",
+    "confirming_paypal": "PayPal 결제 확인 중…",
+    "payment_not_captured": "결제를 처리할 수 없습니다."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "지갑 연결 중...",
+    "sending": "트랜잭션 전송 중...",
+    "confirming": "체인에서 확인 중...",
+    "success": "✓ Minted Successfully",
+    "retry": "Mint 재시도",
+    "no_wallet": "지갑을 찾을 수 없습니다. Uniswap 또는 MetaMask를 설치하세요."
+  },
+  "redeem": {
+    "title": "XER로 교환",
+    "instrument_line": "악기 #{{tokenId}}을(를) {{amount}} XER로 교환합니다.",
+    "warning": "이 작업은 악기를 소각하며 되돌릴 수 없습니다.",
+    "processing": "처리 중...",
+    "confirm": "교환 확인"
+  },
+  "vault": {
+    "acceptance_text": "볼트 토큰이 실물 예술품의 소유권, 점유권 또는 법적 권리를 나타내지 않으며, 내 권리는 볼트 참여 계약 및 관련 법적 문서에 명시된 것으로 제한됨을 인정합니다.",
+    "acceptance_note": "동의는 귀하의 지갑 주소와 타임스탬프로 기록됩니다",
+    "legal_title": "법적 사항 및 공시",
+    "view_legal_pack": "법적 패키지 보기 ({{label}})",
+    "legal_confirm": "법적 문서를 읽고 이해했음을 확인합니다.",
+    "jurisdiction_version": "관할권: {{jurisdiction}} · 버전 {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

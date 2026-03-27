@@ -17,7 +17,12 @@
     "connecting": "Conectando…",
     "connected": "Billetera conectada",
     "disconnect": "Desconectar",
-    "metamask_required": "Se requiere MetaMask o una billetera compatible"
+    "metamask_required": "Se requiere MetaMask o una billetera compatible",
+    "wallet_required": "Cartera requerida",
+    "wallet_required_body": "Conecte su cartera para acceder a esta sección. No se requiere cuenta ni dirección de correo electrónico.",
+    "identity_note": "Su dirección de cartera es su identidad — nada más se almacena",
+    "unsupported_network": "Red no compatible",
+    "switch_network": "Por favor, cambie a una red compatible."
   },
   "common": {
     "loading": "Cargando…",
@@ -39,7 +44,11 @@
     "close_menu": "Cerrar menú",
     "skip_to_content": "Ir al contenido principal",
     "risk_disclosures": "Ver divulgaciones de riesgo →",
-    "page_not_found": "Página no encontrada"
+    "page_not_found": "Página no encontrada",
+    "loading_page": "Cargando página",
+    "return_to_studio": "Volver al Estudio",
+    "invalid_link": "Enlace de pago inválido.",
+    "service_unreachable": "No se pudo contactar el servicio de verificación. Por favor, contacte al soporte."
   },
   "hero": {
     "title": "Facinations: Bóvedas de arte fraccional",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "Estás en la lista.",
     "newsletter_placeholder": "Tu dirección de correo electrónico",
     "newsletter_btn": "Suscribirse",
-    "newsletter_error": "Algo salió mal — por favor inténtalo de nuevo."
+    "newsletter_error": "Algo salió mal — por favor inténtalo de nuevo.",
+    "protocol_tagline": "Protocolo de Arte Descentralizado"
   },
   "landing": {
     "eyebrow": "Protocolo Facinations",
@@ -544,6 +554,45 @@
     "mint_label_desc": "Descripción",
     "mint_placeholder_desc": "Describe esta obra...",
     "disclaimer": "Los precios y la disponibilidad están sujetos a la debida diligencia y revisión jurisdiccional. Facinations Studio no constituye asesoramiento en inversiones ni una solicitud."
+  },
+  "checkout": {
+    "verifying_subscription": "Verificando su suscripción…",
+    "just_a_moment": "Esto tarda solo un momento.",
+    "subscription_activated": "Suscripción activada",
+    "welcome_returning": "Bienvenido a Facinations Studio. Redirigiendo ahora…",
+    "verification_failed": "Verificación fallida",
+    "payment_failed": "Pago fallido",
+    "payment_not_verified": "El pago no pudo ser verificado.",
+    "verifying_payment": "Verificando su pago…",
+    "payment_confirmed": "Pago confirmado",
+    "awaiting_confirmation": "En espera de confirmación",
+    "crypto_pending_body": "Su pago en criptomoneda ha sido recibido y está esperando confirmación de la blockchain. Esto puede tardar unos minutos. Obtendrá acceso tan pronto como se confirme.",
+    "confirming_paypal": "Confirmando su pago de PayPal…",
+    "payment_not_captured": "El pago no pudo ser capturado."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "Conectando cartera...",
+    "sending": "Enviando transacción...",
+    "confirming": "Confirmando en la cadena...",
+    "success": "✓ Minted Successfully",
+    "retry": "Reintentar Mint",
+    "no_wallet": "No se encontró cartera. Instale Uniswap o MetaMask."
+  },
+  "redeem": {
+    "title": "Canjear por XER",
+    "instrument_line": "Canjear instrumento #{{tokenId}} por {{amount}} XER.",
+    "warning": "Esta acción quema el instrumento y no se puede deshacer.",
+    "processing": "Procesando...",
+    "confirm": "Confirmar canje"
+  },
+  "vault": {
+    "acceptance_text": "Reconozco que los tokens de bóveda no representan propiedad, posesión o título legal de la obra física, y que mis derechos se limitan a los expresamente descritos en el Acuerdo de Participación en Bóveda y documentos legales relacionados.",
+    "acceptance_note": "La aceptación se registra con su dirección de cartera y marca de tiempo",
+    "legal_title": "Legal y Divulgaciones",
+    "view_legal_pack": "Ver paquete legal ({{label}})",
+    "legal_confirm": "Confirmo que he leído y comprendido la documentación legal.",
+    "jurisdiction_version": "Jurisdicción: {{jurisdiction}} · Versión {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

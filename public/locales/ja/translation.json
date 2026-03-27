@@ -17,7 +17,12 @@
     "connecting": "接続中…",
     "connected": "ウォレット接続済み",
     "disconnect": "切断",
-    "metamask_required": "MetaMask または互換性のあるウォレットが必要です"
+    "metamask_required": "MetaMask または互換性のあるウォレットが必要です",
+    "wallet_required": "ウォレットが必要です",
+    "wallet_required_body": "このセクションにアクセスするにはウォレットを接続してください。アカウントやメールアドレスは不要です。",
+    "identity_note": "ウォレットアドレスがあなたのアイデンティティです — それ以外は保存されません",
+    "unsupported_network": "サポートされていないネットワーク",
+    "switch_network": "サポートされているチェーンに切り替えてください。"
   },
   "common": {
     "loading": "読み込み中…",
@@ -39,7 +44,11 @@
     "close_menu": "メニューを閉じる",
     "skip_to_content": "メインコンテンツへスキップ",
     "risk_disclosures": "リスク開示を見る →",
-    "page_not_found": "ページが見つかりません"
+    "page_not_found": "ページが見つかりません",
+    "loading_page": "ページ読み込み中",
+    "return_to_studio": "スタジオに戻る",
+    "invalid_link": "無効なチェックアウトリンクです。",
+    "service_unreachable": "認証サービスに接続できませんでした。サポートにお問い合わせください。"
   },
   "hero": {
     "title": "Facinations：分割ファインアート・ヴォルト",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "リストに登録されました。",
     "newsletter_placeholder": "メールアドレス",
     "newsletter_btn": "登録",
-    "newsletter_error": "エラーが発生しました。再度お試しください。"
+    "newsletter_error": "エラーが発生しました。再度お試しください。",
+    "protocol_tagline": "分散型アートプロトコル"
   },
   "landing": {
     "eyebrow": "Facinations プロトコル",
@@ -544,6 +554,45 @@
     "mint_label_desc": "説明",
     "mint_placeholder_desc": "この作品を説明してください...",
     "disclaimer": "価格と利用可能性はデューデリジェンスと管轄区域の審査の対象です。Facinations スタジオは投資アドバイスや勧誘を構成するものではありません。"
+  },
+  "checkout": {
+    "verifying_subscription": "サブスクリプションを確認中…",
+    "just_a_moment": "少々お待ちください。",
+    "subscription_activated": "サブスクリプションが有効化されました",
+    "welcome_returning": "Facinations Studioへようこそ。ただいまリダイレクト中…",
+    "verification_failed": "認証に失敗しました",
+    "payment_failed": "支払いに失敗しました",
+    "payment_not_verified": "支払いを確認できませんでした。",
+    "verifying_payment": "支払いを確認中…",
+    "payment_confirmed": "支払いが確認されました",
+    "awaiting_confirmation": "確認待ち",
+    "crypto_pending_body": "暗号通貨の支払いが受け付けられ、ブロックチェーンの確認を待っています。数分かかる場合があります。確認され次第アクセス権が付与されます。",
+    "confirming_paypal": "PayPalの支払いを確認中…",
+    "payment_not_captured": "支払いを取得できませんでした。"
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "ウォレットに接続中...",
+    "sending": "トランザクション送信中...",
+    "confirming": "チェーン上で確認中...",
+    "success": "✓ Minted Successfully",
+    "retry": "Mintを再試行",
+    "no_wallet": "ウォレットが見つかりません。UniswapまたはMetaMaskをインストールしてください。"
+  },
+  "redeem": {
+    "title": "XERと交換",
+    "instrument_line": "インストゥルメント #{{tokenId}} を {{amount}} XERと交換します。",
+    "warning": "このアクションはインストゥルメントをバーンし、元に戻せません。",
+    "processing": "処理中...",
+    "confirm": "交換を確認"
+  },
+  "vault": {
+    "acceptance_text": "ヴォールトトークンは実物の芸術作品の所有権、占有権、または法的権利を表すものではなく、私の権利はヴォールト参加契約および関連する法的文書に明示的に記載されたものに限定されることを認めます。",
+    "acceptance_note": "承諾はウォレットアドレスとタイムスタンプとともに記録されます",
+    "legal_title": "法的事項と開示",
+    "view_legal_pack": "法的パッケージを表示 ({{label}})",
+    "legal_confirm": "法的文書を読み、理解したことを確認します。",
+    "jurisdiction_version": "管轄区域: {{jurisdiction}} · バージョン {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

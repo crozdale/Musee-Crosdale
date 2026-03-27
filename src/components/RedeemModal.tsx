@@ -1,4 +1,8 @@
+import { useTranslation } from "react-i18next";
+
 export default function RedeemModal({ open, onClose, instrument, onConfirm, busy }) {
+  const { t } = useTranslation();
+
   if (!open || !instrument) return null;
 
   return (
@@ -6,13 +10,15 @@ export default function RedeemModal({ open, onClose, instrument, onConfirm, busy
       <div className="w-full max-w-lg rounded-2xl border border-white/10 bg-gray-950 p-6">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="text-xl font-semibold text-white">Exchange for XER</div>
+            <div className="text-xl font-semibold text-white">{t("redeem.title", "Exchange for XER")}</div>
             <div className="text-sm text-white/70 mt-2">
-              Exchange Instrument #{instrument.tokenId.toString()} for{" "}
-              <span className="text-white">{instrument.redemptionAmountFmt} XER</span>.
+              {t("redeem.instrument_line", "Exchange Instrument #{{tokenId}} for {{amount}} XER.", {
+                tokenId: instrument.tokenId.toString(),
+                amount: instrument.redemptionAmountFmt,
+              })}
             </div>
             <div className="text-sm text-white/70 mt-2">
-              This action burns the instrument and cannot be undone.
+              {t("redeem.warning", "This action burns the instrument and cannot be undone.")}
             </div>
           </div>
 
@@ -20,7 +26,7 @@ export default function RedeemModal({ open, onClose, instrument, onConfirm, busy
             onClick={onClose}
             className="px-3 py-2 rounded-lg bg-white/10 text-white hover:bg-white/15"
           >
-            Close
+            {t("common.close", "Close")}
           </button>
         </div>
 
@@ -30,7 +36,7 @@ export default function RedeemModal({ open, onClose, instrument, onConfirm, busy
             className="flex-1 px-4 py-3 rounded-xl bg-white/10 text-white hover:bg-white/15"
             disabled={busy}
           >
-            Cancel
+            {t("common.cancel", "Cancel")}
           </button>
 
           <button
@@ -38,7 +44,7 @@ export default function RedeemModal({ open, onClose, instrument, onConfirm, busy
             className="flex-1 px-4 py-3 rounded-xl bg-blue-600 text-white hover:bg-blue-500"
             disabled={busy}
           >
-            {busy ? "Processing..." : "Confirm Exchange"}
+            {busy ? t("redeem.processing", "Processing...") : t("redeem.confirm", "Confirm Exchange")}
           </button>
         </div>
       </div>

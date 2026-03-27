@@ -17,7 +17,12 @@
     "connecting": "Verbindung wird hergestellt…",
     "connected": "Wallet verbunden",
     "disconnect": "Trennen",
-    "metamask_required": "MetaMask oder kompatibles Wallet erforderlich"
+    "metamask_required": "MetaMask oder kompatibles Wallet erforderlich",
+    "wallet_required": "Wallet erforderlich",
+    "wallet_required_body": "Verbinden Sie Ihr Wallet, um auf diesen Bereich zuzugreifen. Kein Konto oder E-Mail-Adresse erforderlich.",
+    "identity_note": "Ihre Wallet-Adresse ist Ihre Identität — nichts anderes wird gespeichert",
+    "unsupported_network": "Nicht unterstütztes Netzwerk",
+    "switch_network": "Bitte wechseln Sie zu einem unterstützten Netzwerk."
   },
   "common": {
     "loading": "Wird geladen…",
@@ -39,7 +44,11 @@
     "close_menu": "Menü schließen",
     "skip_to_content": "Zum Hauptinhalt springen",
     "risk_disclosures": "Risikohinweise ansehen →",
-    "page_not_found": "Seite nicht gefunden"
+    "page_not_found": "Seite nicht gefunden",
+    "loading_page": "Seite wird geladen",
+    "return_to_studio": "Zurück zum Studio",
+    "invalid_link": "Ungültiger Checkout-Link.",
+    "service_unreachable": "Der Verifikationsdienst ist nicht erreichbar. Bitte kontaktieren Sie den Support."
   },
   "hero": {
     "title": "Facinations: Fraktionale Kunsttresore",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "Sie stehen auf der Liste.",
     "newsletter_placeholder": "Ihre E-Mail-Adresse",
     "newsletter_btn": "Abonnieren",
-    "newsletter_error": "Ein Fehler ist aufgetreten — bitte versuchen Sie es erneut."
+    "newsletter_error": "Ein Fehler ist aufgetreten — bitte versuchen Sie es erneut.",
+    "protocol_tagline": "Dezentralisiertes Kunstprotokoll"
   },
   "landing": {
     "eyebrow": "Facinations-Protokoll",
@@ -544,6 +554,45 @@
     "mint_label_desc": "Beschreibung",
     "mint_placeholder_desc": "Beschreiben Sie dieses Werk...",
     "disclaimer": "Preise und Verfügbarkeit unterliegen einer Due-Diligence-Prüfung und einer jurisdiktionalen Überprüfung. Facinations Studio stellt keine Anlageberatung oder Aufforderung dar."
+  },
+  "checkout": {
+    "verifying_subscription": "Abonnement wird verifiziert…",
+    "just_a_moment": "Dies dauert nur einen Moment.",
+    "subscription_activated": "Abonnement aktiviert",
+    "welcome_returning": "Willkommen bei Facinations Studio. Sie werden jetzt weitergeleitet…",
+    "verification_failed": "Verifizierung fehlgeschlagen",
+    "payment_failed": "Zahlung fehlgeschlagen",
+    "payment_not_verified": "Die Zahlung konnte nicht verifiziert werden.",
+    "verifying_payment": "Zahlung wird verifiziert…",
+    "payment_confirmed": "Zahlung bestätigt",
+    "awaiting_confirmation": "Warte auf Bestätigung",
+    "crypto_pending_body": "Ihre Krypto-Zahlung wurde empfangen und wartet auf Blockchain-Bestätigung. Dies kann einige Minuten dauern. Sie erhalten Zugang, sobald die Bestätigung erfolgt.",
+    "confirming_paypal": "PayPal-Zahlung wird bestätigt…",
+    "payment_not_captured": "Die Zahlung konnte nicht erfasst werden."
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "Wallet verbinden...",
+    "sending": "Transaktion senden...",
+    "confirming": "Auf der Chain bestätigen...",
+    "success": "✓ Minted Successfully",
+    "retry": "Mint wiederholen",
+    "no_wallet": "Kein Wallet gefunden. Installieren Sie Uniswap oder MetaMask."
+  },
+  "redeem": {
+    "title": "Gegen XER einlösen",
+    "instrument_line": "Instrument #{{tokenId}} gegen {{amount}} XER einlösen.",
+    "warning": "Diese Aktion verbrennt das Instrument und kann nicht rückgängig gemacht werden.",
+    "processing": "Verarbeitung...",
+    "confirm": "Einlösung bestätigen"
+  },
+  "vault": {
+    "acceptance_text": "Ich erkenne an, dass Vault-Token kein Eigentum, keinen Besitz oder Rechtstitel an dem physischen Kunstwerk darstellen und dass meine Rechte auf jene beschränkt sind, die ausdrücklich im Vault-Beteiligungsvertrag und den zugehörigen Rechtsdokumenten beschrieben sind.",
+    "acceptance_note": "Die Akzeptanz wird mit Ihrer Wallet-Adresse und dem Zeitstempel gespeichert",
+    "legal_title": "Rechtliches & Offenlegungen",
+    "view_legal_pack": "Rechtspaket ansehen ({{label}})",
+    "legal_confirm": "Ich bestätige, dass ich die Rechtsdokumentation gelesen und verstanden habe.",
+    "jurisdiction_version": "Rechtsraum: {{jurisdiction}} · Version {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",

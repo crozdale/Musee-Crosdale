@@ -5,6 +5,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useSubscription } from "../context/SubscriptionContext";
 import type { PlanTier } from "../context/SubscriptionContext";
 
@@ -13,6 +14,7 @@ type Status = "verifying" | "success" | "error";
 const VALID_TIERS = new Set<string>(["starter", "gallery"]);
 
 export default function PayPalSuccess() {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const navigate       = useNavigate();
   const { subscribe }  = useSubscription();
@@ -26,7 +28,7 @@ export default function PayPalSuccess() {
     const tier    = searchParams.get("tier");
 
     if (!orderId || !tier || !VALID_TIERS.has(tier)) {
-      setErrorMsg("Invalid checkout link.");
+      setErrorMsg(t("common.invalid_link", "Invalid checkout link."));
       setStatus("error");
       return;
     }
@@ -41,7 +43,7 @@ export default function PayPalSuccess() {
         const data = await res.json();
 
         if (!res.ok || !data.verified) {
-          setErrorMsg(data.error ?? "Payment could not be captured.");
+          setErrorMsg(data.error ?? t("checkout.payment_not_captured", "Payment could not be captured."));
           setStatus("error");
           return;
         }
@@ -50,7 +52,7 @@ export default function PayPalSuccess() {
         setStatus("success");
         setTimeout(() => navigate("/studio"), 2500);
       } catch {
-        setErrorMsg("Could not reach the verification service. Please contact support.");
+        setErrorMsg(t("common.service_unreachable", "Could not reach the verification service. Please contact support."));
         setStatus("error");
       }
     })();
@@ -69,10 +71,10 @@ export default function PayPalSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "rgba(212,175,55,0.4)", marginBottom: "1.5rem", animation: "pulse 1.6s ease-in-out infinite" }}>◈</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
-              Confirming your PayPal payment…
+              {t("checkout.confirming_paypal", "Confirming your PayPal payment…")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#4a4238", fontSize: "0.85rem", margin: 0 }}>
-              This takes just a moment.
+              {t("checkout.just_a_moment", "This takes just a moment.")}
             </p>
           </>
         )}
@@ -81,10 +83,10 @@ export default function PayPalSuccess() {
           <>
             <div style={{ fontSize: "2.5rem", color: "#5cb85c", marginBottom: "1rem" }}>✓</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "1rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.5rem" }}>
-              Payment Confirmed
+              {t("checkout.payment_confirmed", "Payment Confirmed")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.9rem", margin: 0 }}>
-              Welcome to Facinations Studio. Returning you now…
+              {t("checkout.welcome_returning", "Welcome to Facinations Studio. Returning you now…")}
             </p>
           </>
         )}
@@ -93,7 +95,7 @@ export default function PayPalSuccess() {
           <>
             <div style={{ fontSize: "2rem", color: "#e05", marginBottom: "1rem" }}>✗</div>
             <p style={{ fontFamily: "'Cinzel', serif", fontSize: "0.9rem", color: "#f0e8d0", letterSpacing: "0.1em", margin: "0 0 0.75rem" }}>
-              Payment Failed
+              {t("checkout.payment_failed", "Payment Failed")}
             </p>
             <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: "italic", color: "#6a6258", fontSize: "0.85rem", margin: "0 0 1.5rem" }}>
               {errorMsg}
@@ -112,7 +114,7 @@ export default function PayPalSuccess() {
                 cursor: "pointer",
               }}
             >
-              Return to Studio
+              {t("common.return_to_studio", "Return to Studio")}
             </button>
           </>
         )}

@@ -153,19 +153,19 @@ function SiteFooter() {
             color: "#4a4238",
             textTransform: "uppercase",
           }}>
-            © {year} · Decentralised Fine-Art Protocol
+            © {year} · {t("footer.protocol_tagline", "Decentralised Fine-Art Protocol")}
           </span>
         </div>
 
         {/* Centre — nav links */}
         <nav style={{ display: "flex", gap: "0.25rem", flexWrap: "wrap", justifyContent: "center" }}>
           {([
-            ["Gallery",      "/gallery"],
-            ["Vaults",       "/vaults"],
-            ["Studio",       "/studio"],
-            ["About",        "/about"],
-            ["Legal",        "/legal"],
-            ["Architecture", "/architecture"],
+            [t("nav.gallery", "Gallery"),      "/gallery"],
+            [t("nav.vaults", "Vaults"),        "/vaults"],
+            [t("nav.studio", "Studio"),        "/studio"],
+            [t("nav.about", "About"),          "/about"],
+            [t("nav.legal", "Legal"),          "/legal"],
+            [t("nav.arch", "Architecture"),    "/architecture"],
           ] as [string, string][]).map(([label, path]) => (
             <Link
               key={label}

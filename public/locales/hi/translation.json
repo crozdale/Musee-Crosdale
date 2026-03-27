@@ -17,7 +17,12 @@
     "connecting": "कनेक्ट हो रहा है…",
     "connected": "वॉलेट कनेक्टेड",
     "disconnect": "डिसकनेक्ट करें",
-    "metamask_required": "MetaMask या संगत वॉलेट आवश्यक है"
+    "metamask_required": "MetaMask या संगत वॉलेट आवश्यक है",
+    "wallet_required": "वॉलेट आवश्यक है",
+    "wallet_required_body": "इस अनुभाग तक पहुंचने के लिए अपना वॉलेट कनेक्ट करें। कोई खाता या ईमेल पता आवश्यक नहीं है।",
+    "identity_note": "आपका वॉलेट पता आपकी पहचान है — कुछ और संग्रहीत नहीं किया जाता",
+    "unsupported_network": "असमर्थित नेटवर्क",
+    "switch_network": "कृपया समर्थित चेन पर स्विच करें।"
   },
   "common": {
     "loading": "लोड हो रहा है…",
@@ -39,7 +44,11 @@
     "close_menu": "मेनू बंद करें",
     "skip_to_content": "मुख्य सामग्री पर जाएँ",
     "risk_disclosures": "जोखिम प्रकटीकरण देखें →",
-    "page_not_found": "पृष्ठ नहीं मिला"
+    "page_not_found": "पृष्ठ नहीं मिला",
+    "loading_page": "पृष्ठ लोड हो रहा है",
+    "return_to_studio": "स्टूडियो पर वापस जाएं",
+    "invalid_link": "अमान्य चेकआउट लिंक।",
+    "service_unreachable": "सत्यापन सेवा तक पहुंच नहीं हो सकी। कृपया सहायता से संपर्क करें।"
   },
   "hero": {
     "title": "Facinations: आंशिक ललित कला वॉल्ट",
@@ -54,7 +63,8 @@
     "newsletter_confirmed": "आप सूची में हैं।",
     "newsletter_placeholder": "आपका ईमेल पता",
     "newsletter_btn": "सब्सक्राइब करें",
-    "newsletter_error": "कुछ गलत हो गया — कृपया पुनः प्रयास करें।"
+    "newsletter_error": "कुछ गलत हो गया — कृपया पुनः प्रयास करें।",
+    "protocol_tagline": "विकेंद्रीकृत कला प्रोटोकॉल"
   },
   "landing": {
     "eyebrow": "Facinations प्रोटोकॉल",
@@ -544,6 +554,45 @@
     "mint_label_desc": "विवरण",
     "mint_placeholder_desc": "इस काम का वर्णन करें...",
     "disclaimer": "मूल्य निर्धारण और उपलब्धता उचित परिश्रम और न्यायक्षेत्रीय समीक्षा के अधीन है। Facinations Studio निवेश सलाह या आग्रह नहीं है।"
+  },
+  "checkout": {
+    "verifying_subscription": "आपकी सदस्यता सत्यापित हो रही है…",
+    "just_a_moment": "इसमें बस एक क्षण लगता है।",
+    "subscription_activated": "सदस्यता सक्रिय",
+    "welcome_returning": "Facinations Studio में आपका स्वागत है। अभी वापस भेज रहे हैं…",
+    "verification_failed": "सत्यापन विफल",
+    "payment_failed": "भुगतान विफल",
+    "payment_not_verified": "भुगतान सत्यापित नहीं हो सका।",
+    "verifying_payment": "आपका भुगतान सत्यापित हो रहा है…",
+    "payment_confirmed": "भुगतान की पुष्टि हो गई",
+    "awaiting_confirmation": "पुष्टि की प्रतीक्षा में",
+    "crypto_pending_body": "आपका क्रिप्टो भुगतान प्राप्त हो गया है और ब्लॉकचेन पुष्टि की प्रतीक्षा में है। इसमें कुछ मिनट लग सकते हैं। पुष्टि होते ही आपको एक्सेस मिल जाएगा।",
+    "confirming_paypal": "आपके PayPal भुगतान की पुष्टि हो रही है…",
+    "payment_not_captured": "भुगतान कैप्चर नहीं हो सका।"
+  },
+  "mint": {
+    "mint_btn": "✦ Mint to Blockchain",
+    "connecting": "वॉलेट कनेक्ट हो रहा है...",
+    "sending": "लेनदेन भेजा जा रहा है...",
+    "confirming": "चेन पर पुष्टि हो रही है...",
+    "success": "✓ Minted Successfully",
+    "retry": "Mint पुनः प्रयास करें",
+    "no_wallet": "कोई वॉलेट नहीं मिला। Uniswap या MetaMask इंस्टॉल करें।"
+  },
+  "redeem": {
+    "title": "XER के लिए एक्सचेंज करें",
+    "instrument_line": "इंस्ट्रूमेंट #{{tokenId}} को {{amount}} XER के लिए एक्सचेंज करें।",
+    "warning": "यह क्रिया इंस्ट्रूमेंट को जला देती है और पूर्ववत नहीं की जा सकती।",
+    "processing": "प्रसंस्करण हो रहा है...",
+    "confirm": "एक्सचेंज की पुष्टि करें"
+  },
+  "vault": {
+    "acceptance_text": "मैं स्वीकार करता/करती हूं कि वॉल्ट टोकन भौतिक कलाकृति की स्वामित्व, कब्जे या कानूनी शीर्षक का प्रतिनिधित्व नहीं करते, और मेरे अधिकार वॉल्ट भागीदारी समझौते और संबंधित कानूनी दस्तावेजों में स्पष्ट रूप से वर्णित अधिकारों तक सीमित हैं।",
+    "acceptance_note": "स्वीकृति आपके वॉलेट पते और टाइमस्टैम्प के साथ दर्ज की जाती है",
+    "legal_title": "कानूनी और प्रकटीकरण",
+    "view_legal_pack": "कानूनी पैकेज देखें ({{label}})",
+    "legal_confirm": "मैं पुष्टि करता/करती हूं कि मैंने कानूनी दस्तावेज पढ़ और समझ लिए हैं।",
+    "jurisdiction_version": "क्षेत्राधिकार: {{jurisdiction}} · संस्करण {{version}}"
   },
   "whitepaper": {
     "title": "Façinations",
