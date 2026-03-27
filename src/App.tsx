@@ -5,6 +5,7 @@
 import React, { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/react";
 import Layout from "./components/Layout";
 import { KycProvider } from "./context/KycContext";
 import { SubscriptionProvider } from "./context/SubscriptionContext";
@@ -101,6 +102,7 @@ export default function App() {
           </Layout>
         </Router>
       </KycProvider>
+      <VercelAnalytics />
     </SubscriptionProvider>
   );
 }
