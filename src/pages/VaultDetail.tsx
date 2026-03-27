@@ -6,6 +6,7 @@ import { VAULTS } from "../features/vaults/registry/vaultRegistry";
 import { useVaultDetail } from "../features/vaults/hooks/useVaultDetail";
 import FractionPanel from "../components/FractionPanel";
 import WalletGate from "../components/WalletGate";
+import AICurator from "../components/AICurator";
 
 const labelStyle: React.CSSProperties = {
   fontSize: "0.85rem",
@@ -179,6 +180,20 @@ const VaultDetail: React.FC = () => {
       {registryVault && registryVault.fractionTokenId > 0 && (
         <FractionPanel vault={registryVault} />
       )}
+
+      {/* SIA — vault analyst */}
+      <section style={{ marginBottom: "2rem", display: "flex", justifyContent: "flex-end" }}>
+        <AICurator context={[
+          `Vault: ${vault.name}`,
+          vault.description ? `Description: ${vault.description}` : "",
+          registryVault?.fractionTokenId && registryVault.fractionTokenId > 0
+            ? `Fractionalised: ${registryVault.availableFractions} of ${registryVault.totalFractions} fractions available at ${registryVault.fractionPriceXer} XER each`
+            : "Not fractionalised",
+          tvlDisplay !== "—" ? `TVL: ${tvlDisplay}` : "",
+          sharePriceDisplay !== "—" ? `Share price: ${sharePriceDisplay}` : "",
+          holdersDisplay !== "—" ? `Holders: ${holdersDisplay}` : "",
+        ].filter(Boolean).join(". ")} />
+      </section>
 
       {/* Positions */}
       <section

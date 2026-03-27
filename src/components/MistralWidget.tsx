@@ -1,90 +1,145 @@
-import { useState, useRef, useEffect } from "react";
+// src/components/MistralWidget.tsx
+// Context-aware SIA floating widget — routes through /api/claude (no exposed keys).
+import React, { useState, useRef, useEffect } from "react";
 
-const MISTRAL_API_KEY = import.meta.env.VITE_MISTRAL_API_KEY;
+type Context = "gallery" | "studio" | "vaults";
 
-const SYSTEM_PROMPTS = {
-  gallery: "You are an expert fine art analyst and curator for Facades, a blockchain-based fractional art ownership platform. Help users understand artworks, cultural significance, provenance, and value. Be insightful and concise. Keep responses under 150 words.",
-  studio: "You are a minting assistant for Facades Studio. Help artists mint NFTs on Ethereum, understand vault creation, ERC-721 standards, IPFS metadata, and studio tiers. Be practical. Keep responses under 150 words.",
-  vaults: "You are a cultural asset valuation advisor for Facades. Help users understand fractional vault ownership, FAC tokens, reserve pricing, Swapp AMM, and governance. Never give financial advice. Keep responses under 150 words.",
+interface Props {
+  context?: Context;
+}
+
+interface Message {
+  role: "user" | "assistant";
+  content: string;
+}
+
+const SYSTEM_PROMPTS: Record<Context, string> = {
+  gallery: `You are SIA — the Synthetic Intelligence Analyst at Musée-Crosdale, a luxury fine-art institution built on the Facinations protocol. You are the gallery's AI curator. Help visitors understand artworks, artists, cultural significance, provenance, and collecting strategy. Be insightful, elegant, and concise — under 4 sentences unless asked to expand. Never fabricate specific auction results or valuations. Speak as if narrating a private view.`,
+  studio: `You are SIA — the Synthetic Intelligence Analyst at Musée-Crosdale's Facinations Studio. Help artists and collectors understand the minting process, vault creation, ERC-721 and ERC-1155 standards, IPFS metadata, on-chain provenance, fractional ownership, and studio subscription tiers. Be practical and precise. Under 4 sentences unless asked to expand.`,
+  vaults: `You are SIA — the Synthetic Intelligence Analyst at Musée-Crosdale's Facinations Vault platform. Help users understand fractional vault ownership, XER token economics, the Swapp AMM, reserve pricing, governance, and collector strategy. Never give financial advice; give directional guidance only. Under 4 sentences unless asked to expand.`,
 };
 
-export default function MistralWidget({ context = "gallery" }) {
+const LABELS: Record<Context, string> = {
+  gallery: "Art Analyst",
+  studio: "Studio Assistant",
+  vaults: "Vault Advisor",
+};
+
+const PLACEHOLDERS: Record<Context, string> = {
+  gallery: "Ask about this artwork or artist…",
+  studio: "Ask about minting, vaults, IPFS…",
+  vaults: "Ask about fractions, XER, strategy…",
+};
+
+const css = `
+  .mw-fab { position:fixed; bottom:2rem; right:2rem; z-index:1000; width:52px; height:52px; border:1px solid rgba(212,175,55,0.4); background:#080808; color:#d4af37; font-family:'Cinzel',serif; font-size:0.55rem; letter-spacing:0.1em; cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 32px rgba(0,0,0,0.8); transition:border-color 0.2s; }
+  .mw-fab:hover { border-color:#d4af37; background:rgba(212,175,55,0.05); }
+  .mw-panel { position:fixed; bottom:5.5rem; right:2rem; z-index:1000; width:340px; max-height:500px; background:#080808; border:1px solid rgba(212,175,55,0.2); display:flex; flex-direction:column; box-shadow:0 8px 48px rgba(0,0,0,0.85); overflow:hidden; }
+  .mw-header { padding:0.85rem 1rem; border-bottom:1px solid rgba(212,175,55,0.1); display:flex; align-items:center; gap:0.65rem; }
+  .mw-dot { width:6px; height:6px; background:#d4af37; flex-shrink:0; }
+  .mw-title { font-family:'Cinzel',serif; font-size:0.7rem; letter-spacing:0.12em; color:#f0e8d0; }
+  .mw-sub { font-family:'Cormorant Garamond',serif; font-size:0.75rem; color:#6a6258; font-style:italic; }
+  .mw-online { margin-left:auto; width:6px; height:6px; background:rgba(92,184,92,0.8); border-radius:50%; flex-shrink:0; }
+  .mw-messages { flex:1; overflow-y:auto; padding:1rem; display:flex; flex-direction:column; gap:0.65rem; min-height:180px; }
+  .mw-empty { font-family:'Cormorant Garamond',serif; font-size:0.85rem; color:#4a4238; font-style:italic; text-align:center; margin:auto; }
+  .mw-bubble { max-width:88%; padding:0.55rem 0.8rem; font-family:'Cormorant Garamond',serif; font-size:0.85rem; line-height:1.65; }
+  .mw-bubble-user { align-self:flex-end; background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); color:#e8e0d0; }
+  .mw-bubble-ai { align-self:flex-start; background:rgba(255,255,255,0.02); border:1px solid rgba(212,175,55,0.06); color:#9a9288; font-style:italic; }
+  .mw-thinking { align-self:flex-start; font-family:'Cinzel',serif; font-size:0.48rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(212,175,55,0.3); padding:0.25rem 0; }
+  .mw-input-row { border-top:1px solid rgba(212,175,55,0.1); padding:0.6rem 0.75rem; display:flex; gap:0.5rem; background:#050505; }
+  .mw-input { flex:1; background:transparent; border:none; outline:none; font-family:'Cormorant Garamond',serif; font-size:0.88rem; color:#e8e0d0; }
+  .mw-input::placeholder { color:#2a2a2a; }
+  .mw-send { background:none; border:none; font-family:'Cinzel',serif; font-size:0.5rem; letter-spacing:0.15em; text-transform:uppercase; color:#d4af37; cursor:pointer; padding:0.25rem 0.5rem; }
+  .mw-send:disabled { color:#2a2a2a; cursor:not-allowed; }
+`;
+
+export default function MistralWidget({ context = "gallery" }: Props) {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const bottomRef = useRef(null);
+  const endRef = useRef<HTMLDivElement>(null);
 
-  const placeholders = { gallery: "Ask about this artwork...", studio: "Ask about minting & vaults...", vaults: "Ask about valuation & tokens..." };
-  const labels = { gallery: "Art Analyst", studio: "Mint Assistant", vaults: "Vault Advisor" };
-  const contexts = { gallery: "artworks & provenance", studio: "minting & vaults", vaults: "vault valuation & tokens" };
-
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages, loading]);
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
 
   async function send() {
-    if (!input.trim() || loading) return;
-    const userMsg = { role: "user", content: input.trim() };
-    const next = [...messages, userMsg];
+    const msg = input.trim();
+    if (!msg || loading) return;
+    const next: Message[] = [...messages, { role: "user", content: msg }];
     setMessages(next);
     setInput("");
     setLoading(true);
-    try {
-      const res = await fetch("https://api.mistral.ai/v1/chat/completions", {
-        method: "POST",
-        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${MISTRAL_API_KEY}` },
-        body: JSON.stringify({ model: "mistral-small-latest", messages: [{ role: "system", content: SYSTEM_PROMPTS[context] }, ...next] }),
-      });
-      const data = await res.json();
-      const reply = data.choices?.[0]?.message?.content || data.error?.message || JSON.stringify(data);
-      setMessages(prev => [...prev, { role: "assistant", content: reply }]);
-    } catch {
-      setMessages(prev => [...prev, { role: "assistant", content: "Error connecting to Mistral AI." }]);
-    }
-    setLoading(false);
-  }
 
-  const btnStyle = { position:"fixed", bottom:"2rem", right:"2rem", zIndex:1000, width:"52px", height:"52px", borderRadius:"50%", background:"linear-gradient(135deg,#d4af37,#a07c20)", border:"none", cursor:"pointer", boxShadow:"0 4px 24px rgba(212,175,55,0.4)", display:"flex", alignItems:"center", justifyContent:"center", fontSize:"1.1rem", color:"#000", fontWeight:"bold", transition:"transform 0.2s" };
+    try {
+      const res = await fetch("/api/claude/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-6",
+          max_tokens: 350,
+          system: SYSTEM_PROMPTS[context as Context],
+          messages: next.map((m) => ({ role: m.role, content: m.content })),
+        }),
+      });
+      const d = await res.json();
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const reply = d.content?.find((b: { type: string; text?: string }) => b.type === "text")?.text ?? "No response.";
+      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "assistant", content: "Unable to reach SIA. Please try again." }]);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
-      <button onClick={() => setOpen(o => !o)} title={"Ask " + labels[context]} style={btnStyle}
-        onMouseEnter={e => e.currentTarget.style.transform="scale(1.1)"}
-        onMouseLeave={e => e.currentTarget.style.transform="scale(1)"}>
-        {open ? "x" : "AI"}
+      <style>{css}</style>
+
+      <button
+        className="mw-fab"
+        onClick={() => setOpen((o) => !o)}
+        title={`Ask SIA — ${LABELS[context as Context]}`}
+      >
+        {open ? "✕" : "SIA"}
       </button>
 
       {open && (
-        <div style={{ position:"fixed", bottom:"5.5rem", right:"2rem", zIndex:1000, width:"340px", maxHeight:"480px", background:"#0d0d0d", border:"1px solid rgba(212,175,55,0.3)", borderRadius:"1rem", display:"flex", flexDirection:"column", boxShadow:"0 8px 48px rgba(0,0,0,0.6)", fontFamily:"Georgia,serif", overflow:"hidden" }}>
-          <div style={{ padding:"0.85rem 1.1rem", borderBottom:"1px solid rgba(212,175,55,0.2)", background:"rgba(212,175,55,0.06)", display:"flex", alignItems:"center", gap:"0.6rem" }}>
-            <div style={{ width:"8px", height:"8px", borderRadius:"50%", background:"#d4af37" }}/>
+        <div className="mw-panel">
+          <div className="mw-header">
+            <div className="mw-dot" />
             <div>
-              <div style={{ color:"#d4af37", fontSize:"0.85rem", letterSpacing:"0.05em" }}>Facinations AI</div>
-              <div style={{ color:"#666", fontSize:"0.7rem" }}>{labels[context]}</div>
+              <div className="mw-title">SIA · Facinations</div>
+              <div className="mw-sub">{LABELS[context as Context]}</div>
             </div>
-            <div style={{ marginLeft:"auto", width:"7px", height:"7px", borderRadius:"50%", background:"#34d399" }}/>
+            <div className="mw-online" title="Online" />
           </div>
 
-          <div style={{ flex:1, overflowY:"auto", padding:"1rem", display:"flex", flexDirection:"column", gap:"0.75rem" }}>
+          <div className="mw-messages">
             {messages.length === 0 && (
-              <div style={{ color:"#444", fontSize:"0.8rem", fontStyle:"italic", textAlign:"center", marginTop:"2rem" }}>
-                {"Ask anything about " + contexts[context]}
-              </div>
+              <p className="mw-empty">{PLACEHOLDERS[context as Context]}</p>
             )}
             {messages.map((m, i) => (
-              <div key={i} style={{ alignSelf:m.role==="user"?"flex-end":"flex-start", maxWidth:"85%", background:m.role==="user"?"rgba(212,175,55,0.12)":"rgba(255,255,255,0.04)", border:m.role==="user"?"1px solid rgba(212,175,55,0.3)":"1px solid rgba(255,255,255,0.07)", borderRadius:m.role==="user"?"1rem 1rem 0.25rem 1rem":"1rem 1rem 1rem 0.25rem", padding:"0.6rem 0.85rem", color:m.role==="user"?"#d4af37":"#ccc", fontSize:"0.82rem", lineHeight:1.6 }}>
+              <div key={i} className={`mw-bubble ${m.role === "user" ? "mw-bubble-user" : "mw-bubble-ai"}`}>
                 {m.content}
               </div>
             ))}
-            {loading && <div style={{ alignSelf:"flex-start", color:"#555", fontSize:"0.8rem", fontStyle:"italic" }}>thinking...</div>}
-            <div ref={bottomRef}/>
+            {loading && <div className="mw-thinking">Analysing…</div>}
+            <div ref={endRef} />
           </div>
 
-          <div style={{ padding:"0.75rem", borderTop:"1px solid rgba(212,175,55,0.15)", display:"flex", gap:"0.5rem" }}>
-            <input value={input} onChange={e => setInput(e.target.value)} onKeyDown={e => e.key==="Enter" && send()} placeholder={placeholders[context]}
-              style={{ flex:1, background:"rgba(255,255,255,0.04)", border:"1px solid rgba(212,175,55,0.2)", borderRadius:"0.5rem", padding:"0.5rem 0.75rem", color:"#ccc", fontSize:"0.8rem", outline:"none", fontFamily:"Georgia,serif" }}/>
-            <button onClick={send} disabled={loading || !input.trim()}
-              style={{ background:loading||!input.trim()?"rgba(212,175,55,0.2)":"linear-gradient(135deg,#d4af37,#a07c20)", border:"none", borderRadius:"0.5rem", padding:"0.5rem 0.85rem", color:"#000", cursor:loading||!input.trim()?"default":"pointer", fontSize:"0.85rem", fontWeight:"bold" }}>
-              &gt;
+          <div className="mw-input-row">
+            <input
+              className="mw-input"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && send()}
+              placeholder="Ask SIA…"
+            />
+            <button className="mw-send" onClick={send} disabled={loading || !input.trim()}>
+              Send
             </button>
           </div>
         </div>

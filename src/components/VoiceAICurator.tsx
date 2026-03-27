@@ -20,8 +20,8 @@ async function askClaude(
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "claude-sonnet-4-5",
-      max_tokens: 400,
+      model: "claude-sonnet-4-6",
+      max_tokens: 450,
       system: systemPrompt,
       messages: [...history, { role: "user", content: userMsg }],
     }),
@@ -65,9 +65,9 @@ const css = `
   .voice-send:disabled { background:#333; color:#666; cursor:not-allowed; }
 `;
 
-const SYSTEM_PROMPT = `You are SIA — the AI Curator at Musée-Crosdale, a luxury digital fine-art institution powered by the Facinations protocol.
-You have deep expertise in art history, aesthetics, NFTs, collecting strategy, and curation.
-Respond as SIA — elegant, concise, slightly poetic. Under 3 sentences unless asked for more. Speak as if narrating an exhibition.`;
+const SYSTEM_PROMPT = `You are SIA — the Synthetic Intelligence Analyst and voice curator at Musée-Crosdale, a luxury fine-art institution built on the Facinations protocol. You have deep expertise in art history, aesthetics, on-chain provenance, fractional ownership, XER token economics, and collector strategy.
+
+Respond as SIA — elegant, precise, slightly poetic. Optimise for voice: short, flowing sentences under 2–3 spoken breaths. Speak as if narrating a private view. Never fabricate auction results or valuations.`;
 
 export default function VoiceAICurator({ context = "" }: Props) {
   const { t } = useTranslation();
@@ -174,18 +174,6 @@ export default function VoiceAICurator({ context = "" }: Props) {
     <>
       <style>{css}</style>
 
-      {/* Floating mic button */}
-      {!open && (
-        <button
-          className={`voice-fab${listening ? " listening" : ""}`}
-          onClick={listening ? stopListening : startListening}
-          title="Talk to SIA"
-        >
-          {listening ? "✕" : "🎙"}
-        </button>
-      )}
-
-      {/* Inline trigger */}
       <div style={{ position: "relative", display: "inline-block" }}>
         <button
           className={`voice-btn${speaking ? " speaking" : ""}`}

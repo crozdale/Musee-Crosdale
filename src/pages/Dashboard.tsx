@@ -11,6 +11,7 @@ import { useKyc } from "../context/KycContext";
 import { useSubscription } from "../context/SubscriptionContext";
 import { useMeta } from "../hooks/useMeta";
 import { VAULTS } from "../features/vaults/registry/vaultRegistry";
+import AICurator from "../components/AICurator";
 
 // ── Subgraph queries ──────────────────────────────────────────────────────────
 const USER_POSITIONS_QUERY = gql`
@@ -372,6 +373,26 @@ export default function Dashboard() {
                 </tbody>
               </table>
             )}
+          </div>
+
+          {/* SIA — Collector Intelligence */}
+          <div className="dash-section">
+            <p className="dash-section-title">Collector Intelligence</p>
+            <div style={{ display: "flex", alignItems: "flex-start", gap: "1rem", flexWrap: "wrap" }}>
+              <AICurator context={[
+                `Wallet: ${address ? `${address.slice(0, 6)}…${address.slice(-4)}` : "connected"}`,
+                xerBalance && xerBalance !== "—" ? `XER balance: ${xerBalance}` : "",
+                positions.length > 0
+                  ? `Vault positions: ${positions.filter((p) => parseFloat(p.fractionBalance) > 0).map((p) => vaultName(p.vaultId)).join(", ")}`
+                  : "No vault positions yet",
+                totalEntryXer > 0 ? `Total entry value: ${totalEntryXer.toFixed(2)} XER` : "",
+                trades.length > 0 ? `${trades.length} trade${trades.length !== 1 ? "s" : ""} on record` : "",
+                tier !== "none" ? `Subscription tier: ${tier}` : "No active subscription",
+              ].filter(Boolean).join(". ")} />
+              <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.82rem", color: "#4a4238", fontStyle: "italic", margin: 0, alignSelf: "center" }}>
+                Ask SIA about your portfolio, strategy, or fractional ownership.
+              </p>
+            </div>
           </div>
 
           {/* Account status: KYC + Subscription */}

@@ -20,8 +20,8 @@ async function askClaude(
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
-      model: "claude-sonnet-4-5",
-      max_tokens: 400,
+      model: "claude-sonnet-4-6",
+      max_tokens: 450,
       system: systemPrompt,
       messages: [...history, { role: "user", content: userMsg }],
     }),
@@ -74,8 +74,9 @@ export default function AICurator({ context = "" }: Props) {
     setMessages((m) => [...m, { role: "user", content: msg }]);
     setLoading(true);
 
-    const systemPrompt = `You are SIA — the AI Curator at Musée-Crosdale, a luxury digital fine-art institution powered by the Facinations protocol.${context ? `\nContext: ${context}` : ""}
-Respond as SIA — concise, knowledgeable, slightly poetic. Under 3 sentences unless asked for more.`;
+    const systemPrompt = `You are SIA — the Synthetic Intelligence Analyst and principal curator at Musée-Crosdale, a luxury fine-art institution built on the Facinations protocol. You have deep expertise in art history, aesthetics, on-chain provenance, fractional ownership, XER token economics, and collector strategy.${context ? `\n\nCurrent context: ${context}` : ""}
+
+Respond as SIA — elegant, precise, slightly poetic. Under 3 sentences unless the visitor asks for more. Speak as if narrating a private view at a world-class gallery. Never fabricate auction results or valuations.`;
 
     const history = messages.map((m) => ({
       role: m.role,
