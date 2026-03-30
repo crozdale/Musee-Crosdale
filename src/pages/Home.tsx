@@ -1,5 +1,5 @@
 ﻿// src/pages/Home.jsx
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import xCoinLogo from "../assets/x-coin-logo.png";
@@ -22,14 +22,6 @@ const css = `
   .home-banner { width:340px; max-width:82%; margin-bottom:0.5rem; opacity:0; animation:fadeUp 1s ease 0.3s forwards; filter:drop-shadow(0 0 40px rgba(212,175,55,0.2)); }
   .home-eyebrow { font-family:'Cinzel',serif; font-size:0.58rem; letter-spacing:0.35em; text-transform:uppercase; color:rgba(212,175,55,0.45); margin-bottom:2.5rem; opacity:0; animation:fadeUp 0.8s ease 0.5s forwards; }
   .home-div { width:60px; height:1px; background:linear-gradient(to right,transparent,#d4af37,transparent); margin-bottom:2.5rem; opacity:0; animation:fadeIn 1s ease 0.6s forwards; }
-
-  .home-video-wrap { position:relative; width:700px; max-width:95%; margin-bottom:3rem; opacity:0; animation:fadeUp 1.2s ease 0.7s forwards; }
-  .home-video { width:100%; border-radius:2px; border:1px solid rgba(212,175,55,0.2); box-shadow:0 30px 80px rgba(0,0,0,0.95); display:block; }
-  .video-corner { position:absolute; width:16px; height:16px; border-color:rgba(212,175,55,0.4); border-style:solid; }
-  .video-corner.tl { top:-4px; left:-4px; border-width:1px 0 0 1px; }
-  .video-corner.tr { top:-4px; right:-4px; border-width:1px 1px 0 0; }
-  .video-corner.bl { bottom:-4px; left:-4px; border-width:0 0 1px 1px; }
-  .video-corner.br { bottom:-4px; right:-4px; border-width:0 1px 1px 0; }
 
   /* Dionysus Section */
   .dionysus-section { width:700px; max-width:95%; margin-bottom:3.5rem; opacity:0; animation:fadeUp 1.2s ease 0.95s forwards; }
@@ -67,13 +59,6 @@ const css = `
 export default function Home() {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const videoRef = useRef(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {});
-    }
-  }, []);
 
   return (
     <main className="home-root">
@@ -105,24 +90,6 @@ export default function Home() {
           {t("home.eyebrow", "Decentralised Fine-Art Protocol · Ethereum")}
         </div>
         <div className="home-div" />
-
-        {/* Hero video */}
-        <div className="home-video-wrap">
-          <div className="video-corner tl" />
-          <div className="video-corner tr" />
-          <div className="video-corner bl" />
-          <div className="video-corner br" />
-          <video
-            ref={videoRef}
-            playsInline
-            autoPlay
-            muted
-            loop
-            className="home-video"
-          >
-            <source src="/hero.mp4" type="video/mp4" />
-          </video>
-        </div>
 
         {/* Dionysus */}
         <div className="dionysus-section">
