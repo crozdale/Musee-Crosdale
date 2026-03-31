@@ -10,7 +10,18 @@
     "arch": "ドキュメント",
     "swap": "スワップ",
     "dashboard": "ダッシュボード",
-    "analytics": "分析"
+    "analytics": "分析",
+    "collectorsSection": "コレクター",
+    "speculatorsSection": "投機家",
+    "communitySection": "コミュニティ",
+    "platformSection": "プラットフォーム",
+    "partnersSection": "パートナー",
+    "xdale": "Xdaleギャラリー",
+    "galleries": "ギャラリー",
+    "aiCurator": "AIキュレーター",
+    "dealerCrm": "ディーラーCRM",
+    "consultantPortal": "コンサルタントポータル",
+    "marketing": "営業・マーケティング"
   },
   "wallet": {
     "connect": "ウォレットを接続",

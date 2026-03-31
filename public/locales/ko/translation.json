@@ -10,7 +10,18 @@
     "arch": "문서",
     "swap": "스왑",
     "dashboard": "대시보드",
-    "analytics": "분석"
+    "analytics": "분석",
+    "collectorsSection": "수집가",
+    "speculatorsSection": "투기자",
+    "communitySection": "커뮤니티",
+    "platformSection": "플랫폼",
+    "partnersSection": "파트너",
+    "xdale": "엑스데일 갤러리",
+    "galleries": "갤러리",
+    "aiCurator": "AI 큐레이터",
+    "dealerCrm": "딜러 CRM",
+    "consultantPortal": "컨설턴트 포털",
+    "marketing": "영업 및 마케팅"
   },
   "wallet": {
     "connect": "지갑 연결",

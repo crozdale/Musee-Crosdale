@@ -7,13 +7,6 @@ import { useMeta } from "../hooks/useMeta";
 // ── VideoHero: tries mp4, falls back to a still image ─────────────────────────
 function VideoHero() {
   const [failed, setFailed] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.play().catch(() => setFailed(true));
-  }, []);
 
   if (failed) {
     return (
@@ -27,8 +20,6 @@ function VideoHero() {
 
   return (
     <video
-      ref={videoRef}
-      src="/Dionysus.mp4"
       autoPlay
       muted
       loop
@@ -36,7 +27,9 @@ function VideoHero() {
       preload="auto"
       onError={() => setFailed(true)}
       style={{ width: "100%", height: "480px", objectFit: "cover", display: "block", opacity: 0.85 }}
-    />
+    >
+      <source src="/Dionysus.mp4" type="video/mp4" />
+    </video>
   );
 }
 
@@ -1136,49 +1129,6 @@ export default function Gallery() {
         <VideoHero />
       </div>
 
-      {/* Dionysus — Moving Image */}
-      <div className="dion-section">
-        <div className="dion-header">
-          <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
-          <h2 className="dion-title">Dionysus</h2>
-        </div>
-        <div className="dion-rule" />
-        <div className="dion-frame">
-          <div className="dion-corner tl" />
-          <div className="dion-corner tr" />
-          <div className="dion-corner bl" />
-          <div className="dion-corner br" />
-          <video ref={dionRef} controls preload="metadata" playsInline className="dion-video">
-            <source src="/Dionysus.mp4" type="video/mp4" />
-          </video>
-        </div>
-        <div className="dion-caption">
-          <p className="dion-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
-          <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-            <span className="dion-hint" style={{ marginRight: "0.5rem" }}>Speed</span>
-            {[0.25, 0.5, 1].map(r => (
-              <button
-                key={r}
-                onClick={() => setPlaybackRate(r)}
-                style={{
-                  background: speed === r ? "rgba(212,175,55,0.15)" : "none",
-                  border: `1px solid ${speed === r ? "#d4af37" : "rgba(212,175,55,0.25)"}`,
-                  color: speed === r ? "#d4af37" : "rgba(212,175,55,0.35)",
-                  fontFamily: "'Cinzel',serif",
-                  fontSize: "0.5rem",
-                  letterSpacing: "0.1em",
-                  padding: "0.2rem 0.5rem",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                }}
-              >
-                {r === 1 ? "1×" : `${r}×`}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
       <div
         style={{
           display: "flex",
@@ -1237,6 +1187,49 @@ export default function Gallery() {
           onClose={() => setLbIdx(null)}
         />
       )}
+
+      {/* Dionysus — Moving Image */}
+      <div className="dion-section">
+        <div className="dion-header">
+          <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
+          <h2 className="dion-title">Dionysus</h2>
+        </div>
+        <div className="dion-rule" />
+        <div className="dion-frame">
+          <div className="dion-corner tl" />
+          <div className="dion-corner tr" />
+          <div className="dion-corner bl" />
+          <div className="dion-corner br" />
+          <video ref={dionRef} controls preload="metadata" playsInline className="dion-video">
+            <source src="/Dionysus.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className="dion-caption">
+          <p className="dion-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
+          <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+            <span className="dion-hint" style={{ marginRight: "0.5rem" }}>Speed</span>
+            {[0.25, 0.5, 1].map(r => (
+              <button
+                key={r}
+                onClick={() => setPlaybackRate(r)}
+                style={{
+                  background: speed === r ? "rgba(212,175,55,0.15)" : "none",
+                  border: `1px solid ${speed === r ? "#d4af37" : "rgba(212,175,55,0.25)"}`,
+                  color: speed === r ? "#d4af37" : "rgba(212,175,55,0.35)",
+                  fontFamily: "'Cinzel',serif",
+                  fontSize: "0.5rem",
+                  letterSpacing: "0.1em",
+                  padding: "0.2rem 0.5rem",
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                }}
+              >
+                {r === 1 ? "1×" : `${r}×`}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <div
         style={{

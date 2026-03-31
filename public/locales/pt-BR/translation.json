@@ -10,7 +10,18 @@
     "arch": "Documentação",
     "swap": "Trocar",
     "dashboard": "Painel",
-    "analytics": "Análises"
+    "analytics": "Análises",
+    "collectorsSection": "Colecionadores",
+    "speculatorsSection": "Especuladores",
+    "communitySection": "Comunidade",
+    "platformSection": "Plataforma",
+    "partnersSection": "Parceiros",
+    "xdale": "Galeria Xdale",
+    "galleries": "Galerias",
+    "aiCurator": "Curador IA",
+    "dealerCrm": "CRM do Dealer",
+    "consultantPortal": "Portal do Consultor",
+    "marketing": "Vendas & Marketing"
   },
   "wallet": {
     "connect": "Conectar Carteira",

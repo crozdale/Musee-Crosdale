@@ -10,7 +10,18 @@
     "arch": "Документация",
     "swap": "Обмен",
     "dashboard": "Панель управления",
-    "analytics": "Аналитика"
+    "analytics": "Аналитика",
+    "collectorsSection": "Коллекционеры",
+    "speculatorsSection": "Спекулянты",
+    "communitySection": "Сообщество",
+    "platformSection": "Платформа",
+    "partnersSection": "Партнёры",
+    "xdale": "Галерея Xdale",
+    "galleries": "Галереи",
+    "aiCurator": "ИИ-куратор",
+    "dealerCrm": "CRM дилера",
+    "consultantPortal": "Портал консультанта",
+    "marketing": "Продажи и маркетинг"
   },
   "wallet": {
     "connect": "Подключить кошелёк",

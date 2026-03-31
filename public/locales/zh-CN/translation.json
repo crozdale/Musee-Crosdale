@@ -10,7 +10,18 @@
     "arch": "文档",
     "swap": "兑换",
     "dashboard": "仪表盘",
-    "analytics": "分析"
+    "analytics": "分析",
+    "collectorsSection": "收藏家",
+    "speculatorsSection": "投机者",
+    "communitySection": "社区",
+    "platformSection": "平台",
+    "partnersSection": "合作伙伴",
+    "xdale": "Xdale 画廊",
+    "galleries": "画廊",
+    "aiCurator": "AI 策展人",
+    "dealerCrm": "经销商 CRM",
+    "consultantPortal": "顾问门户",
+    "marketing": "销售与营销"
   },
   "wallet": {
     "connect": "连接钱包",

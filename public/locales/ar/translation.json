@@ -10,7 +10,18 @@
     "arch": "التوثيق",
     "swap": "التبادل",
     "dashboard": "لوحة التحكم",
-    "analytics": "التحليلات"
+    "analytics": "التحليلات",
+    "collectorsSection": "المجمعون",
+    "speculatorsSection": "المضاربون",
+    "communitySection": "المجتمع",
+    "platformSection": "المنصة",
+    "partnersSection": "الشركاء",
+    "xdale": "معرض Xdale",
+    "galleries": "المعارض",
+    "aiCurator": "المنسق الذكي",
+    "dealerCrm": "نظام CRM للتجار",
+    "consultantPortal": "بوابة المستشار",
+    "marketing": "المبيعات والتسويق"
   },
   "wallet": {
     "connect": "ربط المحفظة",
