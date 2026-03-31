@@ -12,6 +12,7 @@ export default function About() {
       "Learn about Musée-Crosdale and the Facinations protocol — the on-chain infrastructure for fine-art provenance, fractionalization, and collector access.",
   });
 
+
   return (
     <main style={{ background: tk.bg, minHeight: "100vh", fontFamily: tk.fontBody, color: tk.fg }}>
 
