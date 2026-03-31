@@ -21,7 +21,23 @@
     "aiCurator": "AI क्यूरेटर",
     "dealerCrm": "डीलर CRM",
     "consultantPortal": "सलाहकार पोर्टल",
-    "marketing": "बिक्री और विपणन"
+    "marketing": "बिक्री और विपणन",
+    "gallery_desc": "कलाकृतियाँ देखें और खरीदें",
+    "vaults_desc": "सुरक्षित कला संरक्षण",
+    "dashboard_desc": "आपकी संरक्षित संपत्तियाँ",
+    "swap_desc": "कला-अंश टोकन स्वैप करें",
+    "swapp_desc": "पीयर-टू-पीयर व्यापार",
+    "xdale_desc": "क्यूरेटेड प्रदर्शनियाँ",
+    "galleries_desc": "सभी गैलरी स्थान",
+    "about_desc": "प्रोटोकॉल अवलोकन",
+    "arch_desc": "तकनीकी वास्तुकला",
+    "analytics_desc": "पोर्टफोलियो अंतर्दृष्टि",
+    "legal_desc": "नियम और प्रकटीकरण",
+    "studio_desc": "कलाकृतियाँ प्रकाशित और मिंट करें",
+    "aiCurator_desc": "बुद्धिमान कला अंतर्दृष्टि",
+    "dealerCrm_desc": "ग्राहक और डील प्रबंधन",
+    "consultantPortal_desc": "संबद्ध कमीशन · USD",
+    "marketing_desc": "अभियान और संबद्ध दस्तावेज़"
   },
   "wallet": {
     "connect": "वॉलेट कनेक्ट करें",
@@ -61,7 +77,8 @@
     "invalid_link": "अमान्य चेकआउट लिंक।",
     "service_unreachable": "सत्यापन सेवा तक पहुंच नहीं हो सकी। कृपया सहायता से संपर्क करें।",
     "select_language": "भाषा चुनें",
-    "amount": "राशि"
+    "amount": "राशि",
+    "partners_eyebrow": "Facinations · साझेदार"
   },
   "hero": {
     "title": "Facinations: आंशिक ललित कला वॉल्ट",
@@ -747,6 +764,93 @@
     "nav_collection": "संग्रह",
     "nav_exchange": "संग्रह एक्सचेंज",
     "nav_whitepaper": "श्वेत पत्र"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "गैलरी — Musée-Crosdale",
+    "meta_description": "Facinations प्लेटफ़ॉर्म पर क्यूरेटेड गैलरी खोजें — ऑन-चेन उद्गम के साथ समकालीन और उभरते कलाकार।",
+    "eyebrow": "Musée-Crosdale · प्लेटफ़ॉर्म",
+    "heading": "गैलरी",
+    "subtitle": "Facinations प्लेटफ़ॉर्म पर प्रदर्शन करने वाली भागीदार गैलरी और डीलर, हर कार्य के लिए सत्यापित ऑन-चेन उद्गम के साथ।",
+    "btn_view": "गैलरी देखें →"
+  },
+  "curator": {
+    "meta_title": "AI क्यूरेटर — Musée-Crosdale",
+    "meta_description": "AI द्वारा संचालित बुद्धिमान कला अंतर्दृष्टि। कलाकृतियों का विश्लेषण करें, संग्रह एक्सप्लोर करें और क्यूरेटोरियल मार्गदर्शन प्राप्त करें।",
+    "heading": "AI क्यूरेटर",
+    "subtitle": "बुद्धिमान कला अंतर्दृष्टि — संग्रह में किसी भी कार्य का विश्लेषण करें।"
+  },
+  "dealer_crm": {
+    "meta_title": "डीलर CRM — Musée-Crosdale",
+    "meta_description": "Facinations डीलर्स के लिए ग्राहक और डील प्रबंधन।",
+    "heading": "डीलर CRM",
+    "subtitle": "HubSpot CRM के माध्यम से ग्राहक और डील प्रबंधन — पोर्टल {{portal}}।",
+    "contacts": "संपर्क",
+    "contacts_desc": "संग्राहक और डीलर संपर्कों को देखें और प्रबंधित करें",
+    "deals": "डील पाइपलाइन",
+    "deals_desc": "सक्रिय अवसरों और पाइपलाइन मूल्य को ट्रैक करें",
+    "sequences": "ईमेल अनुक्रम",
+    "sequences_desc": "संग्राहकों के लिए स्वचालित पोषण अनुक्रम",
+    "tasks": "कार्य",
+    "tasks_desc": "फॉलो-अप कार्य और गतिविधि कतार",
+    "reports": "रिपोर्ट",
+    "reports_desc": "पाइपलाइन और राजस्व विश्लेषण"
+  },
+  "partner": {
+    "meta_title": "सलाहकार पोर्टल — Musée-Crosdale",
+    "meta_description": "Facinations एफिलिएट और सलाहकार भागीदार कार्यक्रम।",
+    "heading": "सलाहकार पोर्टल",
+    "subtitle": "संग्राहकों, डीलर्स और संस्थाओं को Facinations प्रोटोकॉल में रेफर करके कमीशन कमाएं।",
+    "section_tiers": "कमीशन स्तर",
+    "section_how": "यह कैसे काम करता है",
+    "how_body": "अपना विशेष रेफरल लिंक प्राप्त करने के लिए नीचे आवेदन करें। इसे संग्राहकों, गैलरी मालिकों या DeFi ट्रेडर्स के साथ साझा करें। जब कोई रेफर किया गया उपयोगकर्ता KYC पूरा करे और पहला व्यापार करे, तो कमीशन जमा होने लगता है। ACH, PayPal या USDC के माध्यम से USD में मासिक भुगतान — न्यूनतम सीमा $50।",
+    "section_terms": "लागू नियम",
+    "terms_body": "90-दिन का एट्रिब्यूशन विंडो · 12-महीने का कमाई विंडो · फर्स्ट-क्लिक एट्रिब्यूशन · 30-दिन का कुकी — अमेरिका के न्यूयॉर्क राज्य के कानूनों द्वारा शासित।",
+    "btn_details": "पूर्ण कार्यक्रम विवरण और नियम →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · बिक्री और विपणन",
+    "heading": "भागीदार संसाधन",
+    "tab_tools": "टूल स्टैक",
+    "tab_affiliate": "एफिलिएट कार्यक्रम",
+    "tab_terms": "नियम और शर्तें",
+    "col_tool": "टूल",
+    "col_purpose": "उद्देश्य",
+    "col_tier": "स्तर",
+    "col_followers": "फॉलोअर्स",
+    "col_commission": "कमीशन",
+    "col_extras": "अतिरिक्त",
+    "col_tools_col": "टूल्स",
+    "payment_schedule": "भुगतान अनुसूची: महीने के अंत के 15 कार्यदिवसों के भीतर मासिक। न्यूनतम भुगतान $50 (सीमा से नीचे होने पर अगले महीने में रोल)। तरीके: ACH/Wire, PayPal या USDC। मुद्रा: USD।"
+  },
+  "gallery_page": {
+    "badge_available": "उपलब्ध",
+    "badge_sold": "बिक गया",
+    "label_medium": "माध्यम",
+    "label_dimensions": "आयाम",
+    "label_price": "मूल्य",
+    "section_enquire": "पूछताछ",
+    "enquiry_sent": "पूछताछ भेज दी गई। हम जल्द ही संपर्क करेंगे।",
+    "label_name": "नाम *",
+    "label_email": "ईमेल *",
+    "label_message": "संदेश",
+    "placeholder_name": "आपका नाम",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "कोई भी प्रश्न…",
+    "btn_send_enquiry": "पूछताछ भेजें",
+    "not_found": "गैलरी नहीं मिली",
+    "all_galleries": "← सभी गैलरी",
+    "works_label": "कृतियाँ",
+    "works_count": "{{count}} कृति · {{available}} उपलब्ध",
+    "works_plural_suffix": "",
+    "no_works": "वर्तमान में कोई कृति सूचीबद्ध नहीं",
+    "eyebrow": "गैलरी · Musée-Crosdale",
+    "powered_by": "Facinations द्वारा संचालित"
+  },
+  "gallery": {
+    "speed": "गति"
   },
   "theme": {
     "dark": "🌙 Dark",

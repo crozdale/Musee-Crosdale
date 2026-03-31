@@ -21,7 +21,23 @@
     "aiCurator": "Curador IA",
     "dealerCrm": "CRM do Dealer",
     "consultantPortal": "Portal do Consultor",
-    "marketing": "Vendas & Marketing"
+    "marketing": "Vendas & Marketing",
+    "gallery_desc": "Explorar e adquirir obras de arte",
+    "vaults_desc": "Custódia segura de arte",
+    "dashboard_desc": "Seus ativos em cofre",
+    "swap_desc": "Trocar tokens de frações de arte",
+    "swapp_desc": "Negociações entre pares",
+    "xdale_desc": "Exposições curadas",
+    "galleries_desc": "Todos os espaços de galeria",
+    "about_desc": "Visão geral do protocolo",
+    "arch_desc": "Arquitetura técnica",
+    "analytics_desc": "Perspectivas de portfólio",
+    "legal_desc": "Termos e divulgações",
+    "studio_desc": "Publicar e mintar obras de arte",
+    "aiCurator_desc": "Perspectivas artísticas inteligentes",
+    "dealerCrm_desc": "Gestão de clientes e negócios",
+    "consultantPortal_desc": "Comissões de afiliados · USD",
+    "marketing_desc": "Documentação de campanha e afiliados"
   },
   "wallet": {
     "connect": "Conectar Carteira",
@@ -61,7 +77,8 @@
     "invalid_link": "Link de checkout inválido.",
     "service_unreachable": "Não foi possível alcançar o serviço de verificação. Entre em contato com o suporte.",
     "select_language": "Selecionar idioma",
-    "amount": "Valor"
+    "amount": "Valor",
+    "partners_eyebrow": "Facinations · Parceiros"
   },
   "hero": {
     "title": "Facinations: Cofres de Arte Fina Fracionada",
@@ -749,6 +766,93 @@
     "nav_collection": "Coleção",
     "nav_exchange": "Troca de Coleção",
     "nav_whitepaper": "Whitepaper"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "Galerias — Musée-Crosdale",
+    "meta_description": "Descubra galerias curadas na plataforma Facinations — artistas contemporâneos e emergentes com proveniência on-chain.",
+    "eyebrow": "Musée-Crosdale · Plataforma",
+    "heading": "Galerias",
+    "subtitle": "Galerias parceiras e revendedores que expõem na plataforma Facinations, com proveniência on-chain verificada para cada obra.",
+    "btn_view": "Ver Galeria →"
+  },
+  "curator": {
+    "meta_title": "Curador IA — Musée-Crosdale",
+    "meta_description": "Perspectivas artísticas inteligentes com IA. Analise obras, explore a coleção e obtenha orientação curatorial.",
+    "heading": "Curador IA",
+    "subtitle": "Perspectivas artísticas inteligentes — analise qualquer obra da coleção."
+  },
+  "dealer_crm": {
+    "meta_title": "CRM do Dealer — Musée-Crosdale",
+    "meta_description": "Gestão de clientes e negócios para os dealers da Facinations.",
+    "heading": "CRM do Dealer",
+    "subtitle": "Gestão de clientes & negócios via HubSpot CRM — Portal {{portal}}.",
+    "contacts": "Contatos",
+    "contacts_desc": "Explorar e gerenciar contatos de colecionadores & dealers",
+    "deals": "Pipeline de Negócios",
+    "deals_desc": "Acompanhar oportunidades ativas e valor do pipeline",
+    "sequences": "Sequências de E-mail",
+    "sequences_desc": "Sequências de nurturing automatizadas para colecionadores",
+    "tasks": "Tarefas",
+    "tasks_desc": "Tarefas de acompanhamento e fila de atividades",
+    "reports": "Relatórios",
+    "reports_desc": "Análises de pipeline e receita"
+  },
+  "partner": {
+    "meta_title": "Portal do Consultor — Musée-Crosdale",
+    "meta_description": "Programa de afiliados e parceiro consultor da Facinations.",
+    "heading": "Portal do Consultor",
+    "subtitle": "Ganhe comissão indicando colecionadores, dealers e instituições ao protocolo Facinations.",
+    "section_tiers": "Níveis de Comissão",
+    "section_how": "Como funciona",
+    "how_body": "Candidate-se abaixo para receber seu link de indicação exclusivo. Compartilhe com colecionadores, proprietários de galerias ou traders DeFi. Quando um usuário indicado concluir o KYC e realizar sua primeira negociação, a comissão começa a acumular. Pago mensalmente em USD via ACH, PayPal ou USDC — limite mínimo $50.",
+    "section_terms": "Termos Aplicáveis",
+    "terms_body": "Janela de atribuição de 90 dias · Janela de ganhos de 12 meses · Atribuição ao primeiro clique · Cookie de 30 dias — Regido pelas leis do Estado de Nova York, Estados Unidos.",
+    "btn_details": "Detalhes Completos do Programa & Termos →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · Vendas & Marketing",
+    "heading": "Recursos para Parceiros",
+    "tab_tools": "Stack de Ferramentas",
+    "tab_affiliate": "Programa de Afiliados",
+    "tab_terms": "Termos e Condições",
+    "col_tool": "Ferramenta",
+    "col_purpose": "Finalidade",
+    "col_tier": "Nível",
+    "col_followers": "Seguidores",
+    "col_commission": "Comissão",
+    "col_extras": "Extras",
+    "col_tools_col": "Ferramentas",
+    "payment_schedule": "Calendário de pagamentos: Mensal em até 15 dias úteis após o fim do mês. Pagamento mínimo $50 (acumulado para o próximo mês se abaixo do limite). Métodos: ACH/TED, PayPal ou USDC. Moeda: USD."
+  },
+  "gallery_page": {
+    "badge_available": "Disponível",
+    "badge_sold": "Vendido",
+    "label_medium": "Técnica",
+    "label_dimensions": "Dimensões",
+    "label_price": "Preço",
+    "section_enquire": "Consultar",
+    "enquiry_sent": "Consulta enviada. Entraremos em contato em breve.",
+    "label_name": "Nome *",
+    "label_email": "E-mail *",
+    "label_message": "Mensagem",
+    "placeholder_name": "Seu nome",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "Alguma dúvida…",
+    "btn_send_enquiry": "Enviar Consulta",
+    "not_found": "Galeria não encontrada",
+    "all_galleries": "← Todas as Galerias",
+    "works_label": "Obras",
+    "works_count": "{{count}} obra · {{available}} disponível",
+    "works_plural_suffix": "s",
+    "no_works": "Nenhuma obra listada no momento",
+    "eyebrow": "Galeria · Musée-Crosdale",
+    "powered_by": "Alimentado por Facinations"
+  },
+  "gallery": {
+    "speed": "Velocidade"
   },
   "theme": {
     "dark": "🌙 Dark",

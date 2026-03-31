@@ -21,7 +21,23 @@
     "aiCurator": "Curateur IA",
     "dealerCrm": "CRM Marchand",
     "consultantPortal": "Portail Consultant",
-    "marketing": "Ventes & Marketing"
+    "marketing": "Ventes & Marketing",
+    "gallery_desc": "Parcourir et acquérir des œuvres d'art",
+    "vaults_desc": "Conservation sécurisée de l'art",
+    "dashboard_desc": "Vos actifs en coffre",
+    "swap_desc": "Échanger des jetons de fractions d'art",
+    "swapp_desc": "Échanges de pair à pair",
+    "xdale_desc": "Expositions curatées",
+    "galleries_desc": "Tous les espaces de galerie",
+    "about_desc": "Aperçu du protocole",
+    "arch_desc": "Architecture technique",
+    "analytics_desc": "Perspectives de portefeuille",
+    "legal_desc": "Conditions et divulgations",
+    "studio_desc": "Publier et frapper des œuvres",
+    "aiCurator_desc": "Perspectives artistiques intelligentes",
+    "dealerCrm_desc": "Gestion clients & affaires",
+    "consultantPortal_desc": "Commissions d'affiliation · USD",
+    "marketing_desc": "Documents de campagne et d'affiliation"
   },
   "wallet": {
     "connect": "Connecter le portefeuille",
@@ -61,7 +77,8 @@
     "invalid_link": "Lien de paiement invalide.",
     "service_unreachable": "Impossible de joindre le service de vérification. Veuillez contacter le support.",
     "select_language": "Sélectionner la langue",
-    "amount": "Montant"
+    "amount": "Montant",
+    "partners_eyebrow": "Facinations · Partenaires"
   },
   "hero": {
     "title": "Facinations : Coffres d'art fractionné",
@@ -749,6 +766,93 @@
     "nav_collection": "Collection",
     "nav_exchange": "Échange de Collection",
     "nav_whitepaper": "Livre Blanc"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "Galeries — Musée-Crosdale",
+    "meta_description": "Découvrez des galeries curatées sur la plateforme Facinations — artistes contemporains et émergents avec provenance on-chain.",
+    "eyebrow": "Musée-Crosdale · Plateforme",
+    "heading": "Galeries",
+    "subtitle": "Galeries partenaires et marchands exposant sur la plateforme Facinations, avec une provenance on-chain vérifiée pour chaque œuvre.",
+    "btn_view": "Voir la Galerie →"
+  },
+  "curator": {
+    "meta_title": "Curateur IA — Musée-Crosdale",
+    "meta_description": "Perspectives artistiques intelligentes propulsées par l'IA. Analysez des œuvres, explorez la collection et obtenez des conseils curatoriaux.",
+    "heading": "Curateur IA",
+    "subtitle": "Perspectives artistiques intelligentes — analysez n'importe quelle œuvre de la collection."
+  },
+  "dealer_crm": {
+    "meta_title": "CRM Marchand — Musée-Crosdale",
+    "meta_description": "Gestion des clients et des affaires pour les marchands Facinations.",
+    "heading": "CRM Marchand",
+    "subtitle": "Gestion clients & affaires via HubSpot CRM — Portail {{portal}}.",
+    "contacts": "Contacts",
+    "contacts_desc": "Parcourir et gérer les contacts collectionneurs & marchands",
+    "deals": "Pipeline des Affaires",
+    "deals_desc": "Suivre les opportunités actives et la valeur du pipeline",
+    "sequences": "Séquences E-mail",
+    "sequences_desc": "Séquences de nurturing automatisées pour collectionneurs",
+    "tasks": "Tâches",
+    "tasks_desc": "Tâches de suivi et file d'activités",
+    "reports": "Rapports",
+    "reports_desc": "Analyses de pipeline et de revenus"
+  },
+  "partner": {
+    "meta_title": "Portail Consultant — Musée-Crosdale",
+    "meta_description": "Programme d'affiliation et de consultant partenaire de Facinations.",
+    "heading": "Portail Consultant",
+    "subtitle": "Gagnez des commissions en référant des collectionneurs, marchands et institutions au protocole Facinations.",
+    "section_tiers": "Niveaux de Commission",
+    "section_how": "Comment ça marche",
+    "how_body": "Postulez ci-dessous pour recevoir votre lien de parrainage unique. Partagez-le avec des collectionneurs, propriétaires de galeries ou traders DeFi. Lorsqu'un utilisateur référé complète le KYC et effectue sa première transaction, la commission commence à s'accumuler. Payé mensuellement en USD via ACH, PayPal ou USDC — seuil minimum 50 $.",
+    "section_terms": "Conditions Applicables",
+    "terms_body": "Fenêtre d'attribution de 90 jours · Fenêtre de gains de 12 mois · Attribution au premier clic · Cookie de 30 jours — Régi par les lois de l'État de New York, États-Unis.",
+    "btn_details": "Détails Complets du Programme et Conditions →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · Ventes & Marketing",
+    "heading": "Ressources Partenaires",
+    "tab_tools": "Stack d'Outils",
+    "tab_affiliate": "Programme d'Affiliation",
+    "tab_terms": "Conditions Générales",
+    "col_tool": "Outil",
+    "col_purpose": "Objectif",
+    "col_tier": "Niveau",
+    "col_followers": "Abonnés",
+    "col_commission": "Commission",
+    "col_extras": "Extras",
+    "col_tools_col": "Outils",
+    "payment_schedule": "Calendrier de paiement : Mensuel dans les 15 jours ouvrables après la fin du mois. Paiement minimum 50 $ (reporté au mois suivant si en dessous du seuil). Méthodes : ACH/Virement, PayPal ou USDC. Devise : USD."
+  },
+  "gallery_page": {
+    "badge_available": "Disponible",
+    "badge_sold": "Vendu",
+    "label_medium": "Technique",
+    "label_dimensions": "Dimensions",
+    "label_price": "Prix",
+    "section_enquire": "Renseignements",
+    "enquiry_sent": "Demande envoyée. Nous vous contacterons prochainement.",
+    "label_name": "Nom *",
+    "label_email": "E-mail *",
+    "label_message": "Message",
+    "placeholder_name": "Votre nom",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "Des questions…",
+    "btn_send_enquiry": "Envoyer la Demande",
+    "not_found": "Galerie introuvable",
+    "all_galleries": "← Toutes les Galeries",
+    "works_label": "Œuvres",
+    "works_count": "{{count}} œuvre · {{available}} disponible",
+    "works_plural_suffix": "",
+    "no_works": "Aucune œuvre actuellement listée",
+    "eyebrow": "Galerie · Musée-Crosdale",
+    "powered_by": "Propulsé par Facinations"
+  },
+  "gallery": {
+    "speed": "Vitesse"
   },
   "theme": {
     "dark": "🌙 Dark",

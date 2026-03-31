@@ -21,7 +21,23 @@
     "aiCurator": "AI 策展人",
     "dealerCrm": "经销商 CRM",
     "consultantPortal": "顾问门户",
-    "marketing": "销售与营销"
+    "marketing": "销售与营销",
+    "gallery_desc": "浏览并购买艺术品",
+    "vaults_desc": "安全的艺术托管",
+    "dashboard_desc": "您的托管资产",
+    "swap_desc": "交换艺术份额代币",
+    "swapp_desc": "点对点交易",
+    "xdale_desc": "精选展览",
+    "galleries_desc": "所有画廊空间",
+    "about_desc": "协议概述",
+    "arch_desc": "技术架构",
+    "analytics_desc": "投资组合洞察",
+    "legal_desc": "条款与披露",
+    "studio_desc": "发布并铸造艺术品",
+    "aiCurator_desc": "智能艺术洞察",
+    "dealerCrm_desc": "客户与交易管理",
+    "consultantPortal_desc": "联盟佣金 · USD",
+    "marketing_desc": "活动与联盟文档"
   },
   "wallet": {
     "connect": "连接钱包",
@@ -61,7 +77,8 @@
     "invalid_link": "无效的结账链接。",
     "service_unreachable": "无法连接验证服务，请联系支持团队。",
     "select_language": "选择语言",
-    "amount": "金额"
+    "amount": "金额",
+    "partners_eyebrow": "Facinations · 合作伙伴"
   },
   "hero": {
     "title": "Facinations：分级精细艺术金库",
@@ -485,7 +502,7 @@
     "tutor_thinking": "导师思考中…",
     "btn_send": "发送",
     "tutor_error": "导师目前不可用。请稍后重试。",
-    "welcome_starter": "欢迎来到模块 {{module}}：{{title}}。不妨从这里开始："{{starter}}"",
+    "welcome_starter": "欢迎来到模块 {{module}}：{{title}}。不妨从这里开始：\u201c{{starter}}\u201d",
     "welcome_default": "欢迎来到模块 {{module}}：{{title}}。有关此主题，请随时提问。",
     "placeholder_ask": "询问有关 {{topic}} 的问题…"
   },
@@ -749,6 +766,93 @@
     "nav_collection": "藏品",
     "nav_exchange": "藏品交易所",
     "nav_whitepaper": "白皮书"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "画廊 — Musée-Crosdale",
+    "meta_description": "在 Facinations 平台探索精选画廊 — 具有链上溯源的当代及新兴艺术家。",
+    "eyebrow": "Musée-Crosdale · 平台",
+    "heading": "画廊",
+    "subtitle": "在 Facinations 平台展出的合作画廊和经销商，每件作品均有经过验证的链上溯源。",
+    "btn_view": "查看画廊 →"
+  },
+  "curator": {
+    "meta_title": "AI 策展人 — Musée-Crosdale",
+    "meta_description": "AI 驱动的智能艺术洞察。分析艺术品，探索馆藏，获取策展指导。",
+    "heading": "AI 策展人",
+    "subtitle": "智能艺术洞察 — 分析馆藏中的任意作品。"
+  },
+  "dealer_crm": {
+    "meta_title": "经销商 CRM — Musée-Crosdale",
+    "meta_description": "面向 Facinations 经销商的客户与交易管理。",
+    "heading": "经销商 CRM",
+    "subtitle": "通过 HubSpot CRM 进行客户与交易管理 — 门户 {{portal}}。",
+    "contacts": "联系人",
+    "contacts_desc": "浏览并管理收藏家及经销商联系人",
+    "deals": "交易管道",
+    "deals_desc": "跟踪活跃机会和管道价值",
+    "sequences": "邮件序列",
+    "sequences_desc": "面向收藏家的自动化培育序列",
+    "tasks": "任务",
+    "tasks_desc": "跟进任务和活动队列",
+    "reports": "报告",
+    "reports_desc": "管道与收入分析"
+  },
+  "partner": {
+    "meta_title": "顾问门户 — Musée-Crosdale",
+    "meta_description": "Facinations 联盟及顾问合作伙伴计划。",
+    "heading": "顾问门户",
+    "subtitle": "通过向 Facinations 协议推荐收藏家、经销商和机构赚取佣金。",
+    "section_tiers": "佣金等级",
+    "section_how": "运作方式",
+    "how_body": "在下方申请以获取您的专属推荐链接。将其分享给收藏家、画廊主或 DeFi 交易者。当被推荐用户完成 KYC 并完成首次交易后，佣金开始累积。每月以 USD 通过 ACH、PayPal 或 USDC 支付 — 最低门槛 $50。",
+    "section_terms": "适用条款",
+    "terms_body": "90 天归因窗口 · 12 个月收益窗口 · 首次点击归因 · 30 天 Cookie — 受美国纽约州法律管辖。",
+    "btn_details": "完整计划详情与条款 →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · 销售与营销",
+    "heading": "合作伙伴资源",
+    "tab_tools": "工具栈",
+    "tab_affiliate": "联盟计划",
+    "tab_terms": "条款与条件",
+    "col_tool": "工具",
+    "col_purpose": "用途",
+    "col_tier": "等级",
+    "col_followers": "粉丝数",
+    "col_commission": "佣金",
+    "col_extras": "附加福利",
+    "col_tools_col": "工具",
+    "payment_schedule": "付款时间表：月末后 15 个工作日内按月支付。最低付款额 $50（低于门槛则顺延至下月）。方式：ACH/电汇、PayPal 或 USDC。货币：USD。"
+  },
+  "gallery_page": {
+    "badge_available": "可购",
+    "badge_sold": "已售",
+    "label_medium": "材质",
+    "label_dimensions": "尺寸",
+    "label_price": "价格",
+    "section_enquire": "咨询",
+    "enquiry_sent": "咨询已发送，我们将尽快与您联系。",
+    "label_name": "姓名 *",
+    "label_email": "邮箱 *",
+    "label_message": "留言",
+    "placeholder_name": "您的姓名",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "有什么问题…",
+    "btn_send_enquiry": "发送咨询",
+    "not_found": "未找到画廊",
+    "all_galleries": "← 所有画廊",
+    "works_label": "作品",
+    "works_count": "{{count}} 件作品 · {{available}} 件可购",
+    "works_plural_suffix": "",
+    "no_works": "当前暂无作品上架",
+    "eyebrow": "画廊 · Musée-Crosdale",
+    "powered_by": "由 Facinations 驱动"
+  },
+  "gallery": {
+    "speed": "速度"
   },
   "theme": {
     "dark": "🌙 Dark",

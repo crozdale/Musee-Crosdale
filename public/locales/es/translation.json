@@ -21,7 +21,23 @@
     "aiCurator": "Curador IA",
     "dealerCrm": "CRM del Dealer",
     "consultantPortal": "Portal del Consultor",
-    "marketing": "Ventas y Marketing"
+    "marketing": "Ventas y Marketing",
+    "gallery_desc": "Explorar y adquirir obras de arte",
+    "vaults_desc": "Custodia segura de arte",
+    "dashboard_desc": "Sus activos en bóveda",
+    "swap_desc": "Intercambiar tokens de fracciones de arte",
+    "swapp_desc": "Operaciones entre pares",
+    "xdale_desc": "Exposiciones curadas",
+    "galleries_desc": "Todos los espacios de galería",
+    "about_desc": "Descripción general del protocolo",
+    "arch_desc": "Arquitectura técnica",
+    "analytics_desc": "Perspectivas de cartera",
+    "legal_desc": "Términos y divulgaciones",
+    "studio_desc": "Publicar y acuñar obras de arte",
+    "aiCurator_desc": "Perspectivas inteligentes de arte",
+    "dealerCrm_desc": "Gestión de clientes y acuerdos",
+    "consultantPortal_desc": "Comisiones de afiliados · USD",
+    "marketing_desc": "Documentación de campaña y afiliados"
   },
   "wallet": {
     "connect": "Conectar billetera",
@@ -61,7 +77,8 @@
     "invalid_link": "Enlace de pago inválido.",
     "service_unreachable": "No se pudo contactar el servicio de verificación. Por favor, contacte al soporte.",
     "select_language": "Seleccionar idioma",
-    "amount": "Cantidad"
+    "amount": "Cantidad",
+    "partners_eyebrow": "Facinations · Socios"
   },
   "hero": {
     "title": "Facinations: Bóvedas de arte fraccional",
@@ -749,6 +766,93 @@
     "nav_collection": "Colección",
     "nav_exchange": "Intercambio de Colección",
     "nav_whitepaper": "Libro Blanco"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "Galerías — Musée-Crosdale",
+    "meta_description": "Descubre galerías curadas en la plataforma Facinations — artistas contemporáneos y emergentes con procedencia on-chain.",
+    "eyebrow": "Musée-Crosdale · Plataforma",
+    "heading": "Galerías",
+    "subtitle": "Galerías y marchantes asociados que exhiben en la plataforma Facinations, con procedencia on-chain verificada para cada obra.",
+    "btn_view": "Ver Galería →"
+  },
+  "curator": {
+    "meta_title": "Curador IA — Musée-Crosdale",
+    "meta_description": "Perspectivas inteligentes de arte impulsadas por IA. Analiza obras, explora la colección y obtén orientación curatorial.",
+    "heading": "Curador IA",
+    "subtitle": "Perspectivas inteligentes de arte — analiza cualquier obra de la colección."
+  },
+  "dealer_crm": {
+    "meta_title": "CRM del Dealer — Musée-Crosdale",
+    "meta_description": "Gestión de clientes y acuerdos para los dealers de Facinations.",
+    "heading": "CRM del Dealer",
+    "subtitle": "Gestión de clientes y acuerdos a través de HubSpot CRM — Portal {{portal}}.",
+    "contacts": "Contactos",
+    "contacts_desc": "Explorar y gestionar contactos de coleccionistas y dealers",
+    "deals": "Pipeline de Acuerdos",
+    "deals_desc": "Seguimiento de oportunidades activas y valor del pipeline",
+    "sequences": "Secuencias de Correo",
+    "sequences_desc": "Secuencias automatizadas de nurturing para coleccionistas",
+    "tasks": "Tareas",
+    "tasks_desc": "Tareas de seguimiento y cola de actividades",
+    "reports": "Informes",
+    "reports_desc": "Análisis de pipeline e ingresos"
+  },
+  "partner": {
+    "meta_title": "Portal del Consultor — Musée-Crosdale",
+    "meta_description": "Programa de afiliados y consultores de Facinations.",
+    "heading": "Portal del Consultor",
+    "subtitle": "Gana comisión refiriendo coleccionistas, dealers e instituciones al protocolo Facinations.",
+    "section_tiers": "Niveles de Comisión",
+    "section_how": "Cómo funciona",
+    "how_body": "Aplica a continuación para recibir tu enlace de referido único. Compártelo con coleccionistas, propietarios de galerías o traders de DeFi. Cuando un usuario referido complete el KYC y realice su primera operación, la comisión comenzará a acumularse. Pagado mensualmente en USD vía ACH, PayPal o USDC — umbral mínimo $50.",
+    "section_terms": "Términos Aplicables",
+    "terms_body": "Ventana de atribución de 90 días · Ventana de ganancias de 12 meses · Atribución al primer clic · Cookie de 30 días — Regido por las leyes del Estado de Nueva York, Estados Unidos.",
+    "btn_details": "Detalles Completos del Programa y Términos →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · Ventas y Marketing",
+    "heading": "Recursos para Socios",
+    "tab_tools": "Stack de Herramientas",
+    "tab_affiliate": "Programa de Afiliados",
+    "tab_terms": "Términos y Condiciones",
+    "col_tool": "Herramienta",
+    "col_purpose": "Propósito",
+    "col_tier": "Nivel",
+    "col_followers": "Seguidores",
+    "col_commission": "Comisión",
+    "col_extras": "Extras",
+    "col_tools_col": "Herramientas",
+    "payment_schedule": "Calendario de pagos: Mensual dentro de los 15 días hábiles después del fin de mes. Pago mínimo $50 (se acumula al mes siguiente si está por debajo del umbral). Métodos: ACH/Wire, PayPal o USDC. Moneda: USD."
+  },
+  "gallery_page": {
+    "badge_available": "Disponible",
+    "badge_sold": "Vendido",
+    "label_medium": "Técnica",
+    "label_dimensions": "Dimensiones",
+    "label_price": "Precio",
+    "section_enquire": "Consultar",
+    "enquiry_sent": "Consulta enviada. Nos pondremos en contacto pronto.",
+    "label_name": "Nombre *",
+    "label_email": "Correo electrónico *",
+    "label_message": "Mensaje",
+    "placeholder_name": "Tu nombre",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "Cualquier pregunta…",
+    "btn_send_enquiry": "Enviar Consulta",
+    "not_found": "Galería no encontrada",
+    "all_galleries": "← Todas las Galerías",
+    "works_label": "Obras",
+    "works_count": "{{count}} obra · {{available}} disponible",
+    "works_plural_suffix": "s",
+    "no_works": "No hay obras listadas actualmente",
+    "eyebrow": "Galería · Musée-Crosdale",
+    "powered_by": "Impulsado por Facinations"
+  },
+  "gallery": {
+    "speed": "Velocidad"
   },
   "theme": {
     "dark": "🌙 Dark",

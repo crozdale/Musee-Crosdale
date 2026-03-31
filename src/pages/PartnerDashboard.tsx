@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 import { Link } from "react-router-dom";
 
@@ -21,19 +22,20 @@ const S = {
 };
 
 export default function PartnerDashboard() {
+  const { t } = useTranslation();
   useMeta({
-    title: "Consultant Portal — Musée-Crosdale",
-    description: "Facinations affiliate and consultant partner programme.",
+    title: t("partner.meta_title", "Consultant Portal — Musée-Crosdale"),
+    description: t("partner.meta_description", "Facinations affiliate and consultant partner programme."),
   });
 
   return (
     <div style={S.page}>
       <div style={S.maxW}>
-        <p style={S.eyebrow}>Facinations · Partners</p>
-        <h1 style={S.h1}>Consultant Portal</h1>
-        <p style={S.sub}>Earn commission referring collectors, dealers, and institutions to the Facinations protocol.</p>
+        <p style={S.eyebrow}>{t("common.partners_eyebrow", "Facinations · Partners")}</p>
+        <h1 style={S.h1}>{t("partner.heading", "Consultant Portal")}</h1>
+        <p style={S.sub}>{t("partner.subtitle", "Earn commission referring collectors, dealers, and institutions to the Facinations protocol.")}</p>
 
-        <p style={S.sectionHead}>Commission Tiers</p>
+        <p style={S.sectionHead}>{t("partner.section_tiers", "Commission Tiers")}</p>
         {TIERS.map(t => (
           <div key={t.tier} style={S.card}>
             <p style={S.tierLabel}>{t.tier} · {t.followers} followers</p>
@@ -41,21 +43,17 @@ export default function PartnerDashboard() {
           </div>
         ))}
 
-        <p style={S.sectionHead}>How it works</p>
+        <p style={S.sectionHead}>{t("partner.section_how", "How it works")}</p>
         <div style={S.card}>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "1rem", color: "#c8c0b4", lineHeight: 1.8, margin: 0 }}>
-            Apply below to receive your unique referral link. Share it with collectors, gallery owners, or DeFi traders.
-            When a referred user completes KYC and places their first trade, commission begins accruing.
-            Paid monthly in <strong style={{ color: "#d4af37" }}>USD</strong> via ACH, PayPal, or USDC —
-            minimum threshold <strong style={{ color: "#d4af37" }}>$50</strong>.
+            {t("partner.how_body", "Apply below to receive your unique referral link. Share it with collectors, gallery owners, or DeFi traders. When a referred user completes KYC and places their first trade, commission begins accruing. Paid monthly in USD via ACH, PayPal, or USDC — minimum threshold $50.")}
           </p>
         </div>
 
-        <p style={S.sectionHead}>Governing Terms</p>
+        <p style={S.sectionHead}>{t("partner.section_terms", "Governing Terms")}</p>
         <div style={S.card}>
           <p style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "0.9rem", color: "#8a8278", margin: 0, fontStyle: "italic", lineHeight: 1.7 }}>
-            90-day attribution window · 12-month earning window · First-click attribution · 30-day cookie<br />
-            Governed by the laws of the State of New York, United States.
+            {t("partner.terms_body", "90-day attribution window · 12-month earning window · First-click attribution · 30-day cookie — Governed by the laws of the State of New York, United States.")}
           </p>
         </div>
 
@@ -65,7 +63,7 @@ export default function PartnerDashboard() {
           onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = "rgba(212,175,55,0.1)"; }}
           onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = "transparent"; }}
         >
-          Full Programme Details & Terms →
+          {t("partner.btn_details", "Full Programme Details & Terms →")}
         </Link>
       </div>
     </div>

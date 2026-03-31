@@ -21,7 +21,23 @@
     "aiCurator": "AI 큐레이터",
     "dealerCrm": "딜러 CRM",
     "consultantPortal": "컨설턴트 포털",
-    "marketing": "영업 및 마케팅"
+    "marketing": "영업 및 마케팅",
+    "gallery_desc": "작품 탐색 및 구매",
+    "vaults_desc": "안전한 미술품 보관",
+    "dashboard_desc": "보관된 자산",
+    "swap_desc": "미술 분할 토큰 교환",
+    "swapp_desc": "P2P 거래",
+    "xdale_desc": "큐레이션 전시",
+    "galleries_desc": "모든 갤러리 공간",
+    "about_desc": "프로토콜 개요",
+    "arch_desc": "기술 아키텍처",
+    "analytics_desc": "포트폴리오 인사이트",
+    "legal_desc": "약관 및 공시",
+    "studio_desc": "작품 게시 및 민팅",
+    "aiCurator_desc": "지능형 미술 인사이트",
+    "dealerCrm_desc": "고객 및 거래 관리",
+    "consultantPortal_desc": "제휴 커미션 · USD",
+    "marketing_desc": "캠페인 및 제휴 문서"
   },
   "wallet": {
     "connect": "지갑 연결",
@@ -61,7 +77,8 @@
     "invalid_link": "잘못된 결제 링크입니다.",
     "service_unreachable": "인증 서비스에 연결할 수 없습니다. 지원팀에 문의하세요.",
     "select_language": "언어 선택",
-    "amount": "금액"
+    "amount": "금액",
+    "partners_eyebrow": "Facinations · 파트너"
   },
   "hero": {
     "title": "Facinations: 분할 순수 예술 볼트",
@@ -749,6 +766,93 @@
     "nav_collection": "컬렉션",
     "nav_exchange": "컬렉션 거래소",
     "nav_whitepaper": "백서"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "갤러리 — Musée-Crosdale",
+    "meta_description": "Facinations 플랫폼에서 큐레이션된 갤러리를 발견하세요 — 온체인 출처가 있는 현대 및 신진 작가.",
+    "eyebrow": "Musée-Crosdale · 플랫폼",
+    "heading": "갤러리",
+    "subtitle": "Facinations 플랫폼에서 전시하는 파트너 갤러리 및 딜러, 모든 작품에 대해 검증된 온체인 출처 제공.",
+    "btn_view": "갤러리 보기 →"
+  },
+  "curator": {
+    "meta_title": "AI 큐레이터 — Musée-Crosdale",
+    "meta_description": "AI로 구동되는 지능형 미술 인사이트. 작품을 분석하고, 컬렉션을 탐색하며, 큐레이터 안내를 받으세요.",
+    "heading": "AI 큐레이터",
+    "subtitle": "지능형 미술 인사이트 — 컬렉션의 모든 작품을 분석하세요."
+  },
+  "dealer_crm": {
+    "meta_title": "딜러 CRM — Musée-Crosdale",
+    "meta_description": "Facinations 딜러를 위한 고객 및 거래 관리.",
+    "heading": "딜러 CRM",
+    "subtitle": "HubSpot CRM을 통한 고객 및 거래 관리 — 포털 {{portal}}.",
+    "contacts": "연락처",
+    "contacts_desc": "수집가 및 딜러 연락처 탐색 및 관리",
+    "deals": "거래 파이프라인",
+    "deals_desc": "활성 기회 및 파이프라인 가치 추적",
+    "sequences": "이메일 시퀀스",
+    "sequences_desc": "수집가를 위한 자동화된 너처링 시퀀스",
+    "tasks": "작업",
+    "tasks_desc": "후속 작업 및 활동 큐",
+    "reports": "보고서",
+    "reports_desc": "파이프라인 및 수익 분석"
+  },
+  "partner": {
+    "meta_title": "컨설턴트 포털 — Musée-Crosdale",
+    "meta_description": "Facinations 제휴 및 컨설턴트 파트너 프로그램.",
+    "heading": "컨설턴트 포털",
+    "subtitle": "수집가, 딜러, 기관을 Facinations 프로토콜에 소개하고 커미션을 받으세요.",
+    "section_tiers": "커미션 등급",
+    "section_how": "작동 방식",
+    "how_body": "아래에 신청하여 고유한 추천 링크를 받으세요. 수집가, 갤러리 소유자 또는 DeFi 트레이더와 공유하세요. 추천된 사용자가 KYC를 완료하고 첫 번째 거래를 진행하면 커미션이 발생하기 시작합니다. ACH, PayPal 또는 USDC를 통해 USD로 월 지급 — 최소 임계값 $50.",
+    "section_terms": "적용 약관",
+    "terms_body": "90일 귀속 기간 · 12개월 수익 기간 · 첫 번째 클릭 귀속 · 30일 쿠키 — 미국 뉴욕주 법률에 따라 관할됩니다.",
+    "btn_details": "전체 프로그램 세부사항 & 약관 →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · 영업 및 마케팅",
+    "heading": "파트너 리소스",
+    "tab_tools": "도구 스택",
+    "tab_affiliate": "제휴 프로그램",
+    "tab_terms": "이용약관",
+    "col_tool": "도구",
+    "col_purpose": "목적",
+    "col_tier": "등급",
+    "col_followers": "팔로워",
+    "col_commission": "커미션",
+    "col_extras": "추가 혜택",
+    "col_tools_col": "도구",
+    "payment_schedule": "지급 일정: 월말 후 15 영업일 이내 월별 지급. 최소 지급액 $50 (임계값 미만 시 다음 달로 이월). 방법: ACH/송금, PayPal 또는 USDC. 통화: USD."
+  },
+  "gallery_page": {
+    "badge_available": "구매 가능",
+    "badge_sold": "판매 완료",
+    "label_medium": "기법",
+    "label_dimensions": "크기",
+    "label_price": "가격",
+    "section_enquire": "문의",
+    "enquiry_sent": "문의가 전송되었습니다. 곧 연락드리겠습니다.",
+    "label_name": "이름 *",
+    "label_email": "이메일 *",
+    "label_message": "메시지",
+    "placeholder_name": "이름",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "문의사항…",
+    "btn_send_enquiry": "문의 보내기",
+    "not_found": "갤러리를 찾을 수 없음",
+    "all_galleries": "← 모든 갤러리",
+    "works_label": "작품",
+    "works_count": "{{count}}점 · {{available}}점 구매 가능",
+    "works_plural_suffix": "",
+    "no_works": "현재 등록된 작품 없음",
+    "eyebrow": "갤러리 · Musée-Crosdale",
+    "powered_by": "Facinations 제공"
+  },
+  "gallery": {
+    "speed": "속도"
   },
   "theme": {
     "dark": "🌙 Dark",

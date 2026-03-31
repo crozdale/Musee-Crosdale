@@ -21,7 +21,23 @@
     "aiCurator": "AI Curator",
     "dealerCrm": "Dealer CRM",
     "consultantPortal": "Consultant Portal",
-    "marketing": "Sales & Marketing"
+    "marketing": "Sales & Marketing",
+    "gallery_desc": "Browse & acquire artworks",
+    "vaults_desc": "Secure art custody",
+    "dashboard_desc": "Your vaulted assets",
+    "swap_desc": "Swap art-fraction tokens",
+    "swapp_desc": "Peer-to-peer trades",
+    "xdale_desc": "Curated exhibitions",
+    "galleries_desc": "All gallery spaces",
+    "about_desc": "Protocol overview",
+    "arch_desc": "Technical architecture",
+    "analytics_desc": "Portfolio insights",
+    "legal_desc": "Terms & disclosures",
+    "studio_desc": "Publish & mint artwork",
+    "aiCurator_desc": "Intelligent art insights",
+    "dealerCrm_desc": "Client & deal management",
+    "consultantPortal_desc": "Affiliate commissions · USD",
+    "marketing_desc": "Campaign & affiliate docs"
   },
   "wallet": {
     "connect": "Connect Wallet",
@@ -61,7 +77,8 @@
     "invalid_link": "Invalid checkout link.",
     "service_unreachable": "Could not reach the verification service. Please contact support.",
     "select_language": "Select language",
-    "amount": "Amount"
+    "amount": "Amount",
+    "partners_eyebrow": "Facinations · Partners"
   },
   "hero": {
     "title": "Facinations: Fractional Fine Art Vaults",
@@ -753,5 +770,92 @@
   "theme": {
     "dark": "🌙 Dark",
     "light": "☀️ Light"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "Galleries — Musée-Crosdale",
+    "meta_description": "Discover curated galleries on the Facinations platform — contemporary and emerging artists with on-chain provenance.",
+    "eyebrow": "Musée-Crosdale · Platform",
+    "heading": "Galleries",
+    "subtitle": "Partner galleries and dealers exhibiting on the Facinations platform, with verified on-chain provenance for every work.",
+    "btn_view": "View Gallery →"
+  },
+  "curator": {
+    "meta_title": "AI Curator — Musée-Crosdale",
+    "meta_description": "Intelligent art insights powered by AI. Analyse artworks, explore the collection, and get curatorial guidance.",
+    "heading": "AI Curator",
+    "subtitle": "Intelligent art insights — analyse any work in the collection."
+  },
+  "dealer_crm": {
+    "meta_title": "Dealer CRM — Musée-Crosdale",
+    "meta_description": "Client and deal management for Facinations dealers.",
+    "heading": "Dealer CRM",
+    "subtitle": "Client & deal management via HubSpot CRM — Portal {{portal}}.",
+    "contacts": "Contacts",
+    "contacts_desc": "Browse and manage collector & dealer contacts",
+    "deals": "Deals Pipeline",
+    "deals_desc": "Track active opportunities and pipeline value",
+    "sequences": "Email Sequences",
+    "sequences_desc": "Automated nurture sequences for collectors",
+    "tasks": "Tasks",
+    "tasks_desc": "Follow-up tasks and activity queue",
+    "reports": "Reports",
+    "reports_desc": "Pipeline and revenue analytics"
+  },
+  "partner": {
+    "meta_title": "Consultant Portal — Musée-Crosdale",
+    "meta_description": "Facinations affiliate and consultant partner programme.",
+    "heading": "Consultant Portal",
+    "subtitle": "Earn commission referring collectors, dealers, and institutions to the Facinations protocol.",
+    "section_tiers": "Commission Tiers",
+    "section_how": "How it works",
+    "how_body": "Apply below to receive your unique referral link. Share it with collectors, gallery owners, or DeFi traders. When a referred user completes KYC and places their first trade, commission begins accruing. Paid monthly in USD via ACH, PayPal, or USDC — minimum threshold $50.",
+    "section_terms": "Governing Terms",
+    "terms_body": "90-day attribution window · 12-month earning window · First-click attribution · 30-day cookie — Governed by the laws of the State of New York, United States.",
+    "btn_details": "Full Programme Details & Terms →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · Sales & Marketing",
+    "heading": "Partner Resources",
+    "tab_tools": "Tool Stack",
+    "tab_affiliate": "Affiliate Programme",
+    "tab_terms": "Terms & Conditions",
+    "col_tool": "Tool",
+    "col_purpose": "Purpose",
+    "col_tier": "Tier",
+    "col_followers": "Followers",
+    "col_commission": "Commission",
+    "col_extras": "Extras",
+    "col_tools_col": "Tools",
+    "payment_schedule": "Payment schedule: Monthly within 15 business days of month-end. Minimum payout $50 (rolls to next month if below threshold). Methods: ACH/Wire, PayPal, or USDC. Currency: USD."
+  },
+  "gallery_page": {
+    "badge_available": "Available",
+    "badge_sold": "Sold",
+    "label_medium": "Medium",
+    "label_dimensions": "Dimensions",
+    "label_price": "Price",
+    "section_enquire": "Enquire",
+    "enquiry_sent": "Enquiry sent. We'll be in touch shortly.",
+    "label_name": "Name *",
+    "label_email": "Email *",
+    "label_message": "Message",
+    "placeholder_name": "Your name",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "Any questions…",
+    "btn_send_enquiry": "Send Enquiry",
+    "not_found": "Gallery not found",
+    "all_galleries": "← All Galleries",
+    "works_label": "Works",
+    "works_count": "{{count}} work · {{available}} available",
+    "works_plural_suffix": "s",
+    "no_works": "No works currently listed",
+    "eyebrow": "Gallery · Musée-Crosdale",
+    "powered_by": "Powered by Facinations"
+  },
+  "gallery": {
+    "speed": "Speed"
   }
 }

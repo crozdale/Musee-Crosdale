@@ -21,7 +21,23 @@
     "aiCurator": "KI-Kurator",
     "dealerCrm": "Händler-CRM",
     "consultantPortal": "Beraterportal",
-    "marketing": "Vertrieb & Marketing"
+    "marketing": "Vertrieb & Marketing",
+    "gallery_desc": "Kunstwerke durchsuchen & erwerben",
+    "vaults_desc": "Sichere Kunstverwahrung",
+    "dashboard_desc": "Ihre verwahrten Vermögenswerte",
+    "swap_desc": "Kunstfraktions-Token tauschen",
+    "swapp_desc": "Peer-to-Peer-Handel",
+    "xdale_desc": "Kuratierte Ausstellungen",
+    "galleries_desc": "Alle Galerieräume",
+    "about_desc": "Protokollübersicht",
+    "arch_desc": "Technische Architektur",
+    "analytics_desc": "Portfolioeinblicke",
+    "legal_desc": "Bedingungen & Offenlegungen",
+    "studio_desc": "Kunstwerke veröffentlichen & prägen",
+    "aiCurator_desc": "Intelligente Kunsteinblicke",
+    "dealerCrm_desc": "Kunden- & Dealmanagement",
+    "consultantPortal_desc": "Affiliate-Provisionen · USD",
+    "marketing_desc": "Kampagnen- & Affiliate-Dokumentation"
   },
   "wallet": {
     "connect": "Wallet verbinden",
@@ -61,7 +77,8 @@
     "invalid_link": "Ungültiger Checkout-Link.",
     "service_unreachable": "Der Verifikationsdienst ist nicht erreichbar. Bitte kontaktieren Sie den Support.",
     "select_language": "Sprache auswählen",
-    "amount": "Betrag"
+    "amount": "Betrag",
+    "partners_eyebrow": "Facinations · Partner"
   },
   "hero": {
     "title": "Facinations: Fraktionale Kunsttresore",
@@ -485,7 +502,7 @@
     "tutor_thinking": "Tutor denkt nach…",
     "btn_send": "Senden",
     "tutor_error": "Tutor ist derzeit nicht verfügbar. Bitte versuchen Sie es in Kürze erneut.",
-    "welcome_starter": "Willkommen in Modul {{module}}: {{title}}. Ein guter Einstieg: „{{starter}}"",
+    "welcome_starter": "Willkommen in Modul {{module}}: {{title}}. Ein guter Einstieg: \u201e{{starter}}\u201c",
     "welcome_default": "Willkommen in Modul {{module}}: {{title}}. Stellen Sie mir beliebige Fragen zu diesem Thema.",
     "placeholder_ask": "Fragen Sie nach {{topic}}…"
   },
@@ -749,6 +766,93 @@
     "nav_collection": "Sammlung",
     "nav_exchange": "Sammlungsbörse",
     "nav_whitepaper": "Whitepaper"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "Galerien — Musée-Crosdale",
+    "meta_description": "Entdecken Sie kuratierte Galerien auf der Facinations-Plattform — zeitgenössische und aufstrebende Künstler mit On-Chain-Provenienz.",
+    "eyebrow": "Musée-Crosdale · Plattform",
+    "heading": "Galerien",
+    "subtitle": "Partnergalerien und Händler, die auf der Facinations-Plattform ausstellen, mit verifizierter On-Chain-Provenienz für jedes Werk.",
+    "btn_view": "Galerie ansehen →"
+  },
+  "curator": {
+    "meta_title": "KI-Kurator — Musée-Crosdale",
+    "meta_description": "Intelligente Kunsteinblicke durch KI. Analysieren Sie Kunstwerke, erkunden Sie die Sammlung und erhalten Sie kuratorische Führung.",
+    "heading": "KI-Kurator",
+    "subtitle": "Intelligente Kunsteinblicke — analysieren Sie jedes Werk der Sammlung."
+  },
+  "dealer_crm": {
+    "meta_title": "Händler-CRM — Musée-Crosdale",
+    "meta_description": "Kunden- und Dealmanagement für Facinations-Händler.",
+    "heading": "Händler-CRM",
+    "subtitle": "Kunden- & Dealmanagement über HubSpot CRM — Portal {{portal}}.",
+    "contacts": "Kontakte",
+    "contacts_desc": "Sammler- & Händlerkontakte durchsuchen und verwalten",
+    "deals": "Deal-Pipeline",
+    "deals_desc": "Aktive Chancen und Pipeline-Wert verfolgen",
+    "sequences": "E-Mail-Sequenzen",
+    "sequences_desc": "Automatisierte Nurturing-Sequenzen für Sammler",
+    "tasks": "Aufgaben",
+    "tasks_desc": "Nachverfolgungsaufgaben und Aktivitätswarteschlange",
+    "reports": "Berichte",
+    "reports_desc": "Pipeline- und Umsatzanalysen"
+  },
+  "partner": {
+    "meta_title": "Beraterportal — Musée-Crosdale",
+    "meta_description": "Facinations Affiliate- und Consultantpartner-Programm.",
+    "heading": "Beraterportal",
+    "subtitle": "Verdienen Sie Provisionen durch Empfehlungen von Sammlern, Händlern und Institutionen an das Facinations-Protokoll.",
+    "section_tiers": "Provisionsebenen",
+    "section_how": "So funktioniert es",
+    "how_body": "Bewerben Sie sich unten, um Ihren einzigartigen Empfehlungslink zu erhalten. Teilen Sie ihn mit Sammlern, Galeriebesitzern oder DeFi-Tradern. Wenn ein geworbener Nutzer das KYC abschließt und seinen ersten Handel durchführt, beginnt die Provision zu laufen. Monatlich in USD per ACH, PayPal oder USDC ausgezahlt — Mindestschwelle 50 $.",
+    "section_terms": "Geltende Bedingungen",
+    "terms_body": "90-Tage-Attributionsfenster · 12-Monate-Verdienstfenster · First-Click-Attribution · 30-Tage-Cookie — Unterliegt den Gesetzen des Staates New York, Vereinigte Staaten.",
+    "btn_details": "Vollständige Programmdetails & Bedingungen →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · Vertrieb & Marketing",
+    "heading": "Partnerressourcen",
+    "tab_tools": "Tool-Stack",
+    "tab_affiliate": "Affiliate-Programm",
+    "tab_terms": "Allgemeine Geschäftsbedingungen",
+    "col_tool": "Tool",
+    "col_purpose": "Zweck",
+    "col_tier": "Ebene",
+    "col_followers": "Follower",
+    "col_commission": "Provision",
+    "col_extras": "Extras",
+    "col_tools_col": "Tools",
+    "payment_schedule": "Zahlungsplan: Monatlich innerhalb von 15 Werktagen nach Monatsende. Mindestausschüttung 50 $ (wird auf den nächsten Monat übertragen, wenn unter Schwellenwert). Methoden: ACH/Überweisung, PayPal oder USDC. Währung: USD."
+  },
+  "gallery_page": {
+    "badge_available": "Verfügbar",
+    "badge_sold": "Verkauft",
+    "label_medium": "Technik",
+    "label_dimensions": "Abmessungen",
+    "label_price": "Preis",
+    "section_enquire": "Anfrage",
+    "enquiry_sent": "Anfrage gesendet. Wir werden uns in Kürze melden.",
+    "label_name": "Name *",
+    "label_email": "E-Mail *",
+    "label_message": "Nachricht",
+    "placeholder_name": "Ihr Name",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "Haben Sie Fragen…",
+    "btn_send_enquiry": "Anfrage senden",
+    "not_found": "Galerie nicht gefunden",
+    "all_galleries": "← Alle Galerien",
+    "works_label": "Werke",
+    "works_count": "{{count}} Werk · {{available}} verfügbar",
+    "works_plural_suffix": "e",
+    "no_works": "Derzeit keine Werke gelistet",
+    "eyebrow": "Galerie · Musée-Crosdale",
+    "powered_by": "Betrieben von Facinations"
+  },
+  "gallery": {
+    "speed": "Geschwindigkeit"
   },
   "theme": {
     "dark": "🌙 Dark",

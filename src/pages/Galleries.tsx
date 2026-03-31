@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
 interface GalleryEntry {
@@ -33,9 +34,10 @@ const css = `
 `;
 
 export default function Galleries() {
+  const { t } = useTranslation();
   useMeta({
-    title: "Galleries — Musée-Crosdale",
-    description: "Discover curated galleries on the Facinations platform — contemporary and emerging artists with on-chain provenance.",
+    title: t("galleries.meta_title", "Galleries — Musée-Crosdale"),
+    description: t("galleries.meta_description", "Discover curated galleries on the Facinations platform — contemporary and emerging artists with on-chain provenance."),
   });
 
   const [galleries, setGalleries] = useState<GalleryEntry[]>([]);
@@ -54,10 +56,10 @@ export default function Galleries() {
       <style>{css}</style>
 
       <div className="gl-header">
-        <p className="gl-eyebrow">Musée-Crosdale · Platform</p>
-        <h1 className="gl-title">Galleries</h1>
+        <p className="gl-eyebrow">{t("galleries.eyebrow", "Musée-Crosdale · Platform")}</p>
+        <h1 className="gl-title">{t("galleries.heading", "Galleries")}</h1>
         <p className="gl-subtitle">
-          Partner galleries and dealers exhibiting on the Facinations platform, with verified on-chain provenance for every work.
+          {t("galleries.subtitle", "Partner galleries and dealers exhibiting on the Facinations platform, with verified on-chain provenance for every work.")}
         </p>
       </div>
 
@@ -65,7 +67,7 @@ export default function Galleries() {
 
       {loading ? (
         <div style={{ textAlign:"center", padding:"4rem", fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.35em", color:"rgba(212,175,55,0.3)", textTransform:"uppercase" }}>
-          Loading…
+          {t("common.loading", "Loading…")}
         </div>
       ) : (
         <div className="gl-grid">
@@ -80,7 +82,7 @@ export default function Galleries() {
               </div>
               {g.blurb && <p className="gl-card-blurb">{g.blurb}</p>}
               {g.location && <p className="gl-card-location">{g.location}</p>}
-              <span className="gl-card-cta">View Gallery →</span>
+              <span className="gl-card-cta">{t("galleries.btn_view", "View Gallery →")}</span>
             </Link>
           ))}
         </div>

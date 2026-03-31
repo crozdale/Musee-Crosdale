@@ -21,7 +21,23 @@
     "aiCurator": "AIキュレーター",
     "dealerCrm": "ディーラーCRM",
     "consultantPortal": "コンサルタントポータル",
-    "marketing": "営業・マーケティング"
+    "marketing": "営業・マーケティング",
+    "gallery_desc": "作品を閲覧・購入",
+    "vaults_desc": "安全な美術品保管",
+    "dashboard_desc": "保管中の資産",
+    "swap_desc": "アート分割トークンのスワップ",
+    "swapp_desc": "P2P取引",
+    "xdale_desc": "キュレーション展覧会",
+    "galleries_desc": "全ギャラリースペース",
+    "about_desc": "プロトコル概要",
+    "arch_desc": "技術アーキテクチャ",
+    "analytics_desc": "ポートフォリオインサイト",
+    "legal_desc": "利用規約と開示",
+    "studio_desc": "作品の公開・ミント",
+    "aiCurator_desc": "インテリジェントなアートインサイト",
+    "dealerCrm_desc": "顧客・取引管理",
+    "consultantPortal_desc": "アフィリエイト報酬 · USD",
+    "marketing_desc": "キャンペーン・アフィリエイト資料"
   },
   "wallet": {
     "connect": "ウォレットを接続",
@@ -61,7 +77,8 @@
     "invalid_link": "無効なチェックアウトリンクです。",
     "service_unreachable": "認証サービスに接続できませんでした。サポートにお問い合わせください。",
     "select_language": "言語を選択",
-    "amount": "金額"
+    "amount": "金額",
+    "partners_eyebrow": "Facinations · パートナー"
   },
   "hero": {
     "title": "Facinations：分割ファインアート・ヴォルト",
@@ -749,6 +766,93 @@
     "nav_collection": "コレクション",
     "nav_exchange": "コレクション取引所",
     "nav_whitepaper": "ホワイトペーパー"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "ギャラリー — Musée-Crosdale",
+    "meta_description": "Facinationsプラットフォームでキュレーションされたギャラリーを発見 — オンチェーン出所を持つ現代・新進アーティスト。",
+    "eyebrow": "Musée-Crosdale · プラットフォーム",
+    "heading": "ギャラリー",
+    "subtitle": "Facinationsプラットフォームで展示するパートナーギャラリー・ディーラー、すべての作品に検証済みオンチェーン出所。",
+    "btn_view": "ギャラリーを見る →"
+  },
+  "curator": {
+    "meta_title": "AIキュレーター — Musée-Crosdale",
+    "meta_description": "AIによるインテリジェントなアートインサイト。作品を分析し、コレクションを探索し、キュレーターの指導を受けましょう。",
+    "heading": "AIキュレーター",
+    "subtitle": "インテリジェントなアートインサイト — コレクションのあらゆる作品を分析。"
+  },
+  "dealer_crm": {
+    "meta_title": "ディーラーCRM — Musée-Crosdale",
+    "meta_description": "Facinationsディーラーのための顧客・取引管理。",
+    "heading": "ディーラーCRM",
+    "subtitle": "HubSpot CRMによる顧客・取引管理 — ポータル {{portal}}。",
+    "contacts": "連絡先",
+    "contacts_desc": "コレクター・ディーラーの連絡先を閲覧・管理",
+    "deals": "取引パイプライン",
+    "deals_desc": "アクティブな商談とパイプライン価値を追跡",
+    "sequences": "メールシーケンス",
+    "sequences_desc": "コレクター向け自動ナーチャリングシーケンス",
+    "tasks": "タスク",
+    "tasks_desc": "フォローアップタスクとアクティビティキュー",
+    "reports": "レポート",
+    "reports_desc": "パイプラインと収益分析"
+  },
+  "partner": {
+    "meta_title": "コンサルタントポータル — Musée-Crosdale",
+    "meta_description": "Facinationsのアフィリエイト・コンサルタントパートナープログラム。",
+    "heading": "コンサルタントポータル",
+    "subtitle": "コレクター、ディーラー、機関をFacinationsプロトコルに紹介して報酬を獲得。",
+    "section_tiers": "報酬ティア",
+    "section_how": "仕組み",
+    "how_body": "下記から申請して専用の紹介リンクを取得してください。コレクター、ギャラリーオーナー、DeFiトレーダーと共有してください。紹介ユーザーがKYCを完了し最初の取引を行うと、報酬が発生し始めます。ACH、PayPal、またはUSDCでUSD月払い — 最低閾値$50。",
+    "section_terms": "適用条件",
+    "terms_body": "90日アトリビューションウィンドウ · 12ヶ月収益ウィンドウ · ファーストクリックアトリビューション · 30日クッキー — アメリカ合衆国ニューヨーク州法に準拠。",
+    "btn_details": "プログラム詳細・規約全文 →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · 営業・マーケティング",
+    "heading": "パートナーリソース",
+    "tab_tools": "ツールスタック",
+    "tab_affiliate": "アフィリエイトプログラム",
+    "tab_terms": "利用規約",
+    "col_tool": "ツール",
+    "col_purpose": "目的",
+    "col_tier": "ティア",
+    "col_followers": "フォロワー",
+    "col_commission": "報酬",
+    "col_extras": "特典",
+    "col_tools_col": "ツール",
+    "payment_schedule": "支払いスケジュール：月末後15営業日以内に月払い。最低支払額$50（閾値未満の場合は翌月繰越）。方法：ACH/振込、PayPal、またはUSBC。通貨：USD。"
+  },
+  "gallery_page": {
+    "badge_available": "購入可能",
+    "badge_sold": "売却済み",
+    "label_medium": "技法",
+    "label_dimensions": "寸法",
+    "label_price": "価格",
+    "section_enquire": "お問い合わせ",
+    "enquiry_sent": "お問い合わせを送信しました。近日中にご連絡いたします。",
+    "label_name": "お名前 *",
+    "label_email": "メールアドレス *",
+    "label_message": "メッセージ",
+    "placeholder_name": "お名前",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "ご質問など…",
+    "btn_send_enquiry": "お問い合わせを送信",
+    "not_found": "ギャラリーが見つかりません",
+    "all_galleries": "← すべてのギャラリー",
+    "works_label": "作品",
+    "works_count": "{{count}}点 · {{available}}点購入可能",
+    "works_plural_suffix": "",
+    "no_works": "現在掲載中の作品はありません",
+    "eyebrow": "ギャラリー · Musée-Crosdale",
+    "powered_by": "Facinationsによって提供"
+  },
+  "gallery": {
+    "speed": "スピード"
   },
   "theme": {
     "dark": "🌙 Dark",

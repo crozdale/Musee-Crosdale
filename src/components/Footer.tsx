@@ -100,7 +100,7 @@ export default function Footer() {
           textTransform: "uppercase",
         }}
       >
-        0x33d1de58...157f · Ethereum Sepolia
+        {t("footer.contract", "0x33d1de58…157f · Ethereum Sepolia")}
       </div>
     </footer>
   );

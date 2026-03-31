@@ -4,6 +4,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
 interface Gallery {
@@ -80,6 +81,7 @@ const css = `
 
 // ── Artwork Card ───────────────────────────────────────────────────────────────
 function ArtworkCard({ artwork, onClick }: { artwork: Artwork; onClick: () => void }) {
+  const { t } = useTranslation();
   const [imgError, setImgError] = useState(false);
   return (
     <div className="gp-card" onClick={onClick}>
@@ -91,8 +93,8 @@ function ArtworkCard({ artwork, onClick }: { artwork: Artwork; onClick: () => vo
             </div>
         }
         {artwork.available
-          ? <span className="gp-badge-avail">Available</span>
-          : <span className="gp-badge-sold">Sold</span>
+          ? <span className="gp-badge-avail">{t("gallery_page.badge_available", "Available")}</span>
+          : <span className="gp-badge-sold">{t("gallery_page.badge_sold", "Sold")}</span>
         }
       </div>
       <p className="gp-card-title">{artwork.title}</p>
@@ -103,6 +105,7 @@ function ArtworkCard({ artwork, onClick }: { artwork: Artwork; onClick: () => vo
 
 // ── Detail Modal ───────────────────────────────────────────────────────────────
 function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery: Gallery; onClose: () => void }) {
+  const { t } = useTranslation();
   const [form, setForm]       = useState({ name: "", email: "", message: "" });
   const [sent, setSent]       = useState(false);
   const [sending, setSending] = useState(false);
@@ -141,7 +144,7 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
         <div className="gp-modal-body">
           <div>
             <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.55rem", letterSpacing:"0.3em", color:"#d4af37", margin:"0 0 0.4rem", textTransform:"uppercase" }}>
-              {artwork.available ? "Available" : "Sold"}
+              {artwork.available ? t("gallery_page.badge_available", "Available") : t("gallery_page.badge_sold", "Sold")}
             </p>
             <h2 style={{ fontFamily:"'Cinzel',serif", fontSize:"1.1rem", fontWeight:400, color:"#f8f2e4", letterSpacing:"0.06em", margin:"0 0 0.2rem" }}>{artwork.title}</h2>
             <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", color:"#8a8278", margin:0 }}>
@@ -150,7 +153,7 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
           </div>
 
           <div style={{ display:"flex", gap:"1.5rem", flexWrap:"wrap" }}>
-            {([["Medium", artwork.medium], ["Dimensions", artwork.dimensions], ["Price", artwork.price_display]] as [string, string|null][])
+            {([[t("gallery_page.label_medium","Medium"), artwork.medium], [t("gallery_page.label_dimensions","Dimensions"), artwork.dimensions], [t("gallery_page.label_price","Price"), artwork.price_display]] as [string, string|null][])
               .filter(([, v]) => v)
               .map(([k, v]) => (
                 <div key={k}>
@@ -168,29 +171,29 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
           )}
 
           <div style={{ borderTop:"1px solid rgba(212,175,55,0.08)", paddingTop:"1rem" }}>
-            <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em", color:"#d4af37", textTransform:"uppercase", margin:"0 0 1rem" }}>Enquire</p>
+            <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em", color:"#d4af37", textTransform:"uppercase", margin:"0 0 1rem" }}>{t("gallery_page.section_enquire", "Enquire")}</p>
             {sent ? (
               <p style={{ fontFamily:"'Cormorant Garamond',serif", fontSize:"0.9rem", color:"#5cb85c", fontStyle:"italic" }}>
-                Enquiry sent. We'll be in touch shortly.
+                {t("gallery_page.enquiry_sent", "Enquiry sent. We'll be in touch shortly.")}
               </p>
             ) : (
               <div style={{ display:"flex", flexDirection:"column", gap:"0.65rem" }}>
                 <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:"0.65rem" }}>
                   <div>
-                    <label className="gp-label">Name *</label>
-                    <input className="gp-input" value={form.name} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Your name" />
+                    <label className="gp-label">{t("gallery_page.label_name", "Name *")}</label>
+                    <input className="gp-input" value={form.name} onChange={(e) => setForm(f => ({ ...f, name: e.target.value }))} placeholder={t("gallery_page.placeholder_name", "Your name")} />
                   </div>
                   <div>
-                    <label className="gp-label">Email *</label>
-                    <input className="gp-input" type="email" value={form.email} onChange={(e) => setForm(f => ({ ...f, email: e.target.value }))} placeholder="you@example.com" />
+                    <label className="gp-label">{t("gallery_page.label_email", "Email *")}</label>
+                    <input className="gp-input" type="email" value={form.email} onChange={(e) => setForm(f => ({ ...f, email: e.target.value }))} placeholder={t("gallery_page.placeholder_email", "you@example.com")} />
                   </div>
                 </div>
                 <div>
-                  <label className="gp-label">Message</label>
-                  <input className="gp-input" value={form.message} onChange={(e) => setForm(f => ({ ...f, message: e.target.value }))} placeholder="Any questions…" />
+                  <label className="gp-label">{t("gallery_page.label_message", "Message")}</label>
+                  <input className="gp-input" value={form.message} onChange={(e) => setForm(f => ({ ...f, message: e.target.value }))} placeholder={t("gallery_page.placeholder_message", "Any questions…")} />
                 </div>
                 <button className="gp-btn" onClick={handleEnquire} disabled={!form.name || !form.email || sending}>
-                  {sending ? "…" : "Send Enquiry"}
+                  {sending ? "…" : t("gallery_page.btn_send_enquiry", "Send Enquiry")}
                 </button>
               </div>
             )}
@@ -203,6 +206,7 @@ function ArtworkModal({ artwork, gallery, onClose }: { artwork: Artwork; gallery
 
 // ── Main Page ──────────────────────────────────────────────────────────────────
 export default function GalleryPage() {
+  const { t } = useTranslation();
   const { slug } = useParams<{ slug: string }>();
   const [gallery, setGallery]   = useState<Gallery | null>(null);
   const [artworks, setArtworks] = useState<Artwork[]>([]);
@@ -235,7 +239,7 @@ export default function GalleryPage() {
   if (loading) {
     return (
       <div style={{ background:"#1c1c1c", minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center" }}>
-        <span style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.35em", color:"rgba(212,175,55,0.3)", textTransform:"uppercase" }}>Loading…</span>
+        <span style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.35em", color:"rgba(212,175,55,0.3)", textTransform:"uppercase" }}>{t("common.loading", "Loading…")}</span>
       </div>
     );
   }
@@ -243,9 +247,9 @@ export default function GalleryPage() {
   if (notFound || !gallery) {
     return (
       <div style={{ background:"#1c1c1c", minHeight:"100vh", display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:"1rem" }}>
-        <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.9rem", color:"rgba(212,175,55,0.3)", letterSpacing:"0.1em" }}>Gallery not found</p>
+        <p style={{ fontFamily:"'Cinzel',serif", fontSize:"0.9rem", color:"rgba(212,175,55,0.3)", letterSpacing:"0.1em" }}>{t("gallery_page.not_found", "Gallery not found")}</p>
         <Link to="/galleries" style={{ fontFamily:"'Cinzel',serif", fontSize:"0.6rem", letterSpacing:"0.2em", color:"#d4af37", textDecoration:"none", textTransform:"uppercase" }}>
-          ← All Galleries
+          {t("gallery_page.all_galleries", "← All Galleries")}
         </Link>
       </div>
     );
@@ -269,7 +273,7 @@ export default function GalleryPage() {
             : <div className="gp-logo">{initial}</div>
           }
           <div style={{ flex:1 }}>
-            <div className="gp-eyebrow">Gallery · Musée-Crosdale</div>
+            <div className="gp-eyebrow">{t("gallery_page.eyebrow", "Gallery · Musée-Crosdale")}</div>
             <h1 className="gp-name">{gallery.name}</h1>
             {gallery.blurb && <p className="gp-blurb">{gallery.blurb}</p>}
             {gallery.location && <p className="gp-location">{gallery.location}</p>}
@@ -288,13 +292,13 @@ export default function GalleryPage() {
       {/* Grid */}
       <div className="gp-grid">
         <div className="gp-grid-header">
-          <span className="gp-works-label">Works</span>
-          <span className="gp-works-count">{artworks.length} work{artworks.length !== 1 ? "s" : ""} · {artworks.filter(a => a.available).length} available</span>
+          <span className="gp-works-label">{t("gallery_page.works_label", "Works")}</span>
+          <span className="gp-works-count">{t("gallery_page.works_count", "{{count}} work · {{available}} available", { count: artworks.length, available: artworks.filter(a => a.available).length })}{artworks.length !== 1 ? t("gallery_page.works_plural_suffix", "s") : ""}</span>
         </div>
 
         {artworks.length === 0 ? (
           <div className="gp-empty">
-            <p className="gp-empty-text">No works currently listed</p>
+            <p className="gp-empty-text">{t("gallery_page.no_works", "No works currently listed")}</p>
           </div>
         ) : (
           <div className="gp-artwork-grid">
@@ -308,8 +312,8 @@ export default function GalleryPage() {
       {/* Footer */}
       <div className="gp-footer">
         <p className="gp-footer-text">
-          <Link to="/galleries" style={{ color:"rgba(212,175,55,0.4)", textDecoration:"none" }}>← All Galleries</Link>
-          &nbsp;·&nbsp; Powered by Facinations
+          <Link to="/galleries" style={{ color:"rgba(212,175,55,0.4)", textDecoration:"none" }}>{t("gallery_page.all_galleries", "← All Galleries")}</Link>
+          &nbsp;·&nbsp; {t("gallery_page.powered_by", "Powered by Facinations")}
         </p>
       </div>
     </div>

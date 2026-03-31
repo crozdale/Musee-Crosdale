@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 // ── Data ─────────────────────────────────────────────────────────────────────
 
@@ -50,8 +51,12 @@ const TERMS = [
   { title: "8–13. IP, Data, Termination & Liability", body: `IP: Limited licence to use Facinations branding for approved content only. Affiliates retain content ownership; grant Company a perpetual, royalty-free licence to share approved content.\n\nData: Both parties comply with applicable US privacy law (CCPA and federal standards).\n\nTermination: 14 days' written notice by either party. Immediate termination for material breach, fraud, or harmful conduct. 6-month clawback right on termination for breach.\n\nLiability: Capped at 3 months' commissions. No liability for indirect or consequential loss.\n\nGoverning Law: State of New York, United States. Disputes to senior representatives, then mediation, then litigation.` },
 ];
 
-const TABS = ["Tool Stack", "Affiliate Programme", "Terms & Conditions"] as const;
-type Tab = typeof TABS[number];
+const TABS_KEYS = [
+  { key: "marketing.tab_tools",     label: "Tool Stack" },
+  { key: "marketing.tab_affiliate", label: "Affiliate Programme" },
+  { key: "marketing.tab_terms",     label: "Terms & Conditions" },
+] as const;
+type Tab = "Tool Stack" | "Affiliate Programme" | "Terms & Conditions";
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 const S = {
@@ -89,19 +94,20 @@ function tabBtn(active: boolean) {
 
 // ── Component ─────────────────────────────────────────────────────────────────
 export default function Marketing() {
+  const { t } = useTranslation();
   const [tab, setTab] = useState<Tab>("Tool Stack");
   const [openTerm, setOpenTerm] = useState<string | null>(null);
 
   return (
     <div style={S.page}>
       <div style={S.maxW}>
-        <p style={S.eyebrow}>Facinations · Sales & Marketing</p>
-        <h1 style={S.h1}>Partner Resources</h1>
+        <p style={S.eyebrow}>{t("marketing.eyebrow", "Facinations · Sales & Marketing")}</p>
+        <h1 style={S.h1}>{t("marketing.heading", "Partner Resources")}</h1>
 
         {/* Tabs */}
         <div style={S.tabs}>
-          {TABS.map(t => (
-            <button key={t} style={tabBtn(tab === t)} onClick={() => setTab(t)}>{t}</button>
+          {TABS_KEYS.map(tab_item => (
+            <button key={tab_item.label} style={tabBtn(tab === tab_item.label)} onClick={() => setTab(tab_item.label)}>{t(tab_item.key, tab_item.label)}</button>
           ))}
         </div>
 
@@ -114,8 +120,8 @@ export default function Marketing() {
                 <table style={S.table}>
                   <thead>
                     <tr>
-                      <th style={S.th}>Tool</th>
-                      <th style={S.th}>Purpose</th>
+                      <th style={S.th}>{t("marketing.col_tool", "Tool")}</th>
+                      <th style={S.th}>{t("marketing.col_purpose", "Purpose")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -135,12 +141,18 @@ export default function Marketing() {
         {/* Affiliate Programme */}
         {tab === "Affiliate Programme" && (
           <div>
-            <h3 style={S.sectionHead}>Commission Tiers</h3>
+            <h3 style={S.sectionHead}>{t("partner.section_tiers", "Commission Tiers")}</h3>
             <table style={S.table}>
               <thead>
                 <tr>
-                  {["Tier", "Followers", "Commission", "Extras", "Tools"].map(h => (
-                    <th key={h} style={S.th}>{h}</th>
+                  {([
+                    ["marketing.col_tier", "Tier"],
+                    ["marketing.col_followers", "Followers"],
+                    ["marketing.col_commission", "Commission"],
+                    ["marketing.col_extras", "Extras"],
+                    ["marketing.col_tools_col", "Tools"],
+                  ] as [string,string][]).map(([k, h]) => (
+                    <th key={h} style={S.th}>{t(k, h)}</th>
                   ))}
                 </tr>
               </thead>
@@ -157,9 +169,7 @@ export default function Marketing() {
               </tbody>
             </table>
             <p style={{ ...S.td, background: "rgba(212,175,55,0.04)", padding: "1rem", borderLeft: "2px solid rgba(212,175,55,0.2)" }}>
-              <strong style={{ color: "#d4af37" }}>Payment schedule:</strong> Monthly within 15 business days of month-end.
-              Minimum payout <strong style={{ color: "#d4af37" }}>$50</strong> (rolls to next month if below threshold).
-              Methods: ACH/Wire, PayPal, or USDC. Currency: <strong style={{ color: "#d4af37" }}>USD</strong>.
+              {t("marketing.payment_schedule", "Payment schedule: Monthly within 15 business days of month-end. Minimum payout $50 (rolls to next month if below threshold). Methods: ACH/Wire, PayPal, or USDC. Currency: USD.")}
             </p>
           </div>
         )}

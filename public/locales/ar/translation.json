@@ -21,7 +21,23 @@
     "aiCurator": "المنسق الذكي",
     "dealerCrm": "نظام CRM للتجار",
     "consultantPortal": "بوابة المستشار",
-    "marketing": "المبيعات والتسويق"
+    "marketing": "المبيعات والتسويق",
+    "gallery_desc": "تصفّح واقتنِ الأعمال الفنية",
+    "vaults_desc": "حضانة آمنة للفن",
+    "dashboard_desc": "أصولك المحفوظة",
+    "swap_desc": "تبادل رموز حصص الفن",
+    "swapp_desc": "تداول من نظير إلى نظير",
+    "xdale_desc": "معارض مُنسَّقة",
+    "galleries_desc": "جميع فضاءات المعارض",
+    "about_desc": "نظرة عامة على البروتوكول",
+    "arch_desc": "البنية التقنية",
+    "analytics_desc": "رؤى المحفظة",
+    "legal_desc": "الشروط والإفصاحات",
+    "studio_desc": "نشر وسكّ الأعمال الفنية",
+    "aiCurator_desc": "رؤى فنية ذكية",
+    "dealerCrm_desc": "إدارة العملاء والصفقات",
+    "consultantPortal_desc": "عمولات الانتساب · USD",
+    "marketing_desc": "وثائق الحملات والانتساب"
   },
   "wallet": {
     "connect": "ربط المحفظة",
@@ -61,7 +77,8 @@
     "invalid_link": "رابط الدفع غير صالح.",
     "service_unreachable": "تعذّر الوصول إلى خدمة التحقق. يرجى التواصل مع الدعم.",
     "select_language": "اختر اللغة",
-    "amount": "المبلغ"
+    "amount": "المبلغ",
+    "partners_eyebrow": "Facinations · الشركاء"
   },
   "hero": {
     "title": "Facinations: خزائن الفنون الجميلة الجزئية",
@@ -747,6 +764,93 @@
     "nav_collection": "المجموعة",
     "nav_exchange": "تبادل المجموعة",
     "nav_whitepaper": "الورقة البيضاء"
+  },
+  "footer": {
+    "contract": "0x33d1de58…157f · Ethereum Sepolia"
+  },
+  "galleries": {
+    "meta_title": "المعارض — Musée-Crosdale",
+    "meta_description": "اكتشف المعارض المنسَّقة على منصة Facinations — فنانون معاصرون وناشئون بسجل ملكية على السلسلة.",
+    "eyebrow": "Musée-Crosdale · المنصة",
+    "heading": "المعارض",
+    "subtitle": "المعارض والتجار الشركاء الذين يعرضون على منصة Facinations، مع سجل ملكية on-chain موثَّق لكل عمل.",
+    "btn_view": "عرض المعرض →"
+  },
+  "curator": {
+    "meta_title": "المنسق الذكي — Musée-Crosdale",
+    "meta_description": "رؤى فنية ذكية مدعومة بالذكاء الاصطناعي. حلِّل الأعمال الفنية، استكشف المجموعة، واحصل على إرشادات التنسيق.",
+    "heading": "المنسق الذكي",
+    "subtitle": "رؤى فنية ذكية — حلِّل أي عمل في المجموعة."
+  },
+  "dealer_crm": {
+    "meta_title": "نظام CRM للتجار — Musée-Crosdale",
+    "meta_description": "إدارة العملاء والصفقات لتجار Facinations.",
+    "heading": "نظام CRM للتجار",
+    "subtitle": "إدارة العملاء والصفقات عبر HubSpot CRM — البوابة {{portal}}.",
+    "contacts": "جهات الاتصال",
+    "contacts_desc": "تصفّح وإدارة جهات اتصال الجامعين والتجار",
+    "deals": "مسار الصفقات",
+    "deals_desc": "تتبّع الفرص النشطة وقيمة المسار",
+    "sequences": "تسلسلات البريد الإلكتروني",
+    "sequences_desc": "تسلسلات رعاية آلية للجامعين",
+    "tasks": "المهام",
+    "tasks_desc": "مهام المتابعة وقائمة الأنشطة",
+    "reports": "التقارير",
+    "reports_desc": "تحليلات المسار والإيرادات"
+  },
+  "partner": {
+    "meta_title": "بوابة المستشار — Musée-Crosdale",
+    "meta_description": "برنامج الشراكة والتسويق بالعمولة لـ Facinations.",
+    "heading": "بوابة المستشار",
+    "subtitle": "اكسب عمولة بإحالة الجامعين والتجار والمؤسسات إلى بروتوكول Facinations.",
+    "section_tiers": "مستويات العمولة",
+    "section_how": "آلية العمل",
+    "how_body": "تقدَّم أدناه للحصول على رابط الإحالة الخاص بك. شاركه مع الجامعين أو أصحاب المعارض أو متداولي DeFi. عند إكمال المُحال إليه لـ KYC وإتمام أول صفقة، تبدأ العمولة في التراكم. تُدفع شهريًا بالدولار الأمريكي عبر ACH أو PayPal أو USDC — الحد الأدنى $50.",
+    "section_terms": "الشروط المطبَّقة",
+    "terms_body": "نافذة إسناد 90 يومًا · نافذة أرباح 12 شهرًا · إسناد النقر الأول · ملف تعريف ارتباط 30 يومًا — يخضع لقوانين ولاية نيويورك، الولايات المتحدة الأمريكية.",
+    "btn_details": "تفاصيل البرنامج الكاملة والشروط →"
+  },
+  "marketing": {
+    "eyebrow": "Facinations · المبيعات والتسويق",
+    "heading": "موارد الشركاء",
+    "tab_tools": "مجموعة الأدوات",
+    "tab_affiliate": "برنامج الانتساب",
+    "tab_terms": "الشروط والأحكام",
+    "col_tool": "الأداة",
+    "col_purpose": "الغرض",
+    "col_tier": "المستوى",
+    "col_followers": "المتابعون",
+    "col_commission": "العمولة",
+    "col_extras": "إضافات",
+    "col_tools_col": "الأدوات",
+    "payment_schedule": "جدول الدفع: شهريًا خلال 15 يوم عمل من نهاية الشهر. الحد الأدنى للدفع $50 (يُرحَّل إلى الشهر التالي إذا كان دون الحد). الطرق: ACH/تحويل بنكي أو PayPal أو USDC. العملة: USD."
+  },
+  "gallery_page": {
+    "badge_available": "متاح",
+    "badge_sold": "مُباع",
+    "label_medium": "التقنية",
+    "label_dimensions": "الأبعاد",
+    "label_price": "السعر",
+    "section_enquire": "استفسار",
+    "enquiry_sent": "تم إرسال الاستفسار. سنتواصل معك قريبًا.",
+    "label_name": "الاسم *",
+    "label_email": "البريد الإلكتروني *",
+    "label_message": "الرسالة",
+    "placeholder_name": "اسمك",
+    "placeholder_email": "you@example.com",
+    "placeholder_message": "أي أسئلة…",
+    "btn_send_enquiry": "إرسال الاستفسار",
+    "not_found": "المعرض غير موجود",
+    "all_galleries": "← جميع المعارض",
+    "works_label": "الأعمال",
+    "works_count": "{{count}} عمل · {{available}} متاح",
+    "works_plural_suffix": "",
+    "no_works": "لا توجد أعمال مُدرجة حاليًا",
+    "eyebrow": "المعرض · Musée-Crosdale",
+    "powered_by": "مُشغَّل بواسطة Facinations"
+  },
+  "gallery": {
+    "speed": "السرعة"
   },
   "theme": {
     "dark": "🌙 Dark",

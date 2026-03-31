@@ -11,46 +11,46 @@ const NAV_SECTIONS = [
     label: "Collectors",
     key: "nav.collectorsSection",
     items: [
-      { path: "/gallery",   label: "Gallery",     key: "nav.gallery",   desc: "Browse & acquire artworks" },
-      { path: "/vaults",    label: "Vaults",      key: "nav.vaults",    desc: "Secure art custody" },
-      { path: "/dashboard", label: "Dashboard",   key: "nav.dashboard", desc: "Your vaulted assets" },
+      { path: "/gallery",   label: "Gallery",     key: "nav.gallery",   descKey: "nav.gallery_desc",           desc: "Browse & acquire artworks" },
+      { path: "/vaults",    label: "Vaults",      key: "nav.vaults",    descKey: "nav.vaults_desc",            desc: "Secure art custody" },
+      { path: "/dashboard", label: "Dashboard",   key: "nav.dashboard", descKey: "nav.dashboard_desc",         desc: "Your vaulted assets" },
     ],
   },
   {
     label: "Speculators",
     key: "nav.speculatorsSection",
     items: [
-      { path: "/swap",  label: "Swap",    key: "nav.swap",  desc: "Swap art-fraction tokens" },
-      { path: "/swapp", label: "P2P Swapp", key: "nav.swapp", desc: "Peer-to-peer trades" },
+      { path: "/swap",  label: "Swap",      key: "nav.swap",  descKey: "nav.swap_desc",  desc: "Swap art-fraction tokens" },
+      { path: "/swapp", label: "P2P Swapp", key: "nav.swapp", descKey: "nav.swapp_desc", desc: "Peer-to-peer trades" },
     ],
   },
   {
     label: "Community",
     key: "nav.communitySection",
     items: [
-      { path: "/xdale",    label: "Xdale Gallery", key: "nav.xdale",    desc: "Curated exhibitions" },
-      { path: "/galleries", label: "Galleries",    key: "nav.galleries", desc: "All gallery spaces" },
+      { path: "/xdale",     label: "Xdale Gallery", key: "nav.xdale",     descKey: "nav.xdale_desc",     desc: "Curated exhibitions" },
+      { path: "/galleries", label: "Galleries",     key: "nav.galleries", descKey: "nav.galleries_desc", desc: "All gallery spaces" },
     ],
   },
   {
     label: "Platform",
     key: "nav.platformSection",
     items: [
-      { path: "/about",        label: "About",        key: "nav.about",     desc: "Protocol overview" },
-      { path: "/architecture", label: "Whitepaper",   key: "nav.arch",      desc: "Technical architecture" },
-      { path: "/analytics",    label: "Analytics",    key: "nav.analytics", desc: "Portfolio insights" },
-      { path: "/legal",        label: "Legal",        key: "nav.legal",     desc: "Terms & disclosures" },
+      { path: "/about",        label: "About",      key: "nav.about",     descKey: "nav.about_desc",     desc: "Protocol overview" },
+      { path: "/architecture", label: "Whitepaper", key: "nav.arch",      descKey: "nav.arch_desc",      desc: "Technical architecture" },
+      { path: "/analytics",    label: "Analytics",  key: "nav.analytics", descKey: "nav.analytics_desc", desc: "Portfolio insights" },
+      { path: "/legal",        label: "Legal",      key: "nav.legal",     descKey: "nav.legal_desc",     desc: "Terms & disclosures" },
     ],
   },
   {
     label: "Partners",
     key: "nav.partnersSection",
     items: [
-      { path: "/studio",            label: "Artist Studio",     key: "nav.studio",           desc: "Publish & mint artwork" },
-      { path: "/curator",           label: "AI Curator",        key: "nav.aiCurator",        desc: "Intelligent art insights" },
-      { path: "/dealer-crm",        label: "Dealer CRM",        key: "nav.dealerCrm",        desc: "Client & deal management" },
-      { path: "/partner-dashboard", label: "Consultant Portal", key: "nav.consultantPortal", desc: "Affiliate commissions · USD" },
-      { path: "/marketing",         label: "Sales & Marketing", key: "nav.marketing",        desc: "Campaign & affiliate docs" },
+      { path: "/studio",            label: "Artist Studio",     key: "nav.studio",           descKey: "nav.studio_desc",           desc: "Publish & mint artwork" },
+      { path: "/curator",           label: "AI Curator",        key: "nav.aiCurator",        descKey: "nav.aiCurator_desc",        desc: "Intelligent art insights" },
+      { path: "/dealer-crm",        label: "Dealer CRM",        key: "nav.dealerCrm",        descKey: "nav.dealerCrm_desc",        desc: "Client & deal management" },
+      { path: "/partner-dashboard", label: "Consultant Portal", key: "nav.consultantPortal", descKey: "nav.consultantPortal_desc", desc: "Affiliate commissions · USD" },
+      { path: "/marketing",         label: "Sales & Marketing", key: "nav.marketing",        descKey: "nav.marketing_desc",        desc: "Campaign & affiliate docs" },
     ],
   },
 ];
@@ -112,7 +112,7 @@ export default function Header() {
                         onClick={() => setOpenSection(null)}
                       >
                         <span className="nav-dropdown-label">{t(item.key, item.label)}</span>
-                        <span className="nav-dropdown-desc">{item.desc}</span>
+                        <span className="nav-dropdown-desc">{t((item as any).descKey ?? "", item.desc)}</span>
                       </a>
                     ) : (
                       <Link
@@ -123,7 +123,7 @@ export default function Header() {
                         onClick={() => setOpenSection(null)}
                       >
                         <span className="nav-dropdown-label">{t(item.key, item.label)}</span>
-                        <span className="nav-dropdown-desc">{item.desc}</span>
+                        <span className="nav-dropdown-desc">{t((item as any).descKey ?? "", item.desc)}</span>
                       </Link>
                     )
                   )}

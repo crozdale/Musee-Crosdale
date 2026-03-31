@@ -1207,7 +1207,7 @@ export default function Gallery() {
         <div className="dion-caption">
           <p className="dion-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
           <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-            <span className="dion-hint" style={{ marginRight: "0.5rem" }}>Speed</span>
+            <span className="dion-hint" style={{ marginRight: "0.5rem" }}>{t("gallery.speed", "Speed")}</span>
             {[0.25, 0.5, 1].map(r => (
               <button
                 key={r}
