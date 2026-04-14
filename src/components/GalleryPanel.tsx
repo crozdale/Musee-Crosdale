@@ -1,4 +1,4 @@
-ï»¿import React, { useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GALLERY_ITEMS } from "../data/gallery";
 import { TeleportViewer } from "./teleport";
@@ -7,7 +7,7 @@ type GalleryItem = typeof GALLERY_ITEMS[number];
 
 export default function GalleryPanel() {
   const [selected, setSelected] = useState<GalleryItem | null>(null);
-  const [showYoutube, setShowYoutube] = useState(false);
+  const [showVimeo, setshowVimeo] = useState(false);
 
   return (
     <>
@@ -16,7 +16,7 @@ export default function GalleryPanel() {
         {GALLERY_ITEMS.map((item) => (
           <div
             key={item.id}
-            onClick={() => { setSelected(item); setShowYoutube(false); }}
+            onClick={() => { setSelected(item); setshowVimeo(false); }}
             style={{ cursor: "pointer" }}
             className="rounded-2xl border border-black/10 bg-white/80 p-6 shadow-sm hover:shadow-md transition-shadow"
           >
@@ -24,7 +24,7 @@ export default function GalleryPanel() {
               <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-xl mb-4" />
             )}
             <h3 className="font-serif text-xl font-semibold">{item.title}</h3>
-            <p className="mt-1 text-sm text-black/70">{item.artist} Â· {item.year}</p>
+            <p className="mt-1 text-sm text-black/70">{item.artist} · {item.year}</p>
             <p className="mt-3 text-sm text-black/60">{item.medium}</p>
           </div>
         ))}
@@ -55,14 +55,14 @@ export default function GalleryPanel() {
                   {selected.title}
                 </h2>
                 <p style={{ color: "#d4af37", fontSize: "0.85rem", margin: "4px 0 0", fontStyle: "italic" }}>
-                  {selected.artist} Â· {selected.year} Â· {selected.medium}
+                  {selected.artist} · {selected.year} · {selected.medium}
                 </p>
               </div>
               <button
                 onClick={() => setSelected(null)}
                 style={{ background: "none", border: "none", color: "#888", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}
               >
-                Ã—
+                ×
               </button>
             </div>
 
@@ -82,27 +82,27 @@ export default function GalleryPanel() {
             )}
 
             {/* YouTube Documentary */}
-            {selected.youtubeUrl && (
+            {selected.vimeoUrl && (
               <div style={{ borderRadius: "10px", border: "1px solid rgba(255,255,255,0.1)", overflow: "hidden" }}>
                 <button
-                  onClick={() => setShowYoutube(!showYoutube)}
+                  onClick={() => setshowVimeo(!showVimeo)}
                   style={{
                     width: "100%", padding: "10px 14px", background: "#1a1a1a",
-                    border: "none", borderBottom: showYoutube ? "1px solid rgba(255,255,255,0.1)" : "none",
+                    border: "none", borderBottom: showVimeo ? "1px solid rgba(255,255,255,0.1)" : "none",
                     color: "#f8f2e4", fontFamily: "'Cinzel',serif", fontSize: "0.8rem",
                     letterSpacing: "0.08em", cursor: "pointer", display: "flex",
                     alignItems: "center", gap: "8px", textAlign: "left",
                   }}
                 >
-                  <span style={{ color: "#FF0000", fontSize: "1rem" }}>â–¶</span>
-                  {showYoutube ? "Hide" : "Watch"} Artist Documentary
+                  <span style={{ color: "#1ab7ea", fontSize: "1rem" }}>?</span>
+                  {showVimeo ? "Hide" : "Watch"} Artist Documentary
                 </button>
-                {showYoutube && (
+                {showVimeo && (
                   <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>
                     <iframe
-                      src={selected.youtubeUrl}
+                      src={selected.vimeoUrl}
                       title="Artist Documentary"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allow="autoplay; fullscreen; picture-in-picture"
                       allowFullScreen
                       style={{
                         position: "absolute", top: 0, left: 0,
