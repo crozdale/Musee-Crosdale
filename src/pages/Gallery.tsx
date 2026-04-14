@@ -1,35 +1,34 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+ï»¿import { useState, useEffect, useRef, useCallback } from "react";
 import MistralWidget from "../components/MistralWidget";
 import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
+import { TeleportViewer } from "../components/teleport";
 
 // -- VideoHero: tries mp4, falls back to a still image -------------------------
 function VideoHero() {
-  const [failed, setFailed] = useState(false);
-
-  if (failed) {
-    return (
-      <img
-        src="/images/MILLENNIALS-483507251_655514630770136_6062852906407374833_n.jpg"
-        alt="Gallery hero"
-        style={{ width: "100%", height: "480px", objectFit: "cover", display: "block", opacity: 0.85 }}
-      />
-    );
-  }
-
+  const [useFallback, setUseFallback] = useState(false);
   return (
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="auto"
-      onError={() => setFailed(true)}
-      style={{ width: "100%", height: "480px", objectFit: "cover", display: "block", opacity: 0.85 }}
-    >
-      <source src="/Dionysus.mp4" type="video/mp4" />
-    </video>
+    <div style={{ width: "100%", height: "100%", position: "relative" }}>
+      {useFallback ? (
+        <img
+          src="/images/Aurora.jpg"
+          alt="MusÃ©e Crosdale"
+          style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
+        />
+      ) : (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.7 }}
+          onError={() => setUseFallback(true)}
+        >
+          <source src="/hero.mp4" type="video/mp4" />
+        </video>
+      )}
+    </div>
   );
 }
 
@@ -118,7 +117,7 @@ const images = [
   "VORTEX-482128186_655514544103478_2126210507016773635_n.jpg",
 ];
 
-function getLabel(f) {
+function getLabel(f: string) {
   return f
     .replace(/\.[^.]+$/, "")
     .replace(/-?\d{15,}(_n)?/g, "")
@@ -128,7 +127,7 @@ function getLabel(f) {
     .trim();
 }
 
-function getRelated(filename, all, n = 4) {
+function getRelated(filename: string, all: string[], n = 4) {
   const tokens = getLabel(filename)
     .toLowerCase()
     .split(" ")
@@ -137,9 +136,7 @@ function getRelated(filename, all, n = 4) {
     .filter((f) => f !== filename)
     .map((f) => ({
       f,
-      score: tokens.filter((t) =>
-        getLabel(f).toLowerCase().includes(t)
-      ).length,
+      score: tokens.filter((t) => getLabel(f).toLowerCase().includes(t)).length,
     }))
     .sort((a, b) => b.score - a.score);
   const out = scored.slice(0, n).map((x) => x.f);
@@ -161,8 +158,8 @@ const SERIES_TESTS = [
   (f: string) => !/\d{15,}/.test(f),
 ] as const;
 
-// --------- AI via Claude (kept) ---------
-async function askClaude(system, userMsg, history = []) {
+// --------- AI via Claude ---------
+async function askClaude(system: string, userMsg: string, history: {role:string;content:string}[] = []) {
   const res = await fetch("/api/claude/v1/messages", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -176,11 +173,11 @@ async function askClaude(system, userMsg, history = []) {
   const raw = await res.text();
   if (!res.ok) throw new Error(`HTTP ${res.status}: ${raw}`);
   const d = JSON.parse(raw);
-  return d.content?.find((b) => b.type === "text")?.text ?? "No response.";
+  return d.content?.find((b: {type:string;text?:string}) => b.type === "text")?.text ?? "No response.";
 }
 
-// --------- ZoomPane (with simple < > arrows) ---------
-const zoomBtnStyle = {
+// --------- ZoomPane ---------
+const zoomBtnStyle: React.CSSProperties = {
   background: "rgba(0,0,0,0.7)",
   border: "1px solid rgba(212,175,55,0.4)",
   color: "#d4af37",
@@ -195,107 +192,79 @@ const zoomBtnStyle = {
   fontFamily: "monospace",
 };
 
-function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
+function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }: {
+  src: string; alt: string; onClose: ()=>void;
+  onPrev: ()=>void; onNext: ()=>void; index: number; total: number;
+}) {
   const { t } = useTranslation();
   const [scale, setScale] = useState(1);
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const scaleRef = useRef(1);
   const panRef = useRef({ x: 0, y: 0 });
-  const dragging = useRef(null);
-  const pinchRef = useRef(null);
-  const divRef = useRef(null);
+  const dragging = useRef<{sx:number;sy:number}|null>(null);
+  const pinchRef = useRef<number|null>(null);
+  const divRef = useRef<HTMLDivElement|null>(null);
 
   useEffect(() => { scaleRef.current = scale; }, [scale]);
   useEffect(() => { panRef.current = pan; }, [pan]);
 
   useEffect(() => {
-    setScale(1);
-    setPan({ x: 0, y: 0 });
-    scaleRef.current = 1;
-    panRef.current = { x: 0, y: 0 };
+    setScale(1); setPan({ x: 0, y: 0 });
+    scaleRef.current = 1; panRef.current = { x: 0, y: 0 };
   }, [src]);
 
-  const attachWheel = useCallback((el) => {
+  const attachWheel = useCallback((el: HTMLDivElement | null) => {
     if (!el) return;
     divRef.current = el;
-    const handler = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    const handler = (e: WheelEvent) => {
+      e.preventDefault(); e.stopPropagation();
       const factor = e.deltaY < 0 ? 1.1 : 0.909;
       const next = Math.min(10, Math.max(1, scaleRef.current * factor));
-      scaleRef.current = next;
-      setScale(next);
+      scaleRef.current = next; setScale(next);
     };
     el.addEventListener("wheel", handler, { passive: false });
-    el._wheelCleanup = () => el.removeEventListener("wheel", handler);
+    (el as any)._wheelCleanup = () => el.removeEventListener("wheel", handler);
   }, []);
 
-  useEffect(() => () => divRef.current?._wheelCleanup?.(), []);
+  useEffect(() => () => (divRef.current as any)?._wheelCleanup?.(), []);
 
-  const onMouseDown = (e) => {
+  const onMouseDown = (e: React.MouseEvent) => {
     if (scaleRef.current <= 1) return;
     e.preventDefault();
-    dragging.current = {
-      sx: e.clientX - panRef.current.x,
-      sy: e.clientY - panRef.current.y,
-    };
+    dragging.current = { sx: e.clientX - panRef.current.x, sy: e.clientY - panRef.current.y };
   };
-  const onMouseMove = (e) => {
+  const onMouseMove = (e: React.MouseEvent) => {
     if (!dragging.current) return;
-    const p = {
-      x: e.clientX - dragging.current.sx,
-      y: e.clientY - dragging.current.sy,
-    };
-    panRef.current = p;
-    setPan(p);
+    const p = { x: e.clientX - dragging.current.sx, y: e.clientY - dragging.current.sy };
+    panRef.current = p; setPan(p);
   };
-  const onMouseUp = () => {
-    dragging.current = null;
-  };
+  const onMouseUp = () => { dragging.current = null; };
 
-  const onTouchStart = (e) => {
+  const onTouchStart = (e: React.TouchEvent) => {
     if (e.touches.length === 2) {
       pinchRef.current = Math.hypot(
         e.touches[0].clientX - e.touches[1].clientX,
         e.touches[0].clientY - e.touches[1].clientY
       );
     } else {
-      dragging.current = {
-        sx: e.touches[0].clientX - panRef.current.x,
-        sy: e.touches[0].clientY - panRef.current.y,
-      };
+      dragging.current = { sx: e.touches[0].clientX - panRef.current.x, sy: e.touches[0].clientY - panRef.current.y };
     }
   };
-  const onTouchMove = (e) => {
+  const onTouchMove = (e: React.TouchEvent) => {
     e.preventDefault();
     if (e.touches.length === 2 && pinchRef.current) {
-      const d = Math.hypot(
-        e.touches[0].clientX - e.touches[1].clientX,
-        e.touches[0].clientY - e.touches[1].clientY
-      );
-      const next = Math.min(
-        10,
-        Math.max(1, scaleRef.current * (d / pinchRef.current))
-      );
-      pinchRef.current = d;
-      scaleRef.current = next;
-      setScale(next);
+      const d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+      const next = Math.min(10, Math.max(1, scaleRef.current * (d / pinchRef.current)));
+      pinchRef.current = d; scaleRef.current = next; setScale(next);
     } else if (dragging.current) {
-      const p = {
-        x: e.touches[0].clientX - dragging.current.sx,
-        y: e.touches[0].clientY - dragging.current.sy,
-      };
-      panRef.current = p;
-      setPan(p);
+      const p = { x: e.touches[0].clientX - dragging.current.sx, y: e.touches[0].clientY - dragging.current.sy };
+      panRef.current = p; setPan(p);
     }
   };
-  const onTouchEnd = () => {
-    dragging.current = null;
-    pinchRef.current = null;
-  };
+  const onTouchEnd = () => { dragging.current = null; pinchRef.current = null; };
 
   useEffect(() => {
-    const h = (e) => {
+    const h = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") onNext();
       if (e.key === "ArrowLeft") onPrev();
       if (e.key === "Escape") onClose();
@@ -305,44 +274,26 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
   }, [onNext, onPrev, onClose]);
 
   const reset = () => {
-    setScale(1);
-    setPan({ x: 0, y: 0 });
-    scaleRef.current = 1;
-    panRef.current = { x: 0, y: 0 };
+    setScale(1); setPan({ x: 0, y: 0 });
+    scaleRef.current = 1; panRef.current = { x: 0, y: 0 };
   };
 
   return (
     <div
       ref={attachWheel}
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
-      onMouseUp={onMouseUp}
-      onMouseLeave={onMouseUp}
-      onTouchStart={onTouchStart}
-      onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      onMouseDown={onMouseDown} onMouseMove={onMouseMove}
+      onMouseUp={onMouseUp} onMouseLeave={onMouseUp}
+      onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}
       style={{
-        flex: 1,
-        position: "relative",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        background: "#181818",
-        cursor: scale > 1 ? "grab" : "default",
-        userSelect: "none",
+        flex: 1, position: "relative", overflow: "hidden",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        background: "#181818", cursor: scale > 1 ? "grab" : "default", userSelect: "none",
       }}
     >
       <img
-        key={src}
-        src={src}
-        alt={alt}
-        draggable={false}
+        key={src} src={src} alt={alt} draggable={false}
         style={{
-          display: "block",
-          maxWidth: "100%",
-          maxHeight: "92vh",
-          objectFit: "contain",
+          display: "block", maxWidth: "100%", maxHeight: "92vh", objectFit: "contain",
           transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale})`,
           transformOrigin: "center center",
           transition: dragging.current ? "none" : "transform 0.12s ease",
@@ -351,177 +302,36 @@ function ZoomPane({ src, alt, onClose, onPrev, onNext, index, total }) {
           animation: "lbIn 0.25s ease",
         }}
       />
-
-      {/* +/- buttons */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: "1.2rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          display: "flex",
-          alignItems: "center",
-          gap: "0.5rem",
-          zIndex: 10,
-        }}
-      >
-        <button
-          onClick={() => {
-            const n = Math.max(1, scaleRef.current * 0.8);
-            scaleRef.current = n;
-            setScale(n);
-          }}
-          style={zoomBtnStyle}
-        >
-          -
-        </button>
-        <span
-          style={{
-            color: scale > 1 ? "#d4af37" : "#333",
-            fontFamily: "'Cinzel',serif",
-            fontSize: "0.62rem",
-            letterSpacing: "0.1em",
-            minWidth: "3rem",
-            textAlign: "center",
-          }}
-        >
+      <div style={{ position: "absolute", bottom: "1.2rem", left: "50%", transform: "translateX(-50%)", display: "flex", alignItems: "center", gap: "0.5rem", zIndex: 10 }}>
+        <button onClick={() => { const n = Math.max(1, scaleRef.current * 0.8); scaleRef.current = n; setScale(n); }} style={zoomBtnStyle}>-</button>
+        <span style={{ color: scale > 1 ? "#d4af37" : "#333", fontFamily: "'Cinzel',serif", fontSize: "0.62rem", letterSpacing: "0.1em", minWidth: "3rem", textAlign: "center" }}>
           {Math.round(scale * 100)}%
         </span>
-        <button
-          onClick={() => {
-            const n = Math.min(10, scaleRef.current * 1.25);
-            scaleRef.current = n;
-            setScale(n);
-          }}
-          style={zoomBtnStyle}
-        >
-          +
-        </button>
+        <button onClick={() => { const n = Math.min(10, scaleRef.current * 1.25); scaleRef.current = n; setScale(n); }} style={zoomBtnStyle}>+</button>
         {scale > 1 && (
-          <button
-            onClick={reset}
-            style={{
-              ...zoomBtnStyle,
-              fontSize: "0.55rem",
-              padding: "0.3rem 0.6rem",
-              width: "auto",
-            }}
-          >
+          <button onClick={reset} style={{ ...zoomBtnStyle, fontSize: "0.55rem", padding: "0.3rem 0.6rem", width: "auto" }}>
             {t("gallery.zoom_reset")}
           </button>
         )}
       </div>
-
-      {/* hint */}
-      <div
-        style={{
-          position: "absolute",
-          top: "0.7rem",
-          left: "50%",
-          transform: "translateX(-50%)",
-          color: "#222",
-          fontFamily: "'Cinzel',serif",
-          fontSize: "0.58rem",
-          letterSpacing: "0.08em",
-          pointerEvents: "none",
-          whiteSpace: "nowrap",
-        }}
-      >
+      <div style={{ position: "absolute", top: "0.7rem", left: "50%", transform: "translateX(-50%)", color: "#222", fontFamily: "'Cinzel',serif", fontSize: "0.58rem", letterSpacing: "0.08em", pointerEvents: "none", whiteSpace: "nowrap" }}>
         {t("gallery.zoom_hint")}
       </div>
-
-      {/* counter */}
-      <div
-        style={{
-          position: "absolute",
-          top: "0.7rem",
-          right: "0.8rem",
-          color: "#8a8278",
-          fontFamily: "'Cinzel',serif",
-          fontSize: "0.6rem",
-          letterSpacing: "0.1em",
-        }}
-      >
+      <div style={{ position: "absolute", top: "0.7rem", right: "0.8rem", color: "#8a8278", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.1em" }}>
         {index + 1} / {total}
       </div>
-
-      {/* nav arrows < and > */}
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onPrev();
-        }}
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "0.8rem",
-          transform: "translateY(-50%)",
-          background: "rgba(0,0,0,0.55)",
-          border: "1px solid rgba(212,175,55,0.4)",
-          color: "#d4af37",
-          width: "2.8rem",
-          height: "2.8rem",
-          borderRadius: "50%",
-          fontSize: "1.5rem",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 10,
-        }}
-      >
-        {"<"}
-      </button>
-
-      <button
-        onClick={(e) => {
-          e.stopPropagation();
-          onNext();
-        }}
-        style={{
-          position: "absolute",
-          top: "50%",
-          right: "0.8rem",
-          transform: "translateY(-50%)",
-          background: "rgba(0,0,0,0.55)",
-          border: "1px solid rgba(212,175,55,0.4)",
-          color: "#d4af37",
-          width: "2.8rem",
-          height: "2.8rem",
-          borderRadius: "50%",
-          fontSize: "1.5rem",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 10,
-        }}
-      >
-        {">"}
-      </button>
+      <button onClick={(e) => { e.stopPropagation(); onPrev(); }} style={{ position: "absolute", top: "50%", left: "0.8rem", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", width: "2.8rem", height: "2.8rem", borderRadius: "50%", fontSize: "1.5rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>{"<"}</button>
+      <button onClick={(e) => { e.stopPropagation(); onNext(); }} style={{ position: "absolute", top: "50%", right: "0.8rem", transform: "translateY(-50%)", background: "rgba(0,0,0,0.55)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", width: "2.8rem", height: "2.8rem", borderRadius: "50%", fontSize: "1.5rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 10 }}>{">"}</button>
     </div>
   );
 }
 
-// --------- simple Markdown ---------
-// --------- Claude “Curator” panel ---------
-const SYSTEM = `You are a world-class art curator and critic for Facinations — a bold, emotionally charged contemporary gallery.
-Write with authority, warmth, and poetic precision. Cover: subject/composition, palette and technique, mood and symbolism.
-Keep responses under 120 words unless asked for more. Never mention filenames or numeric IDs.`;
-function Markdown({ text }) {
+// --------- Markdown ---------
+function Markdown({ text }: { text: string }) {
   const html = text
-    .replace(
-      /^### (.+)$/gm,
-      "<h4 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;margin:0.6rem 0 0.2rem\">$1</h4>"
-    )
-    .replace(
-      /^## (.+)$/gm,
-      "<h3 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.1em;margin:0.6rem 0 0.2rem\">$1</h3>"
-    )
-    .replace(
-      /^# (.+)$/gm,
-      "<h3 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.1em;margin:0 0 0.4rem\">$1</h3>"
-    )
+    .replace(/^### (.+)$/gm, "<h4 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.7rem;letter-spacing:0.1em;margin:0.6rem 0 0.2rem\">$1</h4>")
+    .replace(/^## (.+)$/gm,  "<h3 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:0.1em;margin:0.6rem 0 0.2rem\">$1</h3>")
+    .replace(/^# (.+)$/gm,   "<h3 style=\"color:#d4af37;font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:0.1em;margin:0 0 0.4rem\">$1</h3>")
     .replace(/\*\*(.+?)\*\*/g, '<strong style="color:#d4c97a">$1</strong>')
     .replace(/\*(.+?)\*/g, "<em>$1</em>")
     .replace(/\n\n/g, "<br/><br/>")
@@ -529,402 +339,112 @@ function Markdown({ text }) {
   return <div dangerouslySetInnerHTML={{ __html: html }} />;
 }
 
-function AiPanel({ filename, allImages, onJump }) {
+// --------- AI Curator panel ---------
+const SYSTEM = `You are a world-class art curator and critic for Facinations â€” a bold, emotionally charged contemporary gallery.
+Write with authority, warmth, and poetic precision. Cover: subject/composition, palette and technique, mood and symbolism.
+Keep responses under 120 words unless asked for more. Never mention filenames or numeric IDs.`;
+
+function AiPanel({ filename, allImages, onJump }: { filename: string; allImages: string[]; onJump: (f:string)=>void }) {
   const { t } = useTranslation();
   const label = getLabel(filename);
   const related = useRef(getRelated(filename, allImages)).current;
-
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState<"idle"|"loading"|"done"|"error">("idle");
   const [analysis, setAnalysis] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [chat, setChat] = useState([]);
+  const [chat, setChat] = useState<{role:string;content:string}[]>([]);
   const [input, setInput] = useState("");
   const [chatBusy, setChatBusy] = useState(false);
-  const endRef = useRef(null);
+  const endRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    setStatus("idle");
-    setAnalysis("");
-    setErrMsg("");
-    setChat([]);
-    setInput("");
-  }, [filename]);
-
-  useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [chat]);
+  useEffect(() => { setStatus("idle"); setAnalysis(""); setErrMsg(""); setChat([]); setInput(""); }, [filename]);
+  useEffect(() => { endRef.current?.scrollIntoView({ behavior: "smooth" }); }, [chat]);
 
   const invoke = async () => {
     setStatus("loading");
     try {
-      const text = await askClaude(
-        SYSTEM,
-        `Describe and analyse the artwork titled "${label}". Cover composition, palette, technique, mood and what makes it unforgettable.`
-      );
-      setAnalysis(text);
-      setStatus("done");
-    } catch (e) {
-      setErrMsg(e.message);
-      setStatus("error");
-    }
+      const text = await askClaude(SYSTEM, `Describe and analyse the artwork titled "${label}". Cover composition, palette, technique, mood and what makes it unforgettable.`);
+      setAnalysis(text); setStatus("done");
+    } catch (e: any) { setErrMsg(e.message); setStatus("error"); }
   };
 
   const send = async () => {
     if (!input.trim() || chatBusy) return;
-    const msg = input.trim();
-    setInput("");
+    const msg = input.trim(); setInput("");
     const next = [...chat, { role: "user", content: msg }];
-    setChat(next);
-    setChatBusy(true);
+    setChat(next); setChatBusy(true);
     try {
-      const reply = await askClaude(
-        `${SYSTEM}\nThe visitor is currently viewing "${label}".`,
-        msg,
-        chat
-      );
+      const reply = await askClaude(`${SYSTEM}\nThe visitor is currently viewing "${label}".`, msg, chat);
       setChat((c) => [...c, { role: "assistant", content: reply }]);
-    } catch (e) {
-      setChat((c) => [
-        ...c,
-        { role: "assistant", content: `Error: ${e.message}` },
-      ]);
+    } catch (e: any) {
+      setChat((c) => [...c, { role: "assistant", content: `Error: ${e.message}` }]);
     }
     setChatBusy(false);
   };
 
   return (
-    <div
-      style={{
-        width: "320px",
-        minWidth: "280px",
-        flexShrink: 0,
-        background: "#242424",
-        borderLeft: "1px solid rgba(212,175,55,0.12)",
-        display: "flex",
-        flexDirection: "column",
-        height: "100vh",
-        overflow: "hidden",
-        fontFamily: "'Cormorant Garamond', Georgia, serif",
-      }}
-    >
-      {/* Header */}
-      <div
-        style={{
-          padding: "1rem 1rem 0.6rem",
-          borderBottom: "1px solid rgba(212,175,55,0.1)",
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            fontFamily: "'Cinzel',serif",
-            color: "#d4af37",
-            fontSize: "0.68rem",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            lineHeight: 1.4,
-          }}
-        >
-          {label}
-        </div>
-        <div
-          style={{
-            fontSize: "0.58rem",
-            color: "#8a8278",
-            marginTop: "0.2rem",
-          }}
-        >
-          {t("gallery.ai_subtitle")}
-        </div>
+    <div style={{ width: "320px", minWidth: "280px", flexShrink: 0, background: "#242424", borderLeft: "1px solid rgba(212,175,55,0.12)", display: "flex", flexDirection: "column", height: "100vh", overflow: "hidden", fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+      <div style={{ padding: "1rem 1rem 0.6rem", borderBottom: "1px solid rgba(212,175,55,0.1)", flexShrink: 0 }}>
+        <div style={{ fontFamily: "'Cinzel',serif", color: "#d4af37", fontSize: "0.68rem", letterSpacing: "0.14em", textTransform: "uppercase", lineHeight: 1.4 }}>{label}</div>
+        <div style={{ fontSize: "0.58rem", color: "#8a8278", marginTop: "0.2rem" }}>{t("gallery.ai_subtitle")}</div>
       </div>
 
-      {/* Curator */}
-      <div
-        style={{
-          padding: "0.85rem 1rem",
-          borderBottom: "1px solid rgba(212,175,55,0.07)",
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            fontSize: "0.58rem",
-            color: "#d4af37",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            marginBottom: "0.5rem",
-          }}
-        >
-          {t("gallery.curators_eye")}
-        </div>
+      {/* Teleport 3D viewer */}
+      <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
+        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>3D Immersive</div>
+        <TeleportViewer
+          sceneId={`scene_${filename.replace(/[^a-zA-Z0-9]/g, "_").substring(0, 20)}`}
+          artworkTitle={label}
+        />
+      </div>
 
+      {/* Curator analysis */}
+      <div style={{ padding: "0.85rem 1rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
+        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("gallery.curators_eye")}</div>
         {status === "idle" && (
-          <button
-            onClick={invoke}
-            style={{
-              width: "100%",
-              padding: "0.55rem 0",
-              background: "rgba(212,175,55,0.08)",
-              border: "1px solid rgba(212,175,55,0.4)",
-              color: "#d4af37",
-              fontFamily: "'Cinzel',serif",
-              fontSize: "0.65rem",
-              letterSpacing: "0.12em",
-              cursor: "pointer",
-              borderRadius: "2px",
-            }}
-          >
+          <button onClick={invoke} style={{ width: "100%", padding: "0.55rem 0", background: "rgba(212,175,55,0.08)", border: "1px solid rgba(212,175,55,0.4)", color: "#d4af37", fontFamily: "'Cinzel',serif", fontSize: "0.65rem", letterSpacing: "0.12em", cursor: "pointer", borderRadius: "2px" }}>
             {t("gallery.btn_invoke")}
           </button>
         )}
-
-        {status === "loading" && (
-          <div
-            style={{
-              color: "#8a8278",
-              fontSize: "0.8rem",
-              fontStyle: "italic",
-            }}
-          >
-            {t("gallery.analysing")}
-          </div>
-        )}
-
-        {status === "done" && (
-          <div
-            style={{
-              color: "#b0a898",
-              fontSize: "0.82rem",
-              lineHeight: 1.65,
-            }}
-          >
-            <Markdown text={analysis} />
-          </div>
-        )}
-
+        {status === "loading" && <div style={{ color: "#8a8278", fontSize: "0.8rem", fontStyle: "italic" }}>{t("gallery.analysing")}</div>}
+        {status === "done" && <div style={{ color: "#b0a898", fontSize: "0.82rem", lineHeight: 1.65 }}><Markdown text={analysis} /></div>}
         {status === "error" && (
           <div>
-            <div
-              style={{
-                color: "#a04040",
-                fontSize: "0.75rem",
-                marginBottom: "0.4rem",
-              }}
-            >
-              {t("gallery.ai_error")}
-            </div>
-            <pre
-              style={{
-                color: "#664040",
-                fontSize: "0.62rem",
-                whiteSpace: "pre-wrap",
-                wordBreak: "break-all",
-                maxHeight: "80px",
-                overflowY: "auto",
-                background: "rgba(255,0,0,0.04)",
-                padding: "0.4rem",
-                borderRadius: "3px",
-              }}
-            >
-              {errMsg}
-            </pre>
-            <button
-              onClick={invoke}
-              style={{
-                marginTop: "0.5rem",
-                padding: "0.3rem 0.7rem",
-                background: "none",
-                border: "1px solid rgba(212,175,55,0.3)",
-                color: "#888",
-                fontFamily: "'Cinzel',serif",
-                fontSize: "0.6rem",
-                cursor: "pointer",
-              }}
-            >
-              {t("gallery.btn_retry")}
-            </button>
+            <div style={{ color: "#a04040", fontSize: "0.75rem", marginBottom: "0.4rem" }}>{t("gallery.ai_error")}</div>
+            <pre style={{ color: "#664040", fontSize: "0.62rem", whiteSpace: "pre-wrap", wordBreak: "break-all", maxHeight: "80px", overflowY: "auto", background: "rgba(255,0,0,0.04)", padding: "0.4rem", borderRadius: "3px" }}>{errMsg}</pre>
+            <button onClick={invoke} style={{ marginTop: "0.5rem", padding: "0.3rem 0.7rem", background: "none", border: "1px solid rgba(212,175,55,0.3)", color: "#888", fontFamily: "'Cinzel',serif", fontSize: "0.6rem", cursor: "pointer" }}>{t("gallery.btn_retry")}</button>
           </div>
         )}
       </div>
 
       {/* Chat */}
-      <div
-        style={{
-          flex: 1,
-          overflowY: "auto",
-          padding: "0.75rem 1rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "0.5rem",
-        }}
-      >
-        <div
-          style={{
-            fontSize: "0.58rem",
-            color: "#d4af37",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            marginBottom: "0.1rem",
-          }}
-        >
-          {t("gallery.ask_curator")}
-        </div>
-        {chat.length === 0 && (
-          <div
-            style={{
-              color: "#282828",
-              fontSize: "0.75rem",
-              fontStyle: "italic",
-            }}
-          >
-            {t("gallery.ask_hint")}
-          </div>
-        )}
+      <div style={{ flex: 1, overflowY: "auto", padding: "0.75rem 1rem", display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.1rem" }}>{t("gallery.ask_curator")}</div>
+        {chat.length === 0 && <div style={{ color: "#282828", fontSize: "0.75rem", fontStyle: "italic" }}>{t("gallery.ask_hint")}</div>}
         {chat.map((m, i) => (
-          <div
-            key={i}
-            style={{
-              alignSelf:
-                m.role === "user" ? "flex-end" : "flex-start",
-              background:
-                m.role === "user"
-                  ? "rgba(212,175,55,0.09)"
-                  : "rgba(255,255,255,0.03)",
-              border: `1px solid ${
-                m.role === "user"
-                  ? "rgba(212,175,55,0.25)"
-                  : "rgba(255,255,255,0.05)"
-              }`,
-              borderRadius: "5px",
-              padding: "0.4rem 0.65rem",
-              maxWidth: "93%",
-              fontSize: "0.8rem",
-              lineHeight: 1.55,
-              color:
-                m.role === "user" ? "#e8d89a" : "#aaa",
-            }}
-          >
-            {m.role === "assistant" ? (
-              <Markdown text={m.content} />
-            ) : (
-              m.content
-            )}
+          <div key={i} style={{ alignSelf: m.role === "user" ? "flex-end" : "flex-start", background: m.role === "user" ? "rgba(212,175,55,0.09)" : "rgba(255,255,255,0.03)", border: `1px solid ${m.role === "user" ? "rgba(212,175,55,0.25)" : "rgba(255,255,255,0.05)"}`, borderRadius: "5px", padding: "0.4rem 0.65rem", maxWidth: "93%", fontSize: "0.8rem", lineHeight: 1.55, color: m.role === "user" ? "#e8d89a" : "#aaa" }}>
+            {m.role === "assistant" ? <Markdown text={m.content} /> : m.content}
           </div>
         ))}
-        {chatBusy && (
-          <div
-            style={{
-              color: "#484848",
-              fontSize: "0.72rem",
-              fontStyle: "italic",
-            }}
-          >
-            {t("gallery.thinking")}
-          </div>
-        )}
+        {chatBusy && <div style={{ color: "#484848", fontSize: "0.72rem", fontStyle: "italic" }}>{t("gallery.thinking")}</div>}
         <div ref={endRef} />
       </div>
 
       {/* Input */}
-      <div
-        style={{
-          padding: "0.65rem 0.85rem",
-          borderTop: "1px solid rgba(212,175,55,0.07)",
-          display: "flex",
-          gap: "0.4rem",
-          flexShrink: 0,
-        }}
-      >
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder={t("gallery.placeholder_ask")}
-          style={{
-            flex: 1,
-            background: "rgba(255,255,255,0.03)",
-            border: "1px solid rgba(212,175,55,0.18)",
-            color: "#ccc",
-            borderRadius: "3px",
-            padding: "0.35rem 0.5rem",
-            fontSize: "0.78rem",
-            fontFamily: "inherit",
-            outline: "none",
-          }}
-        />
-        <button
-          onClick={send}
-          style={{
-            background: "rgba(212,175,55,0.1)",
-            border: "1px solid rgba(212,175,55,0.35)",
-            color: "#d4af37",
-            borderRadius: "3px",
-            padding: "0.35rem 0.6rem",
-            cursor: "pointer",
-            fontFamily: "'Cinzel',serif",
-            fontSize: "0.72rem",
-          }}
-        >
-          ?
-        </button>
+      <div style={{ padding: "0.65rem 0.85rem", borderTop: "1px solid rgba(212,175,55,0.07)", display: "flex", gap: "0.4rem", flexShrink: 0 }}>
+        <input value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={(e) => e.key === "Enter" && send()} placeholder={t("gallery.placeholder_ask")}
+          style={{ flex: 1, background: "rgba(255,255,255,0.03)", border: "1px solid rgba(212,175,55,0.18)", color: "#ccc", borderRadius: "3px", padding: "0.35rem 0.5rem", fontSize: "0.78rem", fontFamily: "inherit", outline: "none" }} />
+        <button onClick={send} style={{ background: "rgba(212,175,55,0.1)", border: "1px solid rgba(212,175,55,0.35)", color: "#d4af37", borderRadius: "3px", padding: "0.35rem 0.6rem", cursor: "pointer", fontFamily: "'Cinzel',serif", fontSize: "0.72rem" }}>?</button>
       </div>
 
-      {/* Related */}
-      <div
-        style={{
-          padding: "0.7rem 0.85rem 0.9rem",
-          borderTop: "1px solid rgba(212,175,55,0.07)",
-          flexShrink: 0,
-        }}
-      >
-        <div
-          style={{
-            fontSize: "0.58rem",
-            color: "#d4af37",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            marginBottom: "0.5rem",
-          }}
-        >
-          {t("gallery.related_works")}
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "3px",
-          }}
-        >
+      {/* Related works */}
+      <div style={{ padding: "0.7rem 0.85rem 0.9rem", borderTop: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
+        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("gallery.related_works")}</div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "3px" }}>
           {related.map((f) => (
-            <div
-              key={f}
-              onClick={() => onJump(f)}
-              title={getLabel(f)}
-              style={{
-                aspectRatio: "1/1",
-                overflow: "hidden",
-                cursor: "pointer",
-                border: "1px solid rgba(212,175,55,0.08)",
-                borderRadius: "1px",
-              }}
-            >
-              <img
-                src={`/images/${encodeURIComponent(f)}`}
-                alt={getLabel(f)}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  display: "block",
-                  transition: "transform 0.3s",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.transform = "scale(1.1)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.transform = "scale(1)")
-                }
-              />
+            <div key={f} onClick={() => onJump(f)} title={getLabel(f)} style={{ aspectRatio: "1/1", overflow: "hidden", cursor: "pointer", border: "1px solid rgba(212,175,55,0.08)", borderRadius: "1px" }}>
+              <img src={`/images/${encodeURIComponent(f)}`} alt={getLabel(f)} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", transition: "transform 0.3s" }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.1)")}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")} />
             </div>
           ))}
         </div>
@@ -933,86 +453,28 @@ function AiPanel({ filename, allImages, onJump }) {
   );
 }
 
-// --------- Lightbox shell ---------
-function Lightbox({ filtered, index, setIndex, onClose }) {
+// --------- Lightbox ---------
+function Lightbox({ filtered, index, setIndex, onClose }: { filtered: string[]; index: number; setIndex: React.Dispatch<React.SetStateAction<number|null>>; onClose: ()=>void }) {
   const file = filtered[index];
-  const prev = useCallback(
-    () => setIndex((i) => (i - 1 + filtered.length) % filtered.length),
-    [filtered.length, setIndex]
-  );
-  const next = useCallback(
-    () => setIndex((i) => (i + 1) % filtered.length),
-    [filtered.length, setIndex]
-  );
-  const jumpToFile = useCallback(
-    (f) => {
-      const i = filtered.indexOf(f);
-      if (i !== -1) setIndex(i);
-    },
-    [filtered, setIndex]
-  );
+  const prev = useCallback(() => setIndex((i) => ((i as number) - 1 + filtered.length) % filtered.length), [filtered.length, setIndex]);
+  const next = useCallback(() => setIndex((i) => ((i as number) + 1) % filtered.length), [filtered.length, setIndex]);
+  const jumpToFile = useCallback((f: string) => { const i = filtered.indexOf(f); if (i !== -1) setIndex(i); }, [filtered, setIndex]);
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 1000,
-        display: "flex",
-        flexDirection: "row",
-        background: "rgba(3,3,3,0.98)",
-        animation: "lbFade 0.2s ease",
-      }}
-    >
+    <div style={{ position: "fixed", inset: 0, zIndex: 1000, display: "flex", flexDirection: "row", background: "rgba(3,3,3,0.98)", animation: "lbFade 0.2s ease" }}>
       <style>{`
         @keyframes lbFade { from{opacity:0}to{opacity:1} }
         @keyframes lbIn   { from{opacity:0;transform:scale(0.97)}to{opacity:1;transform:scale(1)} }
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
       `}</style>
-
-      <ZoomPane
-        src={`/images/${encodeURIComponent(file)}`}
-        alt={getLabel(file)}
-        onClose={onClose}
-        onPrev={prev}
-        onNext={next}
-        index={index}
-        total={filtered.length}
-      />
-
-      <AiPanel
-        filename={file}
-        allImages={filtered}
-        onJump={jumpToFile}
-      />
-
-      <button
-        onClick={onClose}
-        style={{
-          position: "fixed",
-          top: "0.8rem",
-          right: "328px",
-          background: "rgba(0,0,0,0.7)",
-          border: "1px solid rgba(212,175,55,0.28)",
-          color: "#d4af37",
-          width: "2rem",
-          height: "2rem",
-          borderRadius: "50%",
-          fontSize: "0.85rem",
-          cursor: "pointer",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          zIndex: 1010,
-        }}
-      >
-        ×
-      </button>
+      <ZoomPane src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} onClose={onClose} onPrev={prev} onNext={next} index={index} total={filtered.length} />
+      <AiPanel filename={file} allImages={filtered} onJump={jumpToFile} />
+      <button onClick={onClose} style={{ position: "fixed", top: "0.8rem", right: "328px", background: "rgba(0,0,0,0.7)", border: "1px solid rgba(212,175,55,0.28)", color: "#d4af37", width: "2rem", height: "2rem", borderRadius: "50%", fontSize: "0.85rem", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1010 }}>âœ•</button>
     </div>
   );
 }
 
-// --------- Gallery page ---------
+// --------- CSS ---------
 const css = `
   @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Cinzel:wght@400;600&display=swap');
   .g-marquee{overflow:hidden;width:100%;background:#111}
@@ -1049,13 +511,15 @@ const css = `
   .dion-hint{font-family:'Cinzel',serif;font-size:0.44rem;letter-spacing:0.22em;color:rgba(212,175,55,0.18);text-transform:uppercase;white-space:nowrap}
 `;
 
+// --------- Gallery page ---------
 export default function Gallery() {
   const { t } = useTranslation();
   useMeta({
     title: t("gallery.title"),
-    description: "Browse the Musée-Crosdale collection — original works by Crosdale and invited artists, each with on-chain provenance secured by the Facinations protocol.",
+    description: "Browse the MusÃ©e-Crosdale collection â€” original works by Crosdale and invited artists, each with on-chain provenance secured by the Facinations protocol.",
     image: "/images/Alchemist-of-Light.jpg",
   });
+
   const SERIES = [
     { label: t("gallery.filter_all"),         test: SERIES_TESTS[0] },
     { label: t("gallery.filter_derain"),      test: SERIES_TESTS[1] },
@@ -1064,208 +528,103 @@ export default function Gallery() {
     { label: t("gallery.filter_renaissance"), test: SERIES_TESTS[4] },
     { label: t("gallery.filter_originals"),   test: SERIES_TESTS[5] },
   ];
-  const [lbIdx, setLbIdx] = useState(null);
+
+  const [lbIdx, setLbIdx] = useState<number|null>(null);
   const [filter, setFilter] = useState(0);
   const filtered = images.filter(SERIES[filter].test);
   const dionRef = useRef<HTMLVideoElement>(null);
   const [speed, setSpeed] = useState(1);
+
   const setPlaybackRate = (rate: number) => {
     setSpeed(rate);
     if (dionRef.current) dionRef.current.playbackRate = rate;
   };
 
   return (
-    <section
-      style={{
-        color: "#f2ece0",
-        minHeight: "100vh",
-        background: "#202020",
-      }}
-    >
+    <section style={{ color: "#f2ece0", minHeight: "100vh", background: "#202020" }}>
       <style>{css}</style>
 
-      {/* Page hero */}
       <header style={{ textAlign: "center", padding: "4rem 2rem 3rem", position: "relative", borderBottom: "1px solid rgba(212,175,55,0.08)" }}>
         <div style={{ position: "absolute", inset: 0, background: "radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.05) 0%, transparent 70%)", pointerEvents: "none" }} />
         <p style={{ fontFamily: "'Cinzel',serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: "#d4af37", marginBottom: "1rem", position: "relative" }}>
-          {t("gallery.eyebrow", "Musée-Crosdale · Original Works")}
+          {t("gallery.eyebrow", "MusÃ©e-Crosdale â€” Original Works")}
         </p>
-        <h1
-          style={{
-            fontFamily: "'Cinzel',serif",
-            color: "#f2ece0",
-            fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)",
-            fontWeight: 400,
-            letterSpacing: "0.15em",
-            margin: 0,
-            position: "relative",
-          }}
-        >
+        <h1 style={{ fontFamily: "'Cinzel',serif", color: "#f2ece0", fontSize: "clamp(1.6rem, 3.5vw, 2.4rem)", fontWeight: 400, letterSpacing: "0.15em", margin: 0, position: "relative" }}>
           {t("gallery.title")}
         </h1>
-        <p
-          style={{
-            color: "#b8b0a4",
-            fontFamily: "'Cormorant Garamond',serif",
-            fontStyle: "italic",
-            fontSize: "1.05rem",
-            marginTop: "1rem",
-            marginBottom: 0,
-            position: "relative",
-          }}
-        >
+        <p style={{ color: "#b8b0a4", fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.05rem", marginTop: "1rem", marginBottom: 0, position: "relative" }}>
           {t("gallery.subtitle")}
         </p>
         <div className="g-div" />
       </header>
 
       <div style={{ padding: "2rem" }}>
-
-      {/* Video hero */}
-      <div
-        style={{
-          margin: "1.5rem -2rem 0",
-          position: "relative",
-          width: "calc(100% + 4rem)",
-          height: "480px",
-          overflow: "hidden",
-          background: "#000",
-        }}
-      >
-        <VideoHero />
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          gap: "0.5rem",
-          flexWrap: "wrap",
-          margin: "1.5rem 0",
-          alignItems: "center",
-        }}
-      >
-        {SERIES.map((s, i) => (
-          <button
-            key={s.label}
-            className={`f-btn${filter === i ? " on" : ""}`}
-            onClick={() => setFilter(i)}
-          >
-            {s.label}
-          </button>
-        ))}
-        <span
-          style={{
-            marginLeft: "auto",
-            color: "#8a8278",
-            fontFamily: "'Cinzel',serif",
-            fontSize: "0.65rem",
-            letterSpacing: "0.1em",
-          }}
-        >
-          {t("gallery.works_count", { count: filtered.length })}
-        </span>
-      </div>
-
-      {/* Dionysus — Moving Image */}
-      <div className="dion-section">
-        <div className="dion-header">
-          <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
-          <h2 className="dion-title">Dionysus</h2>
+        <div style={{ margin: "1.5rem -2rem 0", position: "relative", width: "calc(100% + 4rem)", height: "480px", overflow: "hidden", background: "#000" }}>
+          <VideoHero />
         </div>
-        <div className="dion-rule" />
-        <div className="dion-frame">
-          <div className="dion-corner tl" />
-          <div className="dion-corner tr" />
-          <div className="dion-corner bl" />
-          <div className="dion-corner br" />
-          <video ref={dionRef} controls preload="metadata" playsInline className="dion-video">
-            <source src="/Dionysus.mp4" type="video/mp4" />
-          </video>
+
+        <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap", margin: "1.5rem 0", alignItems: "center" }}>
+          {SERIES.map((s, i) => (
+            <button key={s.label} className={`f-btn${filter === i ? " on" : ""}`} onClick={() => setFilter(i)}>{s.label}</button>
+          ))}
+          <span style={{ marginLeft: "auto", color: "#8a8278", fontFamily: "'Cinzel',serif", fontSize: "0.65rem", letterSpacing: "0.1em" }}>
+            {t("gallery.works_count", { count: filtered.length })}
+          </span>
         </div>
-        <div className="dion-caption">
-          <p className="dion-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
-          <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
-            <span className="dion-hint" style={{ marginRight: "0.5rem" }}>{t("gallery.speed", "Speed")}</span>
-            {[0.25, 0.5, 1].map(r => (
-              <button
-                key={r}
-                onClick={() => setPlaybackRate(r)}
-                style={{
-                  background: speed === r ? "rgba(212,175,55,0.15)" : "none",
-                  border: `1px solid ${speed === r ? "#d4af37" : "rgba(212,175,55,0.25)"}`,
-                  color: speed === r ? "#d4af37" : "rgba(212,175,55,0.35)",
-                  fontFamily: "'Cinzel',serif",
-                  fontSize: "0.5rem",
-                  letterSpacing: "0.1em",
-                  padding: "0.2rem 0.5rem",
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                }}
-              >
-                {r === 1 ? "1×" : `${r}×`}
-              </button>
+
+        <div className="dion-section">
+          <div className="dion-header">
+            <span className="dion-eyebrow">{t("home.moving_image", "Moving Image")}</span>
+            <h2 className="dion-title">Dionysus</h2>
+          </div>
+          <div className="dion-rule" />
+          <div className="dion-frame">
+            <div className="dion-corner tl" /><div className="dion-corner tr" />
+            <div className="dion-corner bl" /><div className="dion-corner br" />
+            <video ref={dionRef} controls preload="metadata" playsInline className="dion-video">
+              <source src="/Dionysus.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div className="dion-caption">
+            <p className="dion-caption-text">{t("home.artwork_caption", "A work presented on Facinations")}</p>
+            <div style={{ display: "flex", gap: "0.4rem", alignItems: "center" }}>
+              <span className="dion-hint" style={{ marginRight: "0.5rem" }}>{t("gallery.speed", "Speed")}</span>
+              {[0.25, 0.5, 1].map(r => (
+                <button key={r} onClick={() => setPlaybackRate(r)} style={{ background: speed === r ? "rgba(212,175,55,0.15)" : "none", border: `1px solid ${speed === r ? "#d4af37" : "rgba(212,175,55,0.25)"}`, color: speed === r ? "#d4af37" : "rgba(212,175,55,0.35)", fontFamily: "'Cinzel',serif", fontSize: "0.5rem", letterSpacing: "0.1em", padding: "0.2rem 0.5rem", cursor: "pointer", transition: "all 0.2s" }}>
+                  {r === 1 ? "1Ã—" : `${r}Ã—`}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="g-marquee" key={`marquee-${filter}`}>
+          <div className="g-track left" style={{ marginBottom: "3px" }}>
+            {[...filtered, ...filtered].map((file, i) => (
+              <div key={`r1-${i}`} className="g-item" onClick={() => setLbIdx(filtered.indexOf(file))}>
+                <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
+                <div className="g-item-ov"><span className="g-lbl">{getLabel(file)}</span></div>
+              </div>
+            ))}
+          </div>
+          <div className="g-track right">
+            {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
+              <div key={`r2-${i}`} className="g-item" onClick={() => setLbIdx(filtered.indexOf(file))}>
+                <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
+                <div className="g-item-ov"><span className="g-lbl">{getLabel(file)}</span></div>
+              </div>
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="g-marquee" key={`marquee-${filter}`}>
-        {/* Row 1 — drifts left */}
-        <div className="g-track left" style={{ marginBottom: "3px" }}>
-          {[...filtered, ...filtered].map((file, i) => (
-            <div
-              key={`r1-${i}`}
-              className="g-item"
-              onClick={() => setLbIdx(filtered.indexOf(file))}
-            >
-              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
-              <div className="g-item-ov">
-                <span className="g-lbl">{getLabel(file)}</span>
-              </div>
-            </div>
-          ))}
+        {lbIdx !== null && (
+          <Lightbox filtered={filtered} index={lbIdx} setIndex={setLbIdx} onClose={() => setLbIdx(null)} />
+        )}
+
+        <div style={{ marginTop: "3rem", borderTop: "1px solid rgba(212,175,55,0.15)", paddingTop: "2rem", display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem" }}>
+          <MistralWidget context="gallery" />
+          <VoiceAICurator context="MusÃ©e-https://xervault.com/gallery â€” fine art collection by Crosdale" />
         </div>
-        {/* Row 2 — drifts right */}
-        <div className="g-track right">
-          {[...[...filtered].reverse(), ...[...filtered].reverse()].map((file, i) => (
-            <div
-              key={`r2-${i}`}
-              className="g-item"
-              onClick={() => setLbIdx(filtered.indexOf(file))}
-            >
-              <img src={`/images/${encodeURIComponent(file)}`} alt={getLabel(file)} />
-              <div className="g-item-ov">
-                <span className="g-lbl">{getLabel(file)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {lbIdx !== null && (
-        <Lightbox
-          filtered={filtered}
-          index={lbIdx}
-          setIndex={setLbIdx}
-          onClose={() => setLbIdx(null)}
-        />
-      )}
-
-      <div
-        style={{
-          marginTop: "3rem",
-          borderTop: "1px solid rgba(212,175,55,0.15)",
-          paddingTop: "2rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          flexWrap: "wrap",
-          gap: "1rem",
-        }}
-      >
-        <MistralWidget context="gallery" />
-        <VoiceAICurator context="Musée-https://xervault.com/gallery — fine art collection by Crosdale" />
-      </div>
       </div>
     </section>
   );
