@@ -1,9 +1,8 @@
 {
-  "brand": "Façinations",
+  "siteTitle": "Facinations",
   "nav": {
-    "gallery": "Galería",
-    "vaults": "Bóvedas",
-    "swap": "Intercambio",
-    "legal": "Legal"
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
   }
 }

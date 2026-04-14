@@ -1,9 +1,8 @@
 {
-  "brand": "Façinations",
+  "siteTitle": "Facinations",
   "nav": {
-    "gallery": "Galleria",
-    "vaults": "Casseforti",
-    "swap": "Scambio",
-    "legal": "Legale"
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
   }
 }
