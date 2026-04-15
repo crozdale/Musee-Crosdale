@@ -1,7 +1,7 @@
 export const FACINATIONS_FEATURES = {
-  READ_ONLY_MODE: true,
+  READ_ONLY_MODE: false,
 
-  MINT_ENABLED: false,
-  SWAP_ENABLED: false,
-  MARKETPLACE_ENABLED: false,
+  MINT_ENABLED: true,
+  SWAP_ENABLED: true,
+  MARKETPLACE_ENABLED: true,
 };
