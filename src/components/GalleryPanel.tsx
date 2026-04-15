@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { GALLERY_ITEMS } from "../data/gallery";
-import { TeleportViewer } from "./teleport";
+import { HypsoverseViewer } from "./teleport";
 
 type GalleryItem = typeof GALLERY_ITEMS[number];
 
@@ -24,7 +24,7 @@ export default function GalleryPanel() {
               <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-xl mb-4" />
             )}
             <h3 className="font-serif text-xl font-semibold">{item.title}</h3>
-            <p className="mt-1 text-sm text-black/70">{item.artist} · {item.year}</p>
+            <p className="mt-1 text-sm text-black/70">{item.artist} ï¿½ {item.year}</p>
             <p className="mt-3 text-sm text-black/60">{item.medium}</p>
           </div>
         ))}
@@ -55,14 +55,14 @@ export default function GalleryPanel() {
                   {selected.title}
                 </h2>
                 <p style={{ color: "#d4af37", fontSize: "0.85rem", margin: "4px 0 0", fontStyle: "italic" }}>
-                  {selected.artist} · {selected.year} · {selected.medium}
+                  {selected.artist} ï¿½ {selected.year} ï¿½ {selected.medium}
                 </p>
               </div>
               <button
                 onClick={() => setSelected(null)}
                 style={{ background: "none", border: "none", color: "#888", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}
               >
-                ×
+                ï¿½
               </button>
             </div>
 
@@ -74,7 +74,7 @@ export default function GalleryPanel() {
 
             {/* Varjo Teleport */}
             {selected.sceneId && (
-              <TeleportViewer
+              <HypsoverseViewer
                 sceneId={selected.sceneId}
                 splatCount={selected.splatCount}
                 artworkTitle={selected.title}
@@ -95,7 +95,7 @@ export default function GalleryPanel() {
                   }}
                 >
                   <span style={{ color: "#1ab7ea", fontSize: "1rem" }}>?</span>
-                  {showVimeo ? "Hide" : "Watch"} Artist Documentary
+                  {showVimeo ? t("galleryPanel.hide_doc") : t("galleryPanel.watch_doc")}
                 </button>
                 {showVimeo && (
                   <div style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}>

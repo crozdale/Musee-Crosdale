@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "home": "首页",
     "about": "关于",
@@ -896,5 +896,13 @@
   },
   "xervaultBanner": {
     "tagline": "连接您在 XerVault 上使用的同一钱包 — 即时访问，无需订阅。"
+  },
+  "teleport": {
+    "varjo": "Hypsoverse",
+    "immersive_3d": "Hypsoverse 3D"
+  },
+  "hypsoverse": {
+    "enter": "Enter Immersive Space",
+    "powered_by": "Powered by Hypsoverse"
   }
 }

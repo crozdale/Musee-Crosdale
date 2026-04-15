@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "home": "홈",
     "about": "소개",
@@ -896,5 +896,13 @@
   },
   "xervaultBanner": {
     "tagline": "XerVault에서 사용하는 동일한 지갑을 연결하세요 — 즉각적인 액세스, 구독 불필요."
+  },
+  "teleport": {
+    "varjo": "Hypsoverse",
+    "immersive_3d": "Hypsoverse 3D"
+  },
+  "hypsoverse": {
+    "enter": "Enter Immersive Space",
+    "powered_by": "Powered by Hypsoverse"
   }
 }

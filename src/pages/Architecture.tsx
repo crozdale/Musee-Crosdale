@@ -29,7 +29,7 @@ const sections = [
     { heading: "Step 2 — Contract executes", body: "Validates balances, liquidity, pricing curve. Transfers fractional tokens to pool, XER to user. Emits SwapExecuted and ProvenanceEvent." },
     { heading: "Compact Pipeline", code: "[Swapp UI] → [Wallet] → [Chainstack] → [Contracts]\n→ (SwapExecuted + Transfers + ProvenanceEvent)\n→ [Subgraph] → [Backend] → [All Apps]" },
   ]},
-  { id: "teleport-flow", title: "Flow 4: Teleport", content: [
+  { id: "teleport-flow", title: "Flow 4: Hypsoverse", content: [
     { heading: "Step 1 — Initiation", body: "Teleport UI fetches asset metadata, location, and history from Subgraph. Verifies approvals via Chainstack." },
     { heading: "Step 2 — Contract executes", body: "Validates ownership and destination. Updates asset location. Emits Teleported and ProvenanceEvent." },
     { heading: "Compact Pipeline", code: "[Teleport UI] → [Wallet] → [Chainstack] → [Contracts]\n→ (Teleported + ProvenanceEvent)\n→ [Subgraph] → [Backend] → [All Apps]" },

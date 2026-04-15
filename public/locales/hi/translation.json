@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "home": "होम",
     "about": "परिचय",
@@ -894,5 +894,13 @@
   },
   "xervaultBanner": {
     "tagline": "XerVault पर उपयोग किए जाने वाले समान वॉलेट को कनेक्ट करें — तत्काल पहुंच, कोई सदस्यता आवश्यक नहीं।"
+  },
+  "teleport": {
+    "varjo": "Hypsoverse",
+    "immersive_3d": "Hypsoverse 3D"
+  },
+  "hypsoverse": {
+    "enter": "Enter Immersive Space",
+    "powered_by": "Powered by Hypsoverse"
   }
 }

@@ -1,4 +1,4 @@
-﻿{
+{
   "nav": {
     "home": "الرئيسية",
     "about": "حول المنصة",
@@ -894,5 +894,13 @@
   },
   "xervaultBanner": {
     "tagline": "اربط نفس المحفظة التي تستخدمها على XerVault — وصول فوري، لا يلزم اشتراك."
+  },
+  "teleport": {
+    "varjo": "Hypsoverse",
+    "immersive_3d": "Hypsoverse 3D"
+  },
+  "hypsoverse": {
+    "enter": "Enter Immersive Space",
+    "powered_by": "Powered by Hypsoverse"
   }
 }

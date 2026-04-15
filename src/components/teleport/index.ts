@@ -1,1 +1,1 @@
-﻿export { TeleportViewer } from "./TeleportViewer";
+﻿export { HypsoverseViewer } from "./HypsoverseViewer";

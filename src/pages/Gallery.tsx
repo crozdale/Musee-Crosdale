@@ -3,7 +3,7 @@ import MistralWidget from "../components/MistralWidget";
 import VoiceAICurator from "../components/VoiceAICurator";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
-import { TeleportViewer } from "../components/teleport";
+import { HypsoverseViewer } from "../components/teleport";
 
 // -- VideoHero: tries mp4, falls back to a still image -------------------------
 function VideoHero() {
@@ -390,9 +390,8 @@ function AiPanel({ filename, allImages, onJump }: { filename: string; allImages:
 
       {/* Teleport 3D viewer */}
       <div style={{ padding: "0.75rem", borderBottom: "1px solid rgba(212,175,55,0.07)", flexShrink: 0 }}>
-        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>3D Immersive</div>
-        <TeleportViewer
-          sceneId={`scene_${filename.replace(/[^a-zA-Z0-9]/g, "_").substring(0, 20)}`}
+        <div style={{ fontSize: "0.58rem", color: "#d4af37", letterSpacing: "0.14em", textTransform: "uppercase", marginBottom: "0.5rem" }}>{t("teleport.immersive_3d")}</div>
+        <HypsoverseViewer
           artworkTitle={label}
         />
       </div>
