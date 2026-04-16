@@ -1,9 +1,9 @@
-// src/pages/GalleryPage.tsx
+﻿// src/pages/GalleryPage.tsx
 // Generic dealer gallery page — driven by /api/gallery?slug=:slug.
 // Handles any gallery registered in the galleries table.
 
 import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
+import GalleryPanel from "../components/GalleryPanel";`r`nimport { useParams, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
 
@@ -310,7 +310,7 @@ export default function GalleryPage() {
       </div>
 
       {/* Footer */}
-      <div className="gp-footer">
+      <div style={{ maxWidth:"1200px", margin:"0 auto", padding:"0 2rem 3rem" }}><GalleryPanel /></div>`r`n      <div className="gp-footer">
         <p className="gp-footer-text">
           <Link to="/galleries" style={{ color:"rgba(212,175,55,0.4)", textDecoration:"none" }}>{t("gallery_page.all_galleries", "← All Galleries")}</Link>
           &nbsp;·&nbsp; {t("gallery_page.powered_by", "Powered by Facinations")}
