@@ -26,7 +26,7 @@ export default function GalleryPanel() {
               <img src={item.image} alt={item.title} className="w-full h-48 object-cover rounded-xl mb-4" />
             )}
             <h3 className="font-serif text-xl font-semibold">{item.title}</h3>
-            <p className="mt-1 text-sm text-black/70">{item.artist} � {item.year}</p>
+            <p className="mt-1 text-sm text-black/70">{item.artist} · {item.year}</p>
             <p className="mt-3 text-sm text-black/60">{item.medium}</p>
           </div>
         ))}
@@ -57,14 +57,14 @@ export default function GalleryPanel() {
                   {selected.title}
                 </h2>
                 <p style={{ color: "#d4af37", fontSize: "0.85rem", margin: "4px 0 0", fontStyle: "italic" }}>
-                  {selected.artist} � {selected.year} � {selected.medium}
+                  {selected.artist} · {selected.year} · {selected.medium}
                 </p>
               </div>
               <button
                 onClick={() => setSelected(null)}
                 style={{ background: "none", border: "none", color: "#888", fontSize: "1.4rem", cursor: "pointer", lineHeight: 1 }}
               >
-                �
+                ×
               </button>
             </div>
 
@@ -74,7 +74,7 @@ export default function GalleryPanel() {
                 style={{ width: "100%", borderRadius: "10px", objectFit: "cover", maxHeight: "260px" }} />
             )}
 
-            {/* Varjo Teleport */}
+            {/* Hypsoverse */}
             {selected.sceneId && (
               <HypsoverseViewer
                 sceneId={selected.sceneId}
@@ -83,7 +83,7 @@ export default function GalleryPanel() {
               />
             )}
 
-            {/* YouTube Documentary */}
+            {/* Vimeo Documentary */}
             {selected.vimeoUrl && (
               <div style={{ borderRadius: "10px", border: "1px solid rgba(255,255,255,0.1)", overflow: "hidden" }}>
                 <button
@@ -96,7 +96,7 @@ export default function GalleryPanel() {
                     alignItems: "center", gap: "8px", textAlign: "left",
                   }}
                 >
-                  <span style={{ color: "#1ab7ea", fontSize: "1rem" }}>?</span>
+                  <span style={{ color: "#1ab7ea", fontSize: "1rem" }}>▶</span>
                   {showVimeo ? t("galleryPanel.hide_doc") : t("galleryPanel.watch_doc")}
                 </button>
                 {showVimeo && (
@@ -120,7 +120,7 @@ export default function GalleryPanel() {
             <div style={{ display: "flex", gap: "12px", paddingTop: "4px" }}>
               <a href={selected.externalUrl} target="_blank" rel="noopener noreferrer"
                 style={{ fontSize: "0.8rem", color: "#d4af37", textDecoration: "underline" }}>
-                View on XdaleGallery
+                {t("galleryPanel.view_on_xdale")}
               </a>
               <Link to={`/vaults/${selected.id}`}
                 style={{ fontSize: "0.8rem", color: "#d4af37", textDecoration: "underline" }}>
@@ -133,4 +133,3 @@ export default function GalleryPanel() {
     </>
   );
 }
-
