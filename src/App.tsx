@@ -38,8 +38,6 @@ const Galleries    = React.lazy(() => import("./pages/Galleries"));
 const GalleryPage  = React.lazy(() => import("./pages/GalleryPage"));
 const Hypsoverse   = React.lazy(() => import("./pages/Hypsoverse"));
 const GeneralIntelligence = React.lazy(() => import("./pages/GeneralIntelligence"));
-const Hypsoverse   = React.lazy(() => import("./pages/Hypsoverse"));
-const GeneralIntelligence = React.lazy(() => import("./pages/GeneralIntelligence"));
 const NotFound     = React.lazy(() => import("./pages/NotFound"));
 
 // ── Loading fallback ──────────────────────────────────────────────────────────
