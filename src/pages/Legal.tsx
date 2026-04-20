@@ -1,33 +1,9 @@
+// src/pages/Legal.tsx
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useMeta } from "../hooks/useMeta";
+import { useTheme } from "../context/ThemeContext";
 
-const css = `
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');
-  .legal-root { background: #1c1c1c; min-height: 100vh; font-family: 'Cormorant Garamond', Georgia, serif; color: #f2ece0; }
-  .legal-hero { text-align: center; padding: 5rem 2rem 3rem; position: relative; border-bottom: 1px solid rgba(212,175,55,0.08); }
-  .legal-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(212,175,55,0.04) 0%, transparent 70%); pointer-events: none; }
-  .legal-eyebrow { font-family: 'Cinzel', serif; font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase; color: #d4af37; margin-bottom: 1rem; }
-  .legal-title { font-family: 'Cinzel', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 400; color: #f8f2e4; letter-spacing: 0.1em; margin: 0; }
-  .legal-div { width: 60px; height: 1px; background: linear-gradient(to right, transparent, #d4af37, transparent); margin: 1.5rem auto 0; }
-  .legal-risk-banner { background: rgba(212,175,55,0.05); border-bottom: 1px solid rgba(212,175,55,0.15); padding: 0.75rem 2rem; display: flex; align-items: center; gap: 0.75rem; }
-  .legal-risk-text { font-size: 0.78rem; color: rgba(212,175,55,0.75); line-height: 1.5; }
-  .legal-tabs { display: flex; border-bottom: 1px solid rgba(212,175,55,0.1); padding: 0 2rem; max-width: 820px; margin: 0 auto; }
-  .legal-tab { font-family: 'Cinzel', serif; font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase; padding: 1rem 1.5rem; cursor: pointer; border: none; background: none; transition: color 0.2s; border-bottom: 2px solid transparent; margin-bottom: -1px; }
-  .legal-tab.active { color: #d4af37; border-bottom-color: #d4af37; }
-  .legal-tab:not(.active) { color: rgba(212,175,55,0.35); }
-  .legal-tab:not(.active):hover { color: rgba(212,175,55,0.65); }
-  .legal-body { max-width: 820px; margin: 0 auto; padding: 3rem 2rem 6rem; }
-  .legal-section-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 2.5rem; }
-  .legal-tag { font-family: 'Cinzel', serif; font-size: 0.5rem; letter-spacing: 0.3em; text-transform: uppercase; color: #d4af37; border: 1px solid rgba(212,175,55,0.25); padding: 0.25rem 0.75rem; }
-  .legal-date { font-size: 0.75rem; color: rgba(212,175,55,0.35); font-style: italic; }
-  .legal-item { border-bottom: 1px solid rgba(212,175,55,0.07); padding-bottom: 2rem; margin-bottom: 2rem; }
-  .legal-item:last-child { border-bottom: none; }
-  .legal-item-heading { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 400; color: #f8f2e4; letter-spacing: 0.05em; margin: 0 0 0.75rem; }
-  .legal-item-body { font-size: 1rem; line-height: 1.9; color: #b8b0a4; font-style: italic; margin: 0; }
-`;
-
-// Labels and tags are resolved inside the component using t()
 const SECTION_IDS = [
   { id: "tos",     labelKey: "legal.tab_terms",   tagKey: "legal.tag_legal" },
   { id: "privacy", labelKey: "legal.tab_privacy",  tagKey: "legal.tag_privacy" },
@@ -37,8 +13,6 @@ const SECTION_IDS = [
 const SECTIONS = [
   {
     id: "tos",
-    label: "Terms of Service",
-    tag: "Legal",
     content: [
       { heading: "1. Acceptance of Terms", body: "By accessing or using the Facinations protocol and Musée-Crosdale platform (collectively, the \"Platform\"), you agree to be bound by these Terms of Service. If you do not agree, you may not use the Platform." },
       { heading: "2. Eligibility", body: "You must be at least 18 years of age and legally capable of entering into binding contracts. Use of Swaps and Vault features may be restricted in certain jurisdictions." },
@@ -54,8 +28,6 @@ const SECTIONS = [
   },
   {
     id: "privacy",
-    label: "Privacy Policy",
-    tag: "Privacy",
     content: [
       { heading: "1. Data We Collect", body: "We collect wallet addresses, email addresses (where provided), artwork metadata, transaction records, and usage analytics. We do not collect government ID unless required for KYC." },
       { heading: "2. How We Use Your Data", body: "Data is used to operate the Platform, generate curator notes, provide analytics to dealers, facilitate swaps, and comply with legal obligations." },
@@ -69,8 +41,6 @@ const SECTIONS = [
   },
   {
     id: "risk",
-    label: "Risk Disclosures",
-    tag: "Risk",
     content: [
       { heading: "General Investment Risk", body: "Art and digital assets are speculative investments. Past performance does not guarantee future results. You may lose some or all of the value of assets held or traded on the Platform." },
       { heading: "Swap and DeFi Risk", body: "Token swaps involve smart contract risk, liquidity risk, and price volatility. Slippage, front-running, and oracle manipulation may result in unfavorable execution prices." },
@@ -86,56 +56,103 @@ const SECTIONS = [
 
 export default function Legal() {
   const { t } = useTranslation();
+  const { isDark } = useTheme();
+  const [active, setActive] = useState("tos");
+
   useMeta({
     title: t("legal.title"),
     description: "Terms of Service, Privacy Policy, and Risk Disclosures for Musée-Crosdale and the Facinations protocol.",
     noIndex: false,
   });
-  const [active, setActive] = useState("tos");
-  const section = SECTIONS.find((s) => s.id === active)!;
+
+  const section     = SECTIONS.find((s) => s.id === active)!;
   const sectionMeta = SECTION_IDS.find((s) => s.id === active)!;
 
-  return (
-    <div className="legal-root">
-      <style>{css}</style>
+  const bg         = isDark ? "#18160f" : "#faf8f4";
+  const fg         = isDark ? "#f2ece0" : "#1a1814";
+  const fgMuted    = isDark ? "#b8b0a4" : "#4a4640";
+  const fgSubtle   = isDark ? "#8a8278" : "#8a8680";
+  const gold       = isDark ? "#d4af37" : "#b8975a";
+  const borderFaint= isDark ? "rgba(242,236,224,0.06)" : "rgba(26,24,20,0.07)";
+  const borderMid  = isDark ? "rgba(242,236,224,0.12)" : "rgba(26,24,20,0.14)";
+  const heroBg     = isDark ? "rgba(212,175,55,0.04)" : "rgba(184,151,90,0.03)";
+  const riskBg     = isDark ? "rgba(212,175,55,0.05)" : "rgba(184,151,90,0.04)";
+  const tabActive  = isDark ? "#d4af37" : "#b8975a";
+  const tabInactive= isDark ? "rgba(212,175,55,0.35)" : "rgba(184,151,90,0.4)";
+  const itemBg     = isDark ? "#18160f" : "#faf8f4";
 
-      <div className="legal-hero">
-        <div className="legal-eyebrow">{t("legal.eyebrow")}</div>
-        <h1 className="legal-title">{t("legal.title")}</h1>
-        <p style={{ fontStyle: "italic", color: "#8a8278", fontSize: "0.85rem", marginTop: "0.5rem" }}>
+  return (
+    <div style={{ background: bg, minHeight: "100vh", fontFamily: "'Cormorant Garamond', Georgia, serif", color: fg, transition: "background 0.3s, color 0.3s" }}>
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&display=swap');`}</style>
+
+      {/* Hero */}
+      <div style={{ textAlign: "center", padding: "5rem 2rem 3rem", position: "relative", borderBottom: `1px solid ${borderFaint}` }}>
+        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(ellipse 70% 60% at 50% 0%, ${heroBg} 0%, transparent 70%)`, pointerEvents: "none" }} />
+        <div style={{ fontFamily: "'Cinzel', serif", fontSize: "0.6rem", letterSpacing: "0.35em", textTransform: "uppercase", color: gold, marginBottom: "1rem", position: "relative" }}>
+          {t("legal.eyebrow")}
+        </div>
+        <h1 style={{ fontFamily: "'Cinzel', serif", fontSize: "clamp(1.8rem, 4vw, 2.8rem)", fontWeight: 400, color: fg, letterSpacing: "0.1em", margin: 0, position: "relative" }}>
+          {t("legal.title")}
+        </h1>
+        <p style={{ fontStyle: "italic", color: fgSubtle, fontSize: "0.85rem", marginTop: "0.5rem", position: "relative" }}>
           {t("legal.subtitle")}
         </p>
-        <div className="legal-div" />
+        <div style={{ width: 60, height: 1, background: `linear-gradient(to right, transparent, ${gold}, transparent)`, margin: "1.5rem auto 0" }} />
       </div>
 
-      <div className="legal-risk-banner">
-        <span style={{ color: "#d4af37", fontSize: "0.9rem", flexShrink: 0 }}>⚠</span>
-        <p className="legal-risk-text">
+      {/* Risk banner */}
+      <div style={{ background: riskBg, borderBottom: `1px solid ${borderMid}`, padding: "0.75rem 2rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+        <span style={{ color: gold, fontSize: "0.9rem", flexShrink: 0 }}>⚠</span>
+        <p style={{ fontSize: "0.78rem", color: isDark ? "rgba(212,175,55,0.75)" : "rgba(184,151,90,0.85)", lineHeight: 1.5, margin: 0 }}>
           {t("legal.risk_banner")}
         </p>
       </div>
 
-      <div className="legal-tabs">
+      {/* Tabs */}
+      <div style={{ display: "flex", borderBottom: `1px solid ${borderFaint}`, padding: "0 2rem", maxWidth: 820, margin: "0 auto" }}>
         {SECTION_IDS.map((s) => (
           <button
             key={s.id}
-            className={`legal-tab${active === s.id ? " active" : ""}`}
             onClick={() => setActive(s.id)}
+            style={{
+              fontFamily: "'Cinzel', serif",
+              fontSize: "0.58rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              padding: "1rem 1.5rem",
+              cursor: "pointer",
+              border: "none",
+              background: "none",
+              transition: "color 0.2s",
+              borderBottom: active === s.id ? `2px solid ${tabActive}` : "2px solid transparent",
+              marginBottom: "-1px",
+              color: active === s.id ? tabActive : tabInactive,
+            }}
           >
             {t(s.labelKey)}
           </button>
         ))}
       </div>
 
-      <div className="legal-body">
-        <div className="legal-section-meta">
-          <span className="legal-tag">{t(sectionMeta.tagKey)}</span>
-          <span className="legal-date">{t("legal.last_updated")}</span>
+      {/* Body */}
+      <div style={{ maxWidth: 820, margin: "0 auto", padding: "3rem 2rem 6rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "2.5rem" }}>
+          <span style={{ fontFamily: "'Cinzel', serif", fontSize: "0.5rem", letterSpacing: "0.3em", textTransform: "uppercase", color: gold, border: `1px solid ${borderMid}`, padding: "0.25rem 0.75rem" }}>
+            {t(sectionMeta.tagKey)}
+          </span>
+          <span style={{ fontSize: "0.75rem", color: fgSubtle, fontStyle: "italic" }}>
+            {t("legal.last_updated")}
+          </span>
         </div>
+
         {section.content.map((item, i) => (
-          <div key={i} className="legal-item">
-            <h3 className="legal-item-heading">{item.heading}</h3>
-            <p className="legal-item-body">{item.body}</p>
+          <div key={i} style={{ borderBottom: `1px solid ${borderFaint}`, paddingBottom: "2rem", marginBottom: "2rem" }}>
+            <h3 style={{ fontFamily: "'Cinzel', serif", fontSize: "1.1rem", fontWeight: 400, color: fg, letterSpacing: "0.05em", margin: "0 0 0.75rem" }}>
+              {item.heading}
+            </h3>
+            <p style={{ fontSize: "1rem", lineHeight: 1.9, color: fgMuted, fontStyle: "italic", margin: 0 }}>
+              {item.body}
+            </p>
           </div>
         ))}
       </div>

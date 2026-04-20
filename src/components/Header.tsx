@@ -5,15 +5,16 @@ import { BRAND } from "../brand/brandAssets";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import WalletConnect from "./WalletConnect";
+import { useTheme } from "../context/ThemeContext";
 
 const NAV_SECTIONS = [
   {
     label: "Collectors",
     key: "nav.collectorsSection",
     items: [
-      { path: "/gallery",   label: "Gallery",     key: "nav.gallery",   descKey: "nav.gallery_desc",           desc: "Browse & acquire artworks" },
-      { path: "/vaults",    label: "Vaults",      key: "nav.vaults",    descKey: "nav.vaults_desc",            desc: "Secure art custody" },
-      { path: "/dashboard", label: "Dashboard",   key: "nav.dashboard", descKey: "nav.dashboard_desc",         desc: "Your vaulted assets" },
+      { path: "/gallery",   label: "Gallery",     key: "nav.gallery",   descKey: "nav.gallery_desc",   desc: "Browse & acquire artworks" },
+      { path: "/vaults",    label: "Vaults",      key: "nav.vaults",    descKey: "nav.vaults_desc",    desc: "Secure art custody" },
+      { path: "/dashboard", label: "Dashboard",   key: "nav.dashboard", descKey: "nav.dashboard_desc", desc: "Your vaulted assets" },
     ],
   },
   {
@@ -28,9 +29,9 @@ const NAV_SECTIONS = [
     label: "Community",
     key: "nav.communitySection",
     items: [
-      { path: "/community", label: "Discord & Threema", key: "nav.community",  descKey: "nav.community_desc",  desc: "Live chat · Encrypted messaging" },
-      { path: "/xdale",     label: "Xdale Gallery",  key: "nav.xdale",      descKey: "nav.xdale_desc",      desc: "Curated exhibitions" },
-      { path: "/galleries", label: "Galleries",      key: "nav.galleries",  descKey: "nav.galleries_desc",  desc: "All gallery spaces" },
+      { path: "/community", label: "Discord & Threema", key: "nav.community", descKey: "nav.community_desc", desc: "Live chat · Encrypted messaging" },
+      { path: "/xdale",     label: "Xdale Gallery",     key: "nav.xdale",     descKey: "nav.xdale_desc",     desc: "Curated exhibitions" },
+      { path: "/galleries", label: "Galleries",          key: "nav.galleries", descKey: "nav.galleries_desc", desc: "All gallery spaces" },
     ],
   },
   {
@@ -62,6 +63,70 @@ const LANGS = [
   ["ja","JA"],["ru","RU"],["ar","AR"],["hi","HI"],
 ] as const;
 
+// ── Theme toggle ──────────────────────────────────────────────────────────────
+function ThemeToggle() {
+  const { isDark, toggle, theme } = useTheme();
+  return (
+    <button
+      onClick={toggle}
+      aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+      title={isDark ? "Light mode" : "Dark mode"}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "5px",
+        background: "none",
+        border: "1px solid rgba(212,175,55,0.2)",
+        borderRadius: "20px",
+        padding: "4px 10px 4px 6px",
+        cursor: "pointer",
+        transition: "border-color 0.2s",
+        flexShrink: 0,
+      }}
+      onMouseEnter={e => (e.currentTarget.style.borderColor = "rgba(212,175,55,0.5)")}
+      onMouseLeave={e => (e.currentTarget.style.borderColor = "rgba(212,175,55,0.2)")}
+    >
+      {/* Track */}
+      <span style={{
+        position: "relative",
+        width: "28px",
+        height: "16px",
+        borderRadius: "8px",
+        background: isDark ? "rgba(212,175,55,0.2)" : "rgba(212,175,55,0.08)",
+        border: `1px solid ${isDark ? "rgba(212,175,55,0.4)" : "rgba(212,175,55,0.15)"}`,
+        display: "inline-block",
+        transition: "background 0.25s, border-color 0.25s",
+        flexShrink: 0,
+      }}>
+        {/* Thumb */}
+        <span style={{
+          position: "absolute",
+          top: "1px",
+          left: isDark ? "13px" : "1px",
+          width: "12px",
+          height: "12px",
+          borderRadius: "50%",
+          background: isDark ? "#d4af37" : "rgba(212,175,55,0.4)",
+          transition: "left 0.25s, background 0.25s",
+        }} />
+      </span>
+      {/* Label */}
+      <span style={{
+        fontFamily: "'Cinzel', serif",
+        fontSize: "0.44rem",
+        letterSpacing: "0.14em",
+        textTransform: "uppercase",
+        color: isDark ? "rgba(212,175,55,0.7)" : "rgba(212,175,55,0.45)",
+        transition: "color 0.2s",
+        userSelect: "none",
+      }}>
+        {isDark ? "Light" : "Dark"}
+      </span>
+    </button>
+  );
+}
+
+// ── Header ────────────────────────────────────────────────────────────────────
 export default function Header() {
   const { t, i18n } = useTranslation();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -136,6 +201,7 @@ export default function Header() {
 
         {/* Right controls */}
         <div className="header-right">
+          <ThemeToggle />
           <select
             className="lang-select"
             value={i18n.language || "en"}
@@ -192,6 +258,13 @@ export default function Header() {
                 )}
               </div>
             ))}
+            {/* Theme toggle in mobile menu */}
+            <div style={{ padding: "1rem 0", borderTop: "1px solid rgba(212,175,55,0.08)", marginTop: "0.5rem", display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <span style={{ fontFamily:"'Cinzel',serif", fontSize:"0.5rem", letterSpacing:"0.15em", textTransform:"uppercase", color:"rgba(212,175,55,0.4)" }}>
+                Page theme
+              </span>
+              <ThemeToggle />
+            </div>
             <div className="mobile-lang">
               <select
                 className="lang-select"
